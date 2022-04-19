@@ -1,5 +1,6 @@
 package game;
 
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Ground;
 
 /**
@@ -8,5 +9,12 @@ import edu.monash.fit2099.engine.positions.Ground;
 public class Floor extends Ground {
 	public Floor() {
 		super('_');
+	}
+
+	public boolean canActorEnter(Actor actor){
+		if (actor instanceof Goomba || actor instanceof Koopa){
+			return false;
+		}
+		return true;
 	}
 }
