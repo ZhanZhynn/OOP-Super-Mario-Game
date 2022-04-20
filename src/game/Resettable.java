@@ -11,7 +11,8 @@ public interface Resettable {
     /**
      * a default interface method that register current instance to the Singleton manager.
      * It allows corresponding class uses to be affected by global reset
-     * TODO: Use this method at the constructor of `this` instance.
+     * TODO: Use this method at the constructor of the concrete class that implements it (`this` instance).
+     *       For example: Simple(){ this.registerInstance() }
      */
     default void registerInstance(){
         ResetManager.getInstance().appendResetInstance(this);

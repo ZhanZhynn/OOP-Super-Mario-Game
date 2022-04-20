@@ -11,6 +11,9 @@ public class Wall extends Ground {
 	
 	@Override
 	public boolean canActorEnter(Actor actor) {
+		if(actor.hasCapability(Status.DESTROY_HIGH_GROUND)){
+			return true;
+		}
 		return false;
 	}
 	

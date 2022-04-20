@@ -63,7 +63,7 @@ public class Tree extends Ground {
             } else if (this.hasCapability(Capabilities.SPAWN_COIN)) {
                 boolean spawnCoin = new Random().nextInt(10) == 0;
                 if (spawnCoin) {
-                    location.addItem(new Coin("coin", '$', true));
+                    location.addItem(new Coin(20));
                 }
             } else if (this.hasCapability(Capabilities.SPAWN_KOOPA)) {
                 int random = new Random().nextInt(20);
