@@ -76,7 +76,7 @@ public class ActionList implements Iterable<Action> {
 	 *    </code>
 	 * 
 	 * @return an iterator
-	 * @see java.lang.Iterable#iterator()
+	 * @see Iterable#iterator()
 	 */
 	@Override
 	public Iterator<Action> iterator() {
