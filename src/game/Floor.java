@@ -12,9 +12,11 @@ public class Floor extends Ground {
 	}
 
 	public boolean canActorEnter(Actor actor){
+		//Added by Ng Zu Shen on 20/4/2022-----------------------------------
 		if (actor instanceof Goomba || actor instanceof Koopa){
 			return false;
 		}
+		//-------------------------------------------------------------------
 		return true;
 	}
 }

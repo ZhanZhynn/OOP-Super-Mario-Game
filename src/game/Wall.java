@@ -11,9 +11,11 @@ public class Wall extends Ground {
 	
 	@Override
 	public boolean canActorEnter(Actor actor) {
+		//added by Ng Zu Shen on 20/4/2022----------------
 		if(actor.hasCapability(Status.DESTROY_HIGH_GROUND)){
 			return true;
 		}
+		//NgZuShen\----------------------------------------
 		return false;
 	}
 	

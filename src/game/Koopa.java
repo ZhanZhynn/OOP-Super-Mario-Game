@@ -10,9 +10,8 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import java.util.HashMap;
 import java.util.Map;
 
-/*
-#########This is just the copy of goomba, havent actually implement it#########
- */
+//created by Ng Zu Shen on 22/4/2022, this is just a copy of goomba but change the name to Koopa
+//Koopa implementation has not been done.
 public class Koopa extends Actor{
     private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
 

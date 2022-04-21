@@ -2,26 +2,46 @@ package game;
 
 import edu.monash.fit2099.engine.items.Item;
 
+/**
+ * Wallet system
+ * @author Ng Zu Shen
+ * @version 1.0
+ */
 public class Wallet extends Item {
 
+    /**
+     * wallet balance as integer
+     */
     private int balance = 0;
 
-    public Wallet(String name, char displayChar, boolean portable, int balance) {
-        super(name, displayChar, portable);
+    /**
+     * constructor of wallet, need only wallet balance(int) as parameter
+     * @param balance
+     */
+    public Wallet(int balance) {
+        super("wallet", 'w', true);
         this.balance = balance;
     }
 
-    public Wallet(String name, char displayChar, boolean portable) {
-        super(name, displayChar, portable);
-    }
-
+    /**
+     * increase balance
+     * @param amount the amount as integer
+     */
     public void increaseBalance(int amount){
         balance += amount;
     }
 
+    /**
+     * decrease balance
+     * @param amount the amount as integer
+     */
     public void decreaseBalance(int amount){
         balance -= amount;
     }
 
+    /**
+     * getter of balance
+     * @return the balance as integer
+     */
     public int getBalance(){return balance;}
 }

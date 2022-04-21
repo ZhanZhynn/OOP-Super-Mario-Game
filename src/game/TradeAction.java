@@ -5,18 +5,33 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 
+/**
+ * trade action class, triggered when next to toad
+ * @author Ng Zu Shen
+ * @version 1.0
+ */
 public class TradeAction extends Action {
 
-    private Actor target;
-    private String direction;
+    /**
+     * the item to be traded
+     */
     private Sellable item;
 
-    public TradeAction(Actor toad, String direction, Sellable item){
-        this.target = toad;
-        this.direction = direction;
+    /**
+     * constructor of this class
+     * @param item sellable item
+     */
+    public TradeAction(Sellable item){
         this.item = item;
     }
 
+    /**
+     * if actor has sufficient balance, decrease the balance of wallet and add the item to buyer
+     * inventory, else return a string to prompt player the trade is not done
+     * @param actor The actor performing the action.
+     * @param map The map the actor is on.
+     * @return a string that indicate whether the trade is done or not.
+     */
     @Override
     public String execute(Actor actor, GameMap map) {
         Player p = (Player) actor;
@@ -26,7 +41,7 @@ public class TradeAction extends Action {
             p.addItemToInventory(i);
             return i.toString() + " bought";
         }else{
-            return "insufficient money";
+            return "insufficient money, failed to buy";
         }
     }
 
