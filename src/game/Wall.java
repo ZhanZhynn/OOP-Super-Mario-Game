@@ -6,7 +6,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 
-public class Wall extends Ground {
+public class Wall extends Ground implements Jumpable{
 
 	public Wall() {
 		super('#');
@@ -22,11 +22,23 @@ public class Wall extends Ground {
 		return false;
 	}
 
+	//added by Hee Zhan Zhynn on 28/4/2022----------------
+	public String jumped(Actor by, Location at, GameMap map) { //bug: when jumpover, wall becomes coin -> dirt
+		Actor actor = by;
+		Location location = at;
+		if(Math.random() <= 0.8) {
+			map.moveActor(actor, location);
+			return actor + " jumped over wall successfully.";
+		}
+		else {
+			return actor + " fell from wall.";
+		}
+	}
 
-	public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
+	public ActionList allowableActions(Actor otherActor, Location location, String direction) {
 		ActionList actions = new ActionList();
 		if(otherActor instanceof Player) {
-			actions.add(new JumpAction(otherActor, this));
+			actions.add(new JumpAction(this, location, direction));
 		}
 		return actions;
 	}

@@ -16,6 +16,9 @@ import edu.monash.fit2099.engine.positions.Location;
 import java.util.Random;
 
 public class JumpAction extends Action{
+    private Jumpable jumpable;
+    private Location jumpableLocation;
+    private String direction;
 
 
     /**
@@ -31,33 +34,22 @@ public class JumpAction extends Action{
     /**
      * Random number generator
      */
-    protected Random rand = new Random();
 
-    public JumpAction(Actor player, Ground highGround){
-        this.highGround = highGround;
-        this.player = player;
+    public JumpAction(Jumpable jumpable , Location jumpableLocation, String direction){
+        this.jumpable = jumpable;
+        this.jumpableLocation = jumpableLocation;
+        this.direction = direction;
+
     }
-
 
     @Override
     public String execute(Actor actor, GameMap map) {
-        boolean jumpResult = false;
-        int successRate = rand.nextInt(100);
-        if (this.highGround.getDisplayChar() == '#'){
-            if (successRate > 10){
-                jumpResult = true;
-            }
-        }
-        if (jumpResult) {
-            map.moveActor(actor, map.locationOf(actor));
-            return "Jump Successful";
-        }
-        return "Jump Fail";
+        return jumpable.jumped(actor, jumpableLocation, map);
     }
 
     @Override
     public String menuDescription(Actor actor) {
-        String res= actor + " jumps over "+ highGround.toString();
+        String res= actor + " jumps to the "+ direction;
         return res;
     }
 }
