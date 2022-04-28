@@ -31,7 +31,7 @@ public class Sprout extends Tree implements Jumpable {
         Location location = at;
         if(Math.random() <= 0.9) {
             location.map().moveActor(actor, location);
-            return actor + " jumped over Mature successfully.";
+            return actor + " jumped over " +  location.getGround().getClass().getSimpleName() +"(" + location.x() + ","+ location.y() + ")"  + " successfully.";
         }
         else {
             int damage = 10;
@@ -39,6 +39,8 @@ public class Sprout extends Tree implements Jumpable {
             return actor + " fell from Sprout. Received " + damage + " damage.";
         }
     }
+
+
 
 //    public ActionList allowableActions(Actor otherActor, Location location, String direction) {
 //        ActionList actions = new ActionList();

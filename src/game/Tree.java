@@ -14,6 +14,7 @@ import java.util.Random;
  */
 public class Tree extends Ground implements Jumpable{
 
+
     /**
      * used to keep track of when the tree should evolve or grow new sprout.
      */
@@ -129,7 +130,7 @@ public class Tree extends Ground implements Jumpable{
 //            if (wither) {
 //                location.setGround(new Dirt());
 //            }
-//        }
+//        }4
 //    }
     public ArrayList<Location> getDirt(){
         //getter to get the dirt locations
@@ -141,7 +142,7 @@ public class Tree extends Ground implements Jumpable{
         Location location = at;
         if(Math.random() <= 0.9) {
             location.map().moveActor(actor, location);
-            return actor + " jumped over Mature successfully.";
+            return actor + " jumped over " +  location.getGround().getClass().getSimpleName() +"(" + location.x() + ","+ location.y() + ")"  + " successfully.";
         }
         else {
             int damage = 10;
@@ -156,5 +157,9 @@ public class Tree extends Ground implements Jumpable{
             actions.add(new JumpAction(this, location, direction));
         }
         return actions;
+    }
+
+    public String getGroundName(){
+        return "Sprout";
     }
 }

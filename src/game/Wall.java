@@ -28,7 +28,7 @@ public class Wall extends Ground implements Jumpable{
 		Location location = at;
 		if(Math.random() <= 0.8) {
 			location.map().moveActor(actor, location);
-			return actor + " jumped over wall successfully.";
+			return actor + " jumped over " +  location.getGround().getClass().getSimpleName() +"(" + location.x() + ","+ location.y() + ")"  + " successfully.";
 		}
 		else {
 			int damage = 20;
@@ -44,6 +44,7 @@ public class Wall extends Ground implements Jumpable{
 		}
 		return actions;
 	}
+
 	
 	@Override
 	public boolean blocksThrownObjects() {

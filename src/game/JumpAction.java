@@ -48,7 +48,8 @@ public class JumpAction extends Action{
         //supermushroom jump
         if (actor.hasCapability(Status.GUARANTEED_JUMP)){
             jumpableLocation.map().moveActor(actor, jumpableLocation);
-            return actor + " jumped over successfully.";
+            return actor + " jumped over " +  jumpableLocation.getGround().getClass().getSimpleName() +"(" + jumpableLocation.x() + ","+ jumpableLocation.y() + ")"  + " successfully.";
+
         }
         return jumpable.jumped(actor, jumpableLocation);
 
