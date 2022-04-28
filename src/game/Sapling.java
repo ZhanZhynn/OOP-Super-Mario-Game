@@ -1,10 +1,12 @@
 package game;
+import edu.monash.fit2099.engine.actions.ActionList;
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 
 import java.util.Random;
 
-public class Sapling extends Tree{
+public class Sapling extends Tree implements Jumpable{
     private int counter;
 
     public Sapling(){
@@ -27,8 +29,28 @@ public class Sapling extends Tree{
                 location.addItem(new Coin(20));
             }
         }
-
-
     }
+
+    public String jumped(Actor by, Location at) {
+        Actor actor = by;
+        Location location = at;
+        if(Math.random() <= 0.8) {
+            location.map().moveActor(actor, location);
+            return actor + " jumped over Mature successfully.";
+        }
+        else {
+            int damage = 20;
+            actor.hurt(damage);
+            return actor + " fell from Sapling. Received " + damage + " damage.";
+        }
+    }
+
+//    public ActionList allowableActions(Actor otherActor, Location location, String direction) {
+//        ActionList actions = new ActionList();
+//        if(otherActor instanceof Player) {
+//            actions.add(new JumpAction(this, location, direction));
+//        }
+//        return actions;
+//    }
 
 }

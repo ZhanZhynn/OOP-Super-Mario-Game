@@ -1,5 +1,7 @@
 package game;
 
+import edu.monash.fit2099.engine.actions.ActionList;
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 
@@ -10,7 +12,7 @@ import java.util.Random;
  * @author Ng Zu shen
  * @version 1.0
  */
-public class Tree extends Ground {
+public class Tree extends Ground implements Jumpable{
 
     /**
      * used to keep track of when the tree should evolve or grow new sprout.
@@ -129,9 +131,30 @@ public class Tree extends Ground {
 //            }
 //        }
 //    }
-
     public ArrayList<Location> getDirt(){
         //getter to get the dirt locations
         return this.dirt;
+    }
+
+    public String jumped(Actor by, Location at) {
+        Actor actor = by;
+        Location location = at;
+        if(Math.random() <= 0.9) {
+            location.map().moveActor(actor, location);
+            return actor + " jumped over Mature successfully.";
+        }
+        else {
+            int damage = 10;
+            actor.hurt(damage);
+            return actor + " fell from Sprout. Received " + damage + " damage.";
+        }
+    }
+
+    public ActionList allowableActions(Actor otherActor, Location location, String direction) {
+        ActionList actions = new ActionList();
+        if(otherActor instanceof Player) {
+            actions.add(new JumpAction(this, location, direction));
+        }
+        return actions;
     }
 }
