@@ -74,11 +74,11 @@ public class Player extends Actor  {
 		}
 		lastRoundHp = getCurrentHp();
 
-		//Zz: bug over here. Removed. What is this for?
-//		if (map.locationOf(this).getGround() instanceof Wall){
-//			map.locationOf(this).setGround(new Dirt());
-//			map.locationOf(this).addItem(new Coin(5));
-//		}
+		if (map.locationOf(this).getGround() instanceof Wall){
+			if(hasCapability(Status.DESTROY_HIGH_GROUND)){
+			map.locationOf(this).setGround(new Dirt());
+			map.locationOf(this).addItem(new Coin(5));}
+		}
 		//NgZuShen\-------------------------------------------------------------------
 
 		// Handle multi-turn Actions
