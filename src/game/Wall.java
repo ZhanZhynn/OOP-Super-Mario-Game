@@ -23,11 +23,11 @@ public class Wall extends Ground implements Jumpable{
 	}
 
 	//added by Hee Zhan Zhynn on 28/4/2022----------------
-	public String jumped(Actor by, Location at, GameMap map) { //bug: when jumpover, wall becomes coin -> dirt
+	public String jumped(Actor by, Location at) { //bug: wall is destroyed even without capability
 		Actor actor = by;
 		Location location = at;
 		if(Math.random() <= 0.8) {
-			map.moveActor(actor, location);
+			location.map().moveActor(actor, location);
 			return actor + " jumped over wall successfully.";
 		}
 		else {

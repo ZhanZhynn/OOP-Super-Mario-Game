@@ -34,6 +34,7 @@ public class JumpAction extends Action{
     /**
      * Random number generator
      */
+    protected Random rand = new Random();
 
     public JumpAction(Jumpable jumpable , Location jumpableLocation, String direction){
         this.jumpable = jumpable;
@@ -44,7 +45,8 @@ public class JumpAction extends Action{
 
     @Override
     public String execute(Actor actor, GameMap map) {
-        return jumpable.jumped(actor, jumpableLocation, map);
+        return jumpable.jumped(actor, jumpableLocation);
+
     }
 
     @Override
