@@ -114,7 +114,7 @@ public class Tree extends Ground {
         }
         if (this.hasCapability(Capabilities.SPAWN_KOOPA)){
             //20% chance
-            boolean wither = new Random().nextInt(5) == 0;
+            boolean wither = new Random().nextInt(5) == 0;  //Zz: why is new Random().nextInt(5) == 0 and not <= 2?
             if (wither) {
                 location.setGround(new Dirt());
             }
