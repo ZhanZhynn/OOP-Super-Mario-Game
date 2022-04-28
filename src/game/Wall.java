@@ -31,7 +31,9 @@ public class Wall extends Ground implements Jumpable{
 			return actor + " jumped over wall successfully.";
 		}
 		else {
-			return actor + " fell from wall.";
+			int damage = 20;
+			actor.hurt(20);
+			return actor + " fell from wall. Received " + damage + " damage.";
 		}
 	}
 
