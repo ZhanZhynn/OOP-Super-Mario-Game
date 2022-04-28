@@ -26,7 +26,7 @@ public class Tree extends Ground {
      * Constructor.
      *
      */
-    public Tree() {
+    public Tree() { //Zz: do I just use this as sprout class? or need a new class?
         super('+');
         this.addCapability(Capabilities.SPAWN_GOOMBA);
     }
