@@ -31,6 +31,10 @@ public class Tree extends Ground {
         this.addCapability(Capabilities.SPAWN_GOOMBA);
     }
 
+    public Tree(char displayChar) {
+        super(displayChar);
+    }
+
     /**
      * check whether a location is in range of map and whether is it a dirt, if yes
      * add to dirt arraylist
@@ -70,55 +74,64 @@ public class Tree extends Ground {
      */
     public void tick(Location location){
         counter+=1;
-        if (counter==10){
-            this.setDisplayChar('t');
-            this.removeCapability(Capabilities.SPAWN_GOOMBA);
-            this.addCapability(Capabilities.SPAWN_COIN);
-        }else if (counter==20){
-            this.setDisplayChar('T');
-            this.removeCapability(Capabilities.SPAWN_COIN);
-            this.addCapability(Capabilities.SPAWN_KOOPA);
-            this.addCapability(Capabilities.GROW_SPROUT);
+        if (counter % 10 == 0){
+            location.setGround(new Sapling());
+//            this.setDisplayChar('t');
+//            this.removeCapability(Capabilities.SPAWN_GOOMBA);
+//            this.addCapability(Capabilities.SPAWN_COIN);
+//        }else if (counter==20){
+//            this.setDisplayChar('T');
+//            this.removeCapability(Capabilities.SPAWN_COIN);
+//            this.addCapability(Capabilities.SPAWN_KOOPA);
+//            this.addCapability(Capabilities.GROW_SPROUT);
         }
         if (!location.containsAnActor()) {
             if (this.hasCapability(Capabilities.SPAWN_GOOMBA)) {
-                //10% chance
-                boolean spawnGoomba = new Random().nextInt(10) == 0;
-                if (spawnGoomba) {
+                //10% chance to spawn Goomba if actor is not standing on it
+//                boolean spawnGoomba = new Random().nextInt(10) == 0; //how was this work?
+//                if (spawnGoomba) {
+                if (Math.random() <= 0.1)
                     location.addActor(new Goomba());
                 }
-            } else if (this.hasCapability(Capabilities.SPAWN_COIN)) {
-                //10% chance
-                boolean spawnCoin = new Random().nextInt(10) == 0;
-                if (spawnCoin) {
-                    location.addItem(new Coin(20));
-                }
-            } else if (this.hasCapability(Capabilities.SPAWN_KOOPA)) {
-                //15% chance
-                int random = new Random().nextInt(20);
-                boolean spawnKoopa = random == 0 || random == 1 || random == 2;
-                if (spawnKoopa) {
-                    location.addActor(new Koopa());
-                }
-            }
-        }
-        //grow sprout at random neighbour dirt
-        if (this.hasCapability(Capabilities.GROW_SPROUT) && this.counter%5==0) {
-            addDirtNeighbour(location);
-            if (dirt.size() != 0) {
-                Random ran = new Random();
-                int randomNumber = ran.nextInt(dirt.size());
-                Location grow = dirt.get(randomNumber);
-                grow.setGround(new Tree());
-            }
-        }
-        if (this.hasCapability(Capabilities.SPAWN_KOOPA)){
-            //20% chance
-            boolean wither = new Random().nextInt(5) == 0;  //Zz: why is new Random().nextInt(5) == 0 and not <= 2?
-            if (wither) {
-                location.setGround(new Dirt());
             }
         }
 
+//            else if (this.hasCapability(Capabilities.SPAWN_COIN)) {
+//                //10% chance
+//                boolean spawnCoin = new Random().nextInt(10) == 0;
+//                if (spawnCoin) {
+//                    location.addItem(new Coin(20));
+//                }
+//            } else if (this.hasCapability(Capabilities.SPAWN_KOOPA)) {
+//                //15% chance
+//                int random = new Random().nextInt(20);
+//                boolean spawnKoopa = random == 0 || random == 1 || random == 2; //what is this?
+//                if (spawnKoopa) {
+//                    location.addActor(new Koopa());
+//                }
+//            }
+//        }
+        //grow sprout at random neighbour dirt
+//        if (this.hasCapability(Capabilities.GROW_SPROUT) && this.counter%5==0) {
+//            addDirtNeighbour(location);
+//            if (dirt.size() != 0) {
+//                Random ran = new Random();
+//                int randomNumber = ran.nextInt(dirt.size());
+//                Location grow = dirt.get(randomNumber);
+//                grow.setGround(new Tree());
+//            }
+//        }
+//        if (this.hasCapability(Capabilities.SPAWN_KOOPA)){
+//            //20% chance
+//            boolean wither = new Random().nextInt(5) == 0;  //Zz: why is new Random().nextInt(5) == 0 and not <= 2?
+//            if (wither) {
+//                location.setGround(new Dirt());
+//            }
+//        }
+//    }
+
+    public ArrayList<Location> getDirt(){
+        //getter to get the dirt locations
+        return this.dirt;
     }
 }
