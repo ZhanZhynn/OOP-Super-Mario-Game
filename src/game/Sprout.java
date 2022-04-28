@@ -4,7 +4,7 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Location;
 
-public class Sprout extends Tree implements Jumpable {
+public class Sprout extends Tree implements Jumpable, Destroyable{
     private int counter;
 
     public Sprout(){
@@ -40,9 +40,15 @@ public class Sprout extends Tree implements Jumpable {
         }
     }
 
+    @Override
+    public boolean canActorEnter(Actor actor) {
+        if(actor.hasCapability(Status.DESTROY_HIGH_GROUND)){
+            return true;
+        }
+        return false;
+    }
 
-
-//    public ActionList allowableActions(Actor otherActor, Location location, String direction) {
+    //    public ActionList allowableActions(Actor otherActor, Location location, String direction) {
 //        ActionList actions = new ActionList();
 //        if(otherActor instanceof Player) {
 //            actions.add(new JumpAction(this, location, direction));

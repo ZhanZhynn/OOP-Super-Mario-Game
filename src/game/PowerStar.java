@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.capabilities.CapabilitySet;
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 
 import java.util.List;
@@ -74,7 +75,7 @@ public class PowerStar extends Item implements Sellable,Consumable{
      * reset the counter to 10
      * @param actor the actor that consume this
      */
-    public void consume(Actor actor){
+    public void consume(Actor actor, GameMap map){
         isConsumed = true;
         counter = 10;
         addCapability(Status.INSTANT_KILL);

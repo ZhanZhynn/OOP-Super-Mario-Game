@@ -19,7 +19,7 @@ public class Application {
 
 			World world = new World(new Display());
 
-			FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(), new Tree());
+			FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(), new Sprout());
 
 			List<String> map = Arrays.asList(
 					"..........................................##..........+.........................",
@@ -50,9 +50,6 @@ public class Application {
 
 			Actor toad = new Toad();
 			gameMap.addActor(toad, gameMap.at(42, 11));
-
-			// FIXME: the Goomba should be generated from the Tree
-			gameMap.at(35, 10).addActor(new Goomba());
 
 			world.run();
 

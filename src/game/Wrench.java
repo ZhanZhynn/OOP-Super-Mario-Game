@@ -1,8 +1,9 @@
 package game;
 
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.weapons.Weapon;
 
-public class Wrench extends Item implements Sellable{
+public class Wrench extends Item implements Sellable, Weapon {
 
     public static final int price = 200;
 
@@ -13,5 +14,20 @@ public class Wrench extends Item implements Sellable{
     @Override
     public int getPrice() {
         return price;
+    }
+
+    @Override
+    public int damage() {
+        return 50;
+    }
+
+    @Override
+    public String verb() {
+        return "whack";
+    }
+
+    @Override
+    public int chanceToHit() {
+        return 80;
     }
 }

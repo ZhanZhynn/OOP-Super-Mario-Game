@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.Weapon;
 
 // last modified by NgZuShen on 22/4/2022 (add documentation and implement instant kill)
@@ -60,7 +61,14 @@ public class AttackAction extends Action {
 			for (Action drop : dropActions)
 				drop.execute(target, map);
 			map.removeActor(target);
-			return actor + " kill "+ target + " using power star ability.";
+			String result = actor + " kill "+ target + " using power star ability.";
+			if (target instanceof Koopa){
+				Location here = map.locationOf(target);
+				here.addActor(new DormantKoopa());
+				result += System.lineSeparator() + target + " hides in its shell.";
+				return result;
+			}
+			return result;
 		}
 		//NgZuShen\--------------------------------------------------------------
 
@@ -70,11 +78,22 @@ public class AttackAction extends Action {
 			return actor + " misses " + target + ".";
 		}
 
+		if (target.hasCapability(Status.INVINCIBLE)){
+			return actor + " tried to attack " + target + ". " + target + " receive no damage because of power star.";
+		}
+
 		int damage = weapon.damage();
 		String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
 
 		target.hurt(damage);
 		if (!target.isConscious()) {
+			if (target instanceof Koopa){
+				Location here = map.locationOf(target);
+				map.removeActor(target);
+				here.addActor(new DormantKoopa());
+				result += System.lineSeparator() + target + " hides in its shell.";
+				return result;
+			}
 			ActionList dropActions = new ActionList();
 			// drop all items
 			for (Item item : target.getInventory())

@@ -6,7 +6,7 @@ import edu.monash.fit2099.engine.positions.Location;
 
 import java.util.Random;
 
-public class Sapling extends Tree implements Jumpable{
+public class Sapling extends Tree implements Jumpable, Destroyable{
     private int counter;
 
     public Sapling(){
@@ -43,6 +43,13 @@ public class Sapling extends Tree implements Jumpable{
             actor.hurt(damage);
             return actor + " fell from Sapling. Received " + damage + " damage.";
         }
+    }
+
+    public boolean canActorEnter(Actor actor) {
+        if(actor.hasCapability(Status.DESTROY_HIGH_GROUND)){
+            return true;
+        }
+        return false;
     }
 
 //    public ActionList allowableActions(Actor otherActor, Location location, String direction) {

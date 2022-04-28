@@ -3,6 +3,7 @@ package game;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.GameMap;
 
 //added by Ng Zu Shen on 20/4/2022
 
@@ -37,6 +38,11 @@ public class SuperMushroom extends Item implements Sellable,Consumable{
         this.addAction(consumeAction);
     }
 
+    public SuperMushroom() {
+        super("Super mushroom", '^', false);
+        this.addAction(consumeAction);
+    }
+
     public Boolean getIsConsumed(){return isConsumed;}
 
     @Override
@@ -50,7 +56,11 @@ public class SuperMushroom extends Item implements Sellable,Consumable{
      * @param actor
      */
     @Override
-    public void consume(Actor actor) {
+    public void consume(Actor actor, GameMap map) {
+        if (!actor.getInventory().contains(this)){
+            actor.addItemToInventory(this);
+            map.locationOf(actor).removeItem(this);
+        }
         isConsumed = true;
         addCapability(Status.TALL);
         addCapability(Status.GUARANTEED_JUMP);
