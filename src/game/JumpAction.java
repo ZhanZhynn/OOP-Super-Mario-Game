@@ -45,6 +45,11 @@ public class JumpAction extends Action{
 
     @Override
     public String execute(Actor actor, GameMap map) {
+        //supermushroom jump
+        if (actor.hasCapability(Status.GUARANTEED_JUMP)){
+            jumpableLocation.map().moveActor(actor, jumpableLocation);
+            return actor + " jumped over successfully.";
+        }
         return jumpable.jumped(actor, jumpableLocation);
 
     }
