@@ -111,7 +111,7 @@ public class Player extends Actor implements Resettable {
 
 		//reset for player capabilities not working.
 		if (this.reset) {
-			this.heal(this.getMaxHp() - this.lastRoundHp);
+			this.resetMaxHp(this.getMaxHp());
 			this.removeCapability(Status.INSTANT_KILL);
 			this.removeCapability(Status.PATH_OF_GOLD);
 			this.removeCapability(Status.INVINCIBLE);
