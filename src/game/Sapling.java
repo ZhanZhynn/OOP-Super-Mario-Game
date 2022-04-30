@@ -18,7 +18,7 @@ public class Sapling extends Tree implements Jumpable, Destroyable{
     public void tick(Location location) {
         //grow into mature after 10 turns
         counter += 1;
-        if (counter % 10 == 0) {
+        if (counter  == 10) {
 //            location.addActor(new Bug());
             location.setGround(new Mature());
         }
@@ -36,7 +36,7 @@ public class Sapling extends Tree implements Jumpable, Destroyable{
         Location location = at;
         if(Math.random() <= 0.8) {
             location.map().moveActor(actor, location);
-            return actor + " jumped over " +  location.getGround().getClass().getSimpleName() +"(" + location.x() + ","+ location.y() + ")"  + " successfully.";
+            return actor + " jumped over " +  location +"(" + location.x() + ","+ location.y() + ")"  + " successfully.";
         }
         else {
             int damage = 20;
@@ -52,6 +52,7 @@ public class Sapling extends Tree implements Jumpable, Destroyable{
         return false;
     }
 
+
 //    public ActionList allowableActions(Actor otherActor, Location location, String direction) {
 //        ActionList actions = new ActionList();
 //        if(otherActor instanceof Player) {
@@ -59,5 +60,9 @@ public class Sapling extends Tree implements Jumpable, Destroyable{
 //        }
 //        return actions;
 //    }
+
+    public String toString() {
+        return "Sapling";
+    }
 
 }

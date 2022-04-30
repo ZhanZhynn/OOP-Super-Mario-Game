@@ -48,16 +48,14 @@ public class JumpAction extends Action{
         //supermushroom jump
         if (actor.hasCapability(Status.GUARANTEED_JUMP)){
             jumpableLocation.map().moveActor(actor, jumpableLocation);
-            return actor + " jumped over " +  jumpableLocation.getGround().getClass().getSimpleName() +"(" + jumpableLocation.x() + ","+ jumpableLocation.y() + ")"  + " successfully.";
-
+            return actor + " jumped over " +  jumpable +"(" + jumpableLocation.x() + ","+ jumpableLocation.y() + ")"  + " successfully.";
         }
         return jumpable.jumped(actor, jumpableLocation);
-
     }
 
     @Override
     public String menuDescription(Actor actor) {
-        String res= actor + " jumps to the "+ direction;
+        String res= actor + " jumps over "+ jumpable + " to the " + direction;
         return res;
     }
 }

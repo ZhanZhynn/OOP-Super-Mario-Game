@@ -23,12 +23,12 @@ public class Wall extends Ground implements Jumpable, Destroyable{
 	}
 
 	//added by Hee Zhan Zhynn on 28/4/2022----------------
-	public String jumped(Actor by, Location at) { //bug: wall is destroyed even without capability
+	public String jumped(Actor by, Location at) {
 		Actor actor = by;
 		Location location = at;
 		if(Math.random() <= 0.8) {
 			location.map().moveActor(actor, location);
-			return actor + " jumped over " +  location.getGround().getClass().getSimpleName() +"(" + location.x() + ","+ location.y() + ")"  + " successfully.";
+			return actor + " jumped over " +  location +"(" + location.x() + ","+ location.y() + ")"  + " successfully.";
 		}
 		else {
 			int damage = 20;
@@ -43,6 +43,10 @@ public class Wall extends Ground implements Jumpable, Destroyable{
 			actions.add(new JumpAction(this, location, direction));
 		}
 		return actions;
+	}
+
+	public String toString() {
+		return "Wall";
 	}
 
 	

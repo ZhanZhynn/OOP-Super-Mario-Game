@@ -21,10 +21,10 @@ public class Mature extends Tree implements Jumpable, Destroyable {
         //grow into mature after 10 turns
         counter += 1;
         double chance = Math.random();
-        if (counter % 10 == 0) {
-//            location.addActor(new Bug());
-            location.setGround(new Mature());
-        }
+//        if (counter == 10) {
+////            location.addActor(new Bug());
+//            location.setGround(new Mature());
+//        }
 
         if (!location.containsAnActor()) {
             if (this.hasCapability(Capabilities.SPAWN_KOOPA)) {
@@ -43,7 +43,7 @@ public class Mature extends Tree implements Jumpable, Destroyable {
                 Random ran = new Random();
                 int randomNumber = ran.nextInt(dirt.size());
                 Location grow = dirt.get(randomNumber);
-                grow.setGround(new Tree()); //need to change this to sprout
+                grow.setGround(new Sprout()); //need to change this to sprout
             }
         }
 
@@ -58,7 +58,7 @@ public class Mature extends Tree implements Jumpable, Destroyable {
         Location location = at;
         if(Math.random() <= 0.7) {
             location.map().moveActor(actor, location);
-            return actor + " jumped over " +  location.getGround().getClass().getSimpleName() +"(" + location.x() + ","+ location.y() + ")"  + " successfully.";
+            return actor + " jumped over " +  location +"(" + location.x() + ","+ location.y() + ")"  + " successfully.";
         }
         else {
             int damage = 30;
@@ -81,4 +81,8 @@ public class Mature extends Tree implements Jumpable, Destroyable {
 //        }
 //        return actions;
 //    }
+
+    public String toString() {
+        return "Mature";
+    }
 }
