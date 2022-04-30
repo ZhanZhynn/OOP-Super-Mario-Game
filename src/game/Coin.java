@@ -12,13 +12,14 @@ import edu.monash.fit2099.engine.positions.Location;
  * @author Ng Zu Shen
  * @version 1.0
  */
-public class Coin extends Item {
+public class Coin extends Item{
 
     /**
      * value of the coin as an integer
      */
     private int value;
     private boolean isPickedUp;
+    private boolean reset;
 
     /**
      * Constructor that only take in one parameter, which is the value of coin
@@ -34,4 +35,7 @@ public class Coin extends Item {
      * @return coin value as an integer
      */
     public int getValue(){return value;}
+
+
 }
+

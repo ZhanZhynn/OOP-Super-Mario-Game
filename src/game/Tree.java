@@ -2,19 +2,21 @@ package game;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
  * @author Ng Zu shen
  * @version 1.0
  */
-public abstract class Tree extends Ground implements Jumpable{
+public abstract class Tree extends Ground implements Jumpable, Resettable{
 
-
+    private boolean reset = false;
     /**
      * used to keep track of when the tree should evolve or grow new sprout.
      */
@@ -36,6 +38,7 @@ public abstract class Tree extends Ground implements Jumpable{
 
     public Tree(char displayChar) {
         super(displayChar);
+        this.registerInstance();
     }
 
     public boolean canActorEnter(Actor actor) {
@@ -74,11 +77,22 @@ public abstract class Tree extends Ground implements Jumpable{
         addNeighbour(location, location.x() - 1, location.y() - 1);
     }
 
+
     /**
      * handle all the behaviour of trees as stated in assignment specification
      * @param location The location of the Ground
      */
     public void tick(Location location){
+//        if (this.reset){
+//            List<Item> items = location.getItems();
+//            for (Item item:items){
+//                if (item instanceof Coin){
+//                    location.removeItem(item);
+//                }
+//            }
+//        }
+//        this.reset = false;
+
 //        counter+=1;
 //        if (counter % 10 == 0){
 //            location.setGround(new Sapling());
@@ -160,6 +174,10 @@ public abstract class Tree extends Ground implements Jumpable{
             actions.add(new JumpAction(this, location, direction));
         }
         return actions;
+    }
+
+    public void resetInstance(){ //50% chance to turn into dirt
+            this.reset = true;
     }
 
 

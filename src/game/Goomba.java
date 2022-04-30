@@ -70,6 +70,7 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import edu.monash.fit2099.engine.weapons.Weapon;
 
@@ -80,8 +81,9 @@ import java.util.Random;
 /**
  * A little fungus guy.
  */
-public class Goomba extends Actor {
+public class Goomba extends Actor implements Resettable {
 	private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
+	private boolean reset = false;
 
 	/**
 	 * Constructor.
@@ -90,6 +92,11 @@ public class Goomba extends Actor {
 		super("Goomba", 'g', 20);
 		this.behaviours.put(10, new WanderBehaviour());
 		this.behaviours.put(13, new AttackBehaviour());
+		this.registerInstance();
+	}
+
+	public void resetInstance(){
+		this.reset = true;
 	}
 
 	public Weapon getWeapon() {
@@ -121,6 +128,16 @@ public class Goomba extends Actor {
 	 */
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+		if (this.reset == true){
+//			map.removeActor(this);
+//			Location here = map.locationOf(this);
+//			map.removeActor(this);
+//			here.setGround(new Dirt());
+			this.reset = false;
+			map.removeActor(this);
+			return new DoNothingAction();
+		}
+
 		boolean suicide = new Random().nextInt(10) == 0;
 		if (suicide || !this.isConscious()){
 			map.removeActor(this);

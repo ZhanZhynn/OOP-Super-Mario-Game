@@ -16,8 +16,9 @@ import java.util.Map;
 
 //created by Ng Zu Shen on 22/4/2022, this is just a copy of goomba but change the name to Koopa
 //Koopa implementation has not been done.
-public class Koopa extends Actor{
+public class Koopa extends Actor implements Resettable{
     private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
+    private boolean reset = false;
 
     /**
      * Constructor.
@@ -26,6 +27,11 @@ public class Koopa extends Actor{
         super("Koopa", 'K', 100);
         this.behaviours.put(10, new WanderBehaviour());
         this.behaviours.put(13, new AttackBehaviour());
+        this.registerInstance();
+    }
+
+    public void resetInstance(){
+        this.reset = true;
     }
 
     public Weapon getWeapon() {
@@ -57,6 +63,12 @@ public class Koopa extends Actor{
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+        if (this.reset==true){
+            this.reset = false;
+            map.removeActor(this);
+            return new DoNothingAction();
+        }
+
         Action action = new DoNothingAction();
         //can detect up to 2 step away. even the diagonal 2 steps.
         for (Exit exit : map.locationOf(this).getExits()) {
@@ -78,8 +90,9 @@ public class Koopa extends Actor{
             }
         }
         this.behaviours.remove(12);
-        if (action != null)
+        if (action != null) {
             return action;
+        }
         return new DoNothingAction();
     }
 }

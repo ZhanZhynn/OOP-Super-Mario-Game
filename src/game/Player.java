@@ -11,7 +11,7 @@ import edu.monash.fit2099.engine.displays.Menu;
 /**
  * Class representing the Player.
  */
-public class Player extends Actor  {
+public class Player extends Actor implements Resettable {
 
 	private final Menu menu = new Menu();
 	/**
@@ -23,6 +23,8 @@ public class Player extends Actor  {
 	 */
 	private int lastRoundHp = getMaxHp();
 
+	private boolean reset = false;
+
 	/**
 	 * Constructor.
 	 *
@@ -33,6 +35,11 @@ public class Player extends Actor  {
 	public Player(String name, char displayChar, int hitPoints) {
 		super(name, displayChar, hitPoints);
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
+		this.registerInstance();
+	}
+
+	public void resetInstance(){ //50% chance to turn into dirt
+		this.reset = true;
 	}
 
 	//ZuShen
@@ -60,7 +67,7 @@ public class Player extends Actor  {
 		actions.add(new ResetAction());
 
 		//Added by Ng Zu Shen on 21/4/2022--------------------------------------------
-		for (int i = 0; i<getInventory().size(); i++){
+		for (int i = 0; i<getInventory().size(); i++){ //please comment this block of code
 			Item item = getInventory().get(i);
 			if (item instanceof PowerStar){
 				PowerStar ps = (PowerStar) item;
@@ -101,6 +108,21 @@ public class Player extends Actor  {
 		System.out.println("Wallet: "+this.getWallet().getBalance());
 		//NgZuShen\--------------------------------------------------------------------
 
+
+		//reset for player capabilities not working.
+		if (this.reset) {
+			this.heal(this.getMaxHp() - this.getCurrentHp());
+			this.removeCapability(Status.INSTANT_KILL);
+			this.removeCapability(Status.PATH_OF_GOLD);
+			this.removeCapability(Status.INVINCIBLE);
+			this.removeCapability(Status.DESTROY_HIGH_GROUND);
+			this.removeCapability(Status.TALL);
+			this.removeCapability(Status.GUARANTEED_JUMP);
+			this.addCapability(Status.HOSTILE_TO_ENEMY);
+		}
+		this.reset = false;
+
+
 		// return/print the console menu
 		return menu.showMenu(this, actions, display);
 	}
@@ -126,6 +148,7 @@ public class Player extends Actor  {
 		else if (getCurrentHp() - lastRoundHp < 50 && getCurrentHp() > lastRoundHp){
 			character = super.getDisplayChar();
 		}
+
 		return character;
 		//return this.hasCapability(Status.TALL) ? Character.toUpperCase(super.getDisplayChar()): super.getDisplayChar();
 	}

@@ -2,14 +2,17 @@ package game;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Mature extends Tree implements Jumpable, Destroyable, Resettable {
     private int counter;
-    private Location location;
+    private boolean reset;
 
     public Mature(){
         super('T');
@@ -19,11 +22,24 @@ public class Mature extends Tree implements Jumpable, Destroyable, Resettable {
         counter = 0;
     }
 
-    public void resetInstance(){
-        this.location.setGround(new Dirt());
+    public void resetInstance(){ //50% chance to turn into dirt
+            this.reset = true;
     }
 
     public void tick(Location location) {
+        if (this.reset){
+//            List<Item> items = location.getItems();
+//            for (Item item:items){
+//                if (item instanceof Coin){
+//                    location.removeItem(item);
+//                }
+//            }
+            if (Math.random() <= 0.5) {
+                location.setGround(new Dirt());
+            }
+        }
+        this.reset = false;
+
         //grow into mature after 10 turns
         counter += 1;
         double chance = Math.random();

@@ -2,18 +2,38 @@ package game;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
+
+import java.util.List;
 
 public class Sprout extends Tree implements Jumpable, Destroyable{
     private int counter;
+    private boolean reset = false;
 
     public Sprout(){
         super('+');
         this.addCapability(Capabilities.SPAWN_GOOMBA);
         counter = 0;
+        this.registerInstance();
     }
 
+    public void resetInstance(){ //50% chance to turn into dirt
+        this.reset = true;
+    }
+
+
     public void tick(Location location){
+        if (this.reset){
+            List<Item> items = location.getItems();
+            for (Item item:items){
+                if (item instanceof Coin){
+                    location.removeItem(item);
+                }
+            }
+        }
+        this.reset = false;
+
         counter+=1;
         if (counter % 10 == 0){
             location.setGround(new Sapling());

@@ -1,21 +1,31 @@
 package game;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 
+import java.util.List;
 import java.util.Random;
 
-public class Sapling extends Tree implements Jumpable, Destroyable{
+public class Sapling extends Tree implements Jumpable, Destroyable, Resettable{
     private int counter;
+    private boolean reset = false;
 
     public Sapling(){
         super('t');
         this.addCapability(Capabilities.SPAWN_COIN);
         counter = 0;
+        this.registerInstance();
+    }
+
+    public void resetInstance(){//remove all coins
+        this.reset = true;
     }
 
     public void tick(Location location) {
+
+
         //grow into mature after 10 turns
         counter += 1;
         if (counter  == 10) {
@@ -29,6 +39,18 @@ public class Sapling extends Tree implements Jumpable, Destroyable{
                 location.addItem(new Coin(20));
             }
         }
+
+//        if (this.reset){
+//            List<Item> items = location.getItems();
+//            if (items.size() > 0) {
+//                for (Item item : items) {
+//                    if (item instanceof Coin) {
+//                        location.removeItem(item);
+//                    }
+//                }
+//            }
+//        }
+//        this.reset = false;
     }
 
     public String jumped(Actor by, Location at) {
