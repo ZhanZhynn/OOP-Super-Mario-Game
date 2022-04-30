@@ -57,6 +57,8 @@ public class Player extends Actor  {
 
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+		actions.add(new ResetAction());
+
 		//Added by Ng Zu Shen on 21/4/2022--------------------------------------------
 		for (int i = 0; i<getInventory().size(); i++){
 			Item item = getInventory().get(i);
@@ -87,6 +89,7 @@ public class Player extends Actor  {
 				map.locationOf(this).setGround(new Dirt());
 				map.locationOf(this).addItem(new Coin(5));}
 		}
+
 		//NgZuShen\-------------------------------------------------------------------
 
 		// Handle multi-turn Actions

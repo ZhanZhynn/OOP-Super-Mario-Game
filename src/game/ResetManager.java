@@ -36,7 +36,7 @@ public class ResetManager {
     /**
      * Constructor
      */
-    private ResetManager(){
+    public ResetManager(){
         resettableList = new ArrayList<>();
     }
 
@@ -45,7 +45,9 @@ public class ResetManager {
      * By doing this way, it will avoid using `instanceof` all over the place.
      */
     public void run(){
-//        this.cleanUp();
+        for (Resettable item: resettableList) {
+            cleanUp(item);
+        }
     }
 
     /**
@@ -61,10 +63,9 @@ public class ResetManager {
      * @param resettable resettable object
      * FIXME: it does nothing, you need to implement it :)
      */
-//    public void cleanUp(Resettable resettable){
-//        for (Resettable items: resettableList){
-//            items.
-//        }
-//    }
+    public void cleanUp(Resettable resettable){
+        resettable.resetInstance();
+
+    }
 
 }

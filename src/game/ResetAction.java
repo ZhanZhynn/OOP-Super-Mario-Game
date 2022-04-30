@@ -8,6 +8,8 @@ public class ResetAction extends Action {
     //class added by Zz
 
     public ResetAction(){
+        ResetManager reseter = new ResetManager();
+        reseter.run();
     }
 
     public String execute(Actor actor, GameMap map) {
