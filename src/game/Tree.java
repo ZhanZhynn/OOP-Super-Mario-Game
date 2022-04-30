@@ -12,7 +12,7 @@ import java.util.Random;
  * @author Ng Zu shen
  * @version 1.0
  */
-public class Tree extends Ground implements Jumpable{
+public abstract class Tree extends Ground implements Jumpable{
 
 
     /**
@@ -29,13 +29,17 @@ public class Tree extends Ground implements Jumpable{
      * Constructor.
      *
      */
-    public Tree() { //Zz: do I just use this as sprout class? or need a new class?
-        super('+');
-        this.addCapability(Capabilities.SPAWN_GOOMBA);
-    }
+//    public Tree() { //Zz: do I just use this as sprout class? or need a new class?
+//        super('+');
+//        this.addCapability(Capabilities.SPAWN_GOOMBA);
+//    }
 
     public Tree(char displayChar) {
         super(displayChar);
+    }
+
+    public boolean canActorEnter(Actor actor) {
+        return false;
     }
 
     /**
@@ -68,7 +72,6 @@ public class Tree extends Ground implements Jumpable{
         addNeighbour(location, location.x() - 1, location.y() + 1);
         addNeighbour(location, location.x() - 1, location.y());
         addNeighbour(location, location.x() - 1, location.y() - 1);
-
     }
 
     /**
@@ -76,27 +79,27 @@ public class Tree extends Ground implements Jumpable{
      * @param location The location of the Ground
      */
     public void tick(Location location){
-        counter+=1;
-        if (counter % 10 == 0){
-            location.setGround(new Sapling());
-//            this.setDisplayChar('t');
-//            this.removeCapability(Capabilities.SPAWN_GOOMBA);
-//            this.addCapability(Capabilities.SPAWN_COIN);
-//        }else if (counter==20){
-//            this.setDisplayChar('T');
-//            this.removeCapability(Capabilities.SPAWN_COIN);
-//            this.addCapability(Capabilities.SPAWN_KOOPA);
-//            this.addCapability(Capabilities.GROW_SPROUT);
-        }
-        if (!location.containsAnActor()) {
-            if (this.hasCapability(Capabilities.SPAWN_GOOMBA)) {
-                //10% chance to spawn Goomba if actor is not standing on it
-//                boolean spawnGoomba = new Random().nextInt(10) == 0; //how was this work?
-//                if (spawnGoomba) {
-                if (Math.random() <= 0.1)
-                    location.addActor(new Goomba());
-                }
-            }
+//        counter+=1;
+//        if (counter % 10 == 0){
+//            location.setGround(new Sapling());
+////            this.setDisplayChar('t');
+////            this.removeCapability(Capabilities.SPAWN_GOOMBA);
+////            this.addCapability(Capabilities.SPAWN_COIN);
+////        }else if (counter==20){
+////            this.setDisplayChar('T');
+////            this.removeCapability(Capabilities.SPAWN_COIN);
+////            this.addCapability(Capabilities.SPAWN_KOOPA);
+////            this.addCapability(Capabilities.GROW_SPROUT);
+//        }
+//        if (!location.containsAnActor()) {
+//            if (this.hasCapability(Capabilities.SPAWN_GOOMBA)) {
+//                //10% chance to spawn Goomba if actor is not standing on it
+////                boolean spawnGoomba = new Random().nextInt(10) == 0; //how was this work?
+////                if (spawnGoomba) {
+//                if (Math.random() <= 0.1)
+//                    location.addActor(new Goomba());
+//                }
+//            }
         }
 
 //            else if (this.hasCapability(Capabilities.SPAWN_COIN)) {
@@ -142,7 +145,7 @@ public class Tree extends Ground implements Jumpable{
         Location location = at;
         if(Math.random() <= 0.9) {
             location.map().moveActor(actor, location);
-            return actor + " jumped over " +  location.getGround().getClass().getSimpleName() +"(" + location.x() + ","+ location.y() + ")"  + " successfully.";
+            return actor + " jumped over " +  location +"(" + location.x() + ","+ location.y() + ")"  + " successfully.";
         }
         else {
             int damage = 10;
@@ -159,7 +162,8 @@ public class Tree extends Ground implements Jumpable{
         return actions;
     }
 
-    public String getGroundName(){
+
+    public String toString() {
         return "Sprout";
     }
 }
