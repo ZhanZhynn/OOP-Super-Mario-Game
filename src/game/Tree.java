@@ -156,7 +156,7 @@ public abstract class Tree extends Ground implements Jumpable{
 
     public ActionList allowableActions(Actor otherActor, Location location, String direction) {
         ActionList actions = new ActionList();
-        if(otherActor instanceof Player) {
+        if(otherActor instanceof Player && !location.containsAnActor()) {
             actions.add(new JumpAction(this, location, direction));
         }
         return actions;
