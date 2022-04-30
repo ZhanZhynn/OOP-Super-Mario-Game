@@ -7,14 +7,20 @@ import edu.monash.fit2099.engine.positions.Location;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Mature extends Tree implements Jumpable, Destroyable {
+public class Mature extends Tree implements Jumpable, Destroyable, Resettable {
     private int counter;
+    private Location location;
 
     public Mature(){
         super('T');
         this.addCapability(Capabilities.SPAWN_KOOPA);
         this.addCapability(Capabilities.GROW_SPROUT);
+        this.registerInstance();
         counter = 0;
+    }
+
+    public void resetInstance(){
+        this.location.setGround(new Dirt());
     }
 
     public void tick(Location location) {
@@ -85,4 +91,5 @@ public class Mature extends Tree implements Jumpable, Destroyable {
     public String toString() {
         return "Mature";
     }
+
 }
