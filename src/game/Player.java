@@ -65,20 +65,31 @@ public class Player extends Actor implements Resettable {
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
 		actions.add(new ResetAction());
+		//reset for player capabilities not working.
+		if (this.reset) {
+			this.resetMaxHp(this.getMaxHp());
+			this.removeCapability(Status.INSTANT_KILL);
+			this.removeCapability(Status.PATH_OF_GOLD);
+			this.removeCapability(Status.INVINCIBLE);
+			this.removeCapability(Status.DESTROY_HIGH_GROUND);
+			this.removeCapability(Status.TALL);
+			this.removeCapability(Status.GUARANTEED_JUMP);
+			this.addCapability(Status.HOSTILE_TO_ENEMY);
+		}
 
 		//Added by Ng Zu Shen on 21/4/2022--------------------------------------------
 		for (int i = 0; i<getInventory().size(); i++){ //please comment this block of code
 			Item item = getInventory().get(i);
 			if (item instanceof PowerStar){
 				PowerStar ps = (PowerStar) item;
-				if (ps.getCounter() == 0){
+				if (ps.getCounter() == 0 || this.reset){
 					//ps.fade();
 					removeItemFromInventory(item);
 				}
 			}else if (item instanceof SuperMushroom){
 				SuperMushroom sm = (SuperMushroom) item;
 				if(sm.getIsConsumed()) {
-					if (getCurrentHp() < lastRoundHp) {
+					if (getCurrentHp() < lastRoundHp || this.reset) {
 						//sm.fade();
 						removeItemFromInventory(item);
 					}
@@ -109,19 +120,9 @@ public class Player extends Actor implements Resettable {
 		//NgZuShen\--------------------------------------------------------------------
 
 
-		//reset for player capabilities not working.
-		if (this.reset) {
-			this.resetMaxHp(this.getMaxHp());
-			this.removeCapability(Status.INSTANT_KILL);
-			this.removeCapability(Status.PATH_OF_GOLD);
-			this.removeCapability(Status.INVINCIBLE);
-			this.removeCapability(Status.DESTROY_HIGH_GROUND);
-			this.removeCapability(Status.TALL);
-			this.removeCapability(Status.GUARANTEED_JUMP);
-			this.addCapability(Status.HOSTILE_TO_ENEMY);
-		}
-		this.reset = false;
 
+
+		this.reset = false;
 
 		// return/print the console menu
 		return menu.showMenu(this, actions, display);
