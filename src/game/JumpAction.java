@@ -51,6 +51,7 @@ public class JumpAction extends Action{
             return actor + " jumped over " +  jumpable +"(" + jumpableLocation.x() + ","+ jumpableLocation.y() + ")"  + " successfully.";
         }
         return jumpable.jumped(actor, jumpableLocation);
+
     }
 
     @Override

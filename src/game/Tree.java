@@ -133,7 +133,7 @@ public abstract class Tree extends Ground implements Jumpable{
 //            if (wither) {
 //                location.setGround(new Dirt());
 //            }
-//        }4
+//        }
 //    }
     public ArrayList<Location> getDirt(){
         //getter to get the dirt locations
