@@ -5,7 +5,11 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
+import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
+import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import edu.monash.fit2099.engine.weapons.Weapon;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,8 +23,13 @@ public class Koopa extends Actor{
      * Constructor.
      */
     public Koopa() {
-        super("Koopa", 'K', 50);
+        super("Koopa", 'K', 100);
         this.behaviours.put(10, new WanderBehaviour());
+        this.behaviours.put(13, new AttackBehaviour());
+    }
+
+    public Weapon getWeapon() {
+        return new IntrinsicWeapon(30, "punches");
     }
 
     /**
@@ -48,11 +57,29 @@ public class Koopa extends Actor{
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        for(Behaviour behaviour : behaviours.values()) {
-            Action action = behaviour.getAction(this, map);
-            if (action != null)
-                return action;
+        Action action = new DoNothingAction();
+        //can detect up to 2 step away. even the diagonal 2 steps.
+        for (Exit exit : map.locationOf(this).getExits()) {
+            for(Exit exitLayer2 : exit.getDestination().getExits()) {
+                if (exitLayer2.getDestination().containsAnActor()) {
+                    if (exit.getDestination().getActor() instanceof Player) {
+                        Player p = (Player) exit.getDestination().getActor();
+                        this.behaviours.put(12, new FollowBehaviour(p));
+                        break;
+                    }
+                }
+            }
         }
+        int priority = 0;
+        for(Map.Entry<Integer, Behaviour> set : behaviours.entrySet()) {
+            if (set.getKey() > priority && set.getValue().getAction(this, map)!=null) {
+                action = set.getValue().getAction(this, map);
+                priority = set.getKey();
+            }
+        }
+        this.behaviours.remove(12);
+        if (action != null)
+            return action;
         return new DoNothingAction();
     }
 }

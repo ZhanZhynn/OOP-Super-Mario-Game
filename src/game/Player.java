@@ -17,7 +17,7 @@ public class Player extends Actor  {
 	/**
 	 * Player's wallet
 	 */
-	private Wallet wallet = new Wallet(600);
+	private Wallet wallet = new Wallet(1200);
 	/**
 	 * Helper instance variable to know when player got hurt in a round.
 	 */
@@ -48,6 +48,14 @@ public class Player extends Actor  {
 	}
 
 	@Override
+	public void addItemToInventory(Item item) {
+		if (item instanceof Coin){
+			item.togglePortability();
+		}
+		super.addItemToInventory(item);
+	}
+
+	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
 		//Added by Ng Zu Shen on 21/4/2022--------------------------------------------
 		for (int i = 0; i<getInventory().size(); i++){
@@ -74,10 +82,10 @@ public class Player extends Actor  {
 		}
 		lastRoundHp = getCurrentHp();
 
-		if (map.locationOf(this).getGround() instanceof Wall){
+		if (map.locationOf(this).getGround() instanceof Destroyable){
 			if(hasCapability(Status.DESTROY_HIGH_GROUND)){
-			map.locationOf(this).setGround(new Dirt());
-			map.locationOf(this).addItem(new Coin(5));}
+				map.locationOf(this).setGround(new Dirt());
+				map.locationOf(this).addItem(new Coin(5));}
 		}
 		//NgZuShen\-------------------------------------------------------------------
 
@@ -94,9 +102,29 @@ public class Player extends Actor  {
 		return menu.showMenu(this, actions, display);
 	}
 
+//	@Override
+//	public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
+//		ActionList actions = new ActionList();
+//		// it can be attacked only by the HOSTILE opponent, and this action will not attack the HOSTILE enemy back.
+//		if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
+//			actions.add(new AttackAction(this,direction));
+//		}
+//		return actions;
+//	}
+
 	@Override
 	public char getDisplayChar(){
-		return this.hasCapability(Status.TALL) ? Character.toUpperCase(super.getDisplayChar()): super.getDisplayChar();
+		char character = this.hasCapability(Status.TALL) ? Character.toUpperCase(super.getDisplayChar()): super.getDisplayChar();
+		if (getCurrentHp() < lastRoundHp) {
+			character = super.getDisplayChar();
+		}
+		//this else if statement is to deal with a specific situation when we consume supermushroom and got attack at the same round
+		//might not be the best way to do it but it works
+		else if (getCurrentHp() - lastRoundHp < 50 && getCurrentHp() > lastRoundHp){
+			character = super.getDisplayChar();
+		}
+		return character;
+		//return this.hasCapability(Status.TALL) ? Character.toUpperCase(super.getDisplayChar()): super.getDisplayChar();
 	}
 
 	//ZuShen

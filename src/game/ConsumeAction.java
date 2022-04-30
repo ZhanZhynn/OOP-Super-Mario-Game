@@ -29,7 +29,7 @@ public class ConsumeAction extends Action {
     @Override
     public String execute(Actor actor, GameMap map) {
         Consumable consumable = (Consumable) item;
-        consumable.consume(actor);
+        consumable.consume(actor, map);
         return item + " consumed";
     }
 

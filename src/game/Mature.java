@@ -7,7 +7,7 @@ import edu.monash.fit2099.engine.positions.Location;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Mature extends Tree implements Jumpable {
+public class Mature extends Tree implements Jumpable, Destroyable {
     private int counter;
 
     public Mature(){
@@ -26,12 +26,14 @@ public class Mature extends Tree implements Jumpable {
             location.setGround(new Mature());
         }
 
-        if (this.hasCapability(Capabilities.SPAWN_COIN) && !location.containsAnActor()) {
-            //15% chance to spawn Koopa, cannot spawn if actor stands on it
-            if (chance <= 0.15) {
-                location.addActor(new Koopa());;
+        if (!location.containsAnActor()) {
+            if (this.hasCapability(Capabilities.SPAWN_KOOPA)) {
+                //15% chance to spawn Koopa if actor is not standing on it
+                if (Math.random() <= 0.15)
+                    location.addActor(new Koopa());
             }
         }
+
 
         if (this.hasCapability(Capabilities.GROW_SPROUT) && this.counter % 5 == 0) {
             //got a new sprout every 5 turns at dirt ground
@@ -63,6 +65,13 @@ public class Mature extends Tree implements Jumpable {
             actor.hurt(damage);
             return actor + " fell from Mature. Received " + damage + " damage.";
         }
+    }
+
+    public boolean canActorEnter(Actor actor) {
+        if(actor.hasCapability(Status.DESTROY_HIGH_GROUND)){
+            return true;
+        }
+        return false;
     }
 
 //    public ActionList allowableActions(Actor otherActor, Location location, String direction) {

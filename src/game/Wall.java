@@ -6,7 +6,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 
-public class Wall extends Ground implements Jumpable{
+public class Wall extends Ground implements Jumpable, Destroyable{
 
 	public Wall() {
 		super('#');
