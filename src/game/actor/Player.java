@@ -71,8 +71,8 @@ public class Player extends Actor implements Resettable {
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
 		actions.add(new ResetAction());
 		//reset for player capabilities not working.
-//		if (this.reset) {
-//			this.resetMaxHp(this.getMaxHp());
+		if (this.reset) {
+			this.resetMaxHp(this.getMaxHp());
 //			this.removeCapability(Status.INSTANT_KILL);
 //			this.removeCapability(Status.PATH_OF_GOLD);
 //			this.removeCapability(Status.INVINCIBLE);
@@ -80,7 +80,7 @@ public class Player extends Actor implements Resettable {
 //			this.removeCapability(Status.TALL);
 //			this.removeCapability(Status.GUARANTEED_JUMP);
 //			this.addCapability(Status.HOSTILE_TO_ENEMY);
-//		}
+		}
 
 		//Added by Ng Zu Shen on 21/4/2022--------------------------------------------
 		for (int i = 0; i<getInventory().size(); i++){ //please comment this block of code
@@ -154,6 +154,7 @@ public class Player extends Actor implements Resettable {
 			return character;
 		}
 		this.reset = false;
+
 		if (getCurrentHp() < lastRoundHp) {
 			character = super.getDisplayChar();
 		}
