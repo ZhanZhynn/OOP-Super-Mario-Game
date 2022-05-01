@@ -90,13 +90,6 @@ public class Mature extends Tree implements Jumpable, Destroyable, Resettable {
         }
     }
 
-    public boolean canActorEnter(Actor actor) {
-        if(actor.hasCapability(Status.DESTROY_HIGH_GROUND)){
-            return true;
-        }
-        return false;
-    }
-
 //    public ActionList allowableActions(Actor otherActor, Location location, String direction) {
 //        ActionList actions = new ActionList();
 //        if(otherActor instanceof Player) {

@@ -8,6 +8,7 @@ import game.action.JumpAction;
 import game.interfaces.Jumpable;
 import game.actor.Player;
 import game.interfaces.Resettable;
+import game.item.Status;
 
 import java.util.ArrayList;
 
@@ -43,6 +44,9 @@ public abstract class Tree extends Ground implements Jumpable, Resettable {
     }
 
     public boolean canActorEnter(Actor actor) {
+        if(actor.hasCapability(Status.DESTROY_HIGH_GROUND)){
+            return true;
+        }
         return false;
     }
 
@@ -172,7 +176,9 @@ public abstract class Tree extends Ground implements Jumpable, Resettable {
     public ActionList allowableActions(Actor otherActor, Location location, String direction) {
         ActionList actions = new ActionList();
         if(otherActor instanceof Player && !location.containsAnActor()) {
-            actions.add(new JumpAction(this, location, direction));
+            if (!otherActor.hasCapability(Status.DESTROY_HIGH_GROUND)) {
+                actions.add(new JumpAction(this, location, direction));
+            }
         }
         return actions;
     }

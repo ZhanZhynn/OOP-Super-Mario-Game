@@ -44,7 +44,9 @@ public class Wall extends Ground implements Jumpable, Destroyable {
 	public ActionList allowableActions(Actor otherActor, Location location, String direction) {
 		ActionList actions = new ActionList();
 		if(otherActor instanceof Player && !location.containsAnActor()) {
-			actions.add(new JumpAction(this, location, direction));
+			if (!otherActor.hasCapability(Status.DESTROY_HIGH_GROUND)) {
+				actions.add(new JumpAction(this, location, direction));
+			}
 		}
 		return actions;
 	}
