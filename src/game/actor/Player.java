@@ -71,25 +71,30 @@ public class Player extends Actor implements Resettable {
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
 		actions.add(new ResetAction());
 		//reset for player capabilities not working.
-		if (this.reset) {
-			this.resetMaxHp(this.getMaxHp());
-			this.removeCapability(Status.INSTANT_KILL);
-			this.removeCapability(Status.PATH_OF_GOLD);
-			this.removeCapability(Status.INVINCIBLE);
-			this.removeCapability(Status.DESTROY_HIGH_GROUND);
-			this.removeCapability(Status.TALL);
-			this.removeCapability(Status.GUARANTEED_JUMP);
-			this.addCapability(Status.HOSTILE_TO_ENEMY);
-		}
+//		if (this.reset) {
+//			this.resetMaxHp(this.getMaxHp());
+//			this.removeCapability(Status.INSTANT_KILL);
+//			this.removeCapability(Status.PATH_OF_GOLD);
+//			this.removeCapability(Status.INVINCIBLE);
+//			this.removeCapability(Status.DESTROY_HIGH_GROUND);
+//			this.removeCapability(Status.TALL);
+//			this.removeCapability(Status.GUARANTEED_JUMP);
+//			this.addCapability(Status.HOSTILE_TO_ENEMY);
+//		}
 
 		//Added by Ng Zu Shen on 21/4/2022--------------------------------------------
 		for (int i = 0; i<getInventory().size(); i++){ //please comment this block of code
 			Item item = getInventory().get(i);
 			if (item instanceof PowerStar){
 				PowerStar ps = (PowerStar) item;
-				if (ps.getCounter() == 0 || this.reset){
+				if (ps.getCounter() == 0){
 					//ps.fade();
 					removeItemFromInventory(item);
+				}
+				if (ps.getIsConsumed()){
+					if (this.reset) {
+						removeItemFromInventory(item);
+					}
 				}
 			}else if (item instanceof SuperMushroom){
 				SuperMushroom sm = (SuperMushroom) item;

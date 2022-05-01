@@ -52,6 +52,8 @@ public class PowerStar extends Item implements Sellable, Consumable {
     public void tick(Location currentLocation) {
         super.tick(currentLocation);
         counter -= 1;
+        if (isConsumed)
+        System.out.println("Power star ability round remaining: " + counter);
     }
 
     /**
