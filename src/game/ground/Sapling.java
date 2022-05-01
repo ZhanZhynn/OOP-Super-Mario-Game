@@ -1,7 +1,6 @@
 package game.ground;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Location;
-import game.actor.Capabilities;
 import game.interfaces.Destroyable;
 import game.interfaces.Jumpable;
 import game.interfaces.Resettable;

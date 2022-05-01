@@ -1,4 +1,4 @@
-package game.actor;
+package game.ground;
 
 //Created by Ng Zu Shen on 20/4/2022
 

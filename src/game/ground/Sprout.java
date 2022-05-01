@@ -3,7 +3,6 @@ package game.ground;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
-import game.actor.Capabilities;
 import game.actor.Goomba;
 import game.interfaces.Destroyable;
 import game.interfaces.Jumpable;
