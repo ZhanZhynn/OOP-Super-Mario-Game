@@ -260,4 +260,5 @@ public class Location implements Printable {
 	public void removeExit(Exit exit) {
 		exits.remove(exit);
 	}
+
 }
