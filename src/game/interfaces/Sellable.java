@@ -1,4 +1,4 @@
-package game;
+package game.interfaces;
 
 /**
  * interface for item that are sellable e.g. powerstar, supermushroom, wrench

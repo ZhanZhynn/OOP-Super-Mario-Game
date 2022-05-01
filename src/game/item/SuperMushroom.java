@@ -1,9 +1,12 @@
-package game;
+package game.item;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.interfaces.Consumable;
+import game.interfaces.Sellable;
+import game.action.ConsumeAction;
 
 //added by Ng Zu Shen on 20/4/2022
 
@@ -12,7 +15,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
  * @author Ng Zu Shen
  * @version 1.0
  */
-public class SuperMushroom extends Item implements Sellable,Consumable{
+public class SuperMushroom extends Item implements Sellable, Consumable {
 
     /**
      * price sold by toad

@@ -1,4 +1,6 @@
-package game;
+package game.interfaces;
+
+import game.resetmanager.ResetManager;
 
 public interface Resettable {
     /**

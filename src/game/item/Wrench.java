@@ -1,7 +1,8 @@
-package game;
+package game.item;
 
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.weapons.Weapon;
+import game.interfaces.Sellable;
 
 public class Wrench extends Item implements Sellable, Weapon {
 

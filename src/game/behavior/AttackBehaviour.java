@@ -1,14 +1,13 @@
-package game;
+package game.behavior;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.positions.Location;
+import game.action.AttackAction;
+import game.actor.Player;
 
-import java.util.ArrayList;
-
-public class AttackBehaviour implements Behaviour{
+public class AttackBehaviour implements Behaviour {
 
     int damage;
 

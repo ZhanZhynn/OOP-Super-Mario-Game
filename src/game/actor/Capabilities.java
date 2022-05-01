@@ -1,4 +1,4 @@
-package game;
+package game.actor;
 
 //Created by Ng Zu Shen on 20/4/2022
 

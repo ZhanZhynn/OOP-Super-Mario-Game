@@ -1,4 +1,6 @@
-package game;
+package game.resetmanager;
+
+import game.interfaces.Resettable;
 
 import java.util.ArrayList;
 import java.util.List;

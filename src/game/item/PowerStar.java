@@ -1,20 +1,20 @@
-package game;
+package game.item;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.capabilities.CapabilitySet;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
-
-import java.util.List;
+import game.interfaces.Consumable;
+import game.interfaces.Sellable;
+import game.action.ConsumeAction;
 
 /**
  * magical item power star
  * @author Ng Zu Shen
  * @version 1.0
  */
-public class PowerStar extends Item implements Sellable,Consumable{
+public class PowerStar extends Item implements Sellable, Consumable {
 
     /**
      * price sold by toad
