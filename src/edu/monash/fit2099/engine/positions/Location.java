@@ -261,7 +261,4 @@ public class Location implements Printable {
 		exits.remove(exit);
 	}
 
-	public String toString(){
-		return "[" + x + ", " + y + "]";
-	}
 }
