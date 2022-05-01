@@ -124,10 +124,7 @@ public class Player extends Actor implements Resettable {
 		System.out.println("Wallet: "+this.getWallet().getBalance());
 		//NgZuShen\--------------------------------------------------------------------
 
-
-
-
-		this.reset = false;
+//		this.reset = false;
 
 		// return/print the console menu
 		return menu.showMenu(this, actions, display);
@@ -146,6 +143,12 @@ public class Player extends Actor implements Resettable {
 	@Override
 	public char getDisplayChar(){
 		char character = this.hasCapability(Status.TALL) ? Character.toUpperCase(super.getDisplayChar()): super.getDisplayChar();
+
+		if (this.reset){
+			character = super.getDisplayChar();
+			return character;
+		}
+		this.reset = false;
 		if (getCurrentHp() < lastRoundHp) {
 			character = super.getDisplayChar();
 		}
