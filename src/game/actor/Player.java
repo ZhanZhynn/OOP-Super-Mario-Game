@@ -125,7 +125,7 @@ public class Player extends Actor implements Resettable {
 			return lastAction.getNextAction();
 
 		//Added by NgZuShen on 21/4/2022------------------------------------------------
-		System.out.println(this+this.printHp() +" at "+map.locationOf(this));
+		System.out.println(this+this.printHp() +" at ("+map.locationOf(this).x() + ", " + map.locationOf(this).y() + ")" );
 		System.out.println("Wallet: "+this.getWallet().getBalance());
 		//NgZuShen\--------------------------------------------------------------------
 
