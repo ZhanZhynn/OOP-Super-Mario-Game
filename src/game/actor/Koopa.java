@@ -1,4 +1,4 @@
-package game;
+package game.actor;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
@@ -7,16 +7,22 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import edu.monash.fit2099.engine.weapons.Weapon;
+import game.action.AttackAction;
+import game.behavior.AttackBehaviour;
+import game.behavior.Behaviour;
+import game.behavior.FollowBehaviour;
+import game.behavior.WanderBehaviour;
+import game.interfaces.Resettable;
+import game.item.Status;
 
 import java.util.HashMap;
 import java.util.Map;
 
 //created by Ng Zu Shen on 22/4/2022, this is just a copy of goomba but change the name to Koopa
 //Koopa implementation has not been done.
-public class Koopa extends Actor implements Resettable{
+public class Koopa extends Actor implements Resettable {
     private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
     private boolean reset = false;
 

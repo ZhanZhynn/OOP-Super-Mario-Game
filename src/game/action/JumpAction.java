@@ -1,17 +1,16 @@
-package game;
+package game.action;
 /*
 Author: Hee Zhan Zhynn
 Last modified: 28/04/2022
  */
 
 import edu.monash.fit2099.engine.actions.Action;
-import edu.monash.fit2099.engine.actions.ActionList;
-import edu.monash.fit2099.engine.actions.MoveActorAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
+import game.interfaces.Jumpable;
+import game.item.Status;
 
 import java.util.Random;
 

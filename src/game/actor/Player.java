@@ -1,4 +1,4 @@
-package game;
+package game.actor;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
@@ -7,6 +7,11 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
+import game.action.ResetAction;
+import game.ground.Dirt;
+import game.interfaces.Destroyable;
+import game.interfaces.Resettable;
+import game.item.*;
 
 /**
  * Class representing the Player.

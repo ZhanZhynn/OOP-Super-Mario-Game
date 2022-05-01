@@ -1,4 +1,4 @@
-package game;
+package game.action;
 
 import java.util.Random;
 
@@ -9,6 +9,9 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.Weapon;
+import game.actor.DormantKoopa;
+import game.actor.Koopa;
+import game.item.Status;
 
 // last modified by NgZuShen on 22/4/2022 (add documentation and implement instant kill)
 /**

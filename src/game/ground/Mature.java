@@ -1,13 +1,15 @@
-package game;
+package game.ground;
 
-import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.items.Item;
-import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
+import game.actor.Capabilities;
+import game.actor.Koopa;
+import game.interfaces.Destroyable;
+import game.interfaces.Jumpable;
+import game.interfaces.Resettable;
+import game.item.Status;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class Mature extends Tree implements Jumpable, Destroyable, Resettable {

@@ -1,10 +1,7 @@
-package game;
+package game.ground;
 
-import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Ground;
-import edu.monash.fit2099.engine.positions.Location;
-
-import java.util.List;
+import game.interfaces.Resettable;
 
 /**
  * A class that represents bare dirt.

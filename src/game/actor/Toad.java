@@ -1,4 +1,4 @@
-package game;
+package game.actor;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
@@ -6,6 +6,10 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.action.TradeAction;
+import game.item.PowerStar;
+import game.item.SuperMushroom;
+import game.item.Wrench;
 //created by Ng Zu Shen on 20/4/2022
 
 /**

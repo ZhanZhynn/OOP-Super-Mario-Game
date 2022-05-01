@@ -1,12 +1,16 @@
-package game;
+package game.ground;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
+import game.action.JumpAction;
+import game.actor.Player;
+import game.interfaces.Destroyable;
+import game.interfaces.Jumpable;
+import game.item.Status;
 
-public class Wall extends Ground implements Jumpable, Destroyable{
+public class Wall extends Ground implements Jumpable, Destroyable {
 
 	public Wall() {
 		super('#');

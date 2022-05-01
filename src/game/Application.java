@@ -8,6 +8,12 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
+import game.actor.Player;
+import game.actor.Toad;
+import game.ground.Dirt;
+import game.ground.Floor;
+import game.ground.Sprout;
+import game.ground.Wall;
 
 /**
  * The main class for the Mario World game.

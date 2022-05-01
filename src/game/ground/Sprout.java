@@ -1,13 +1,18 @@
-package game;
+package game.ground;
 
-import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
+import game.actor.Capabilities;
+import game.actor.Goomba;
+import game.interfaces.Destroyable;
+import game.interfaces.Jumpable;
+import game.item.Coin;
+import game.item.Status;
 
 import java.util.List;
 
-public class Sprout extends Tree implements Jumpable, Destroyable{
+public class Sprout extends Tree implements Jumpable, Destroyable {
     private int counter;
     private boolean reset = false;
 

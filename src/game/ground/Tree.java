@@ -1,20 +1,21 @@
-package game;
+package game.ground;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
+import game.action.JumpAction;
+import game.interfaces.Jumpable;
+import game.actor.Player;
+import game.interfaces.Resettable;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 /**
  * @author Ng Zu shen
  * @version 1.0
  */
-public abstract class Tree extends Ground implements Jumpable, Resettable{
+public abstract class Tree extends Ground implements Jumpable, Resettable {
 
     private boolean reset = false;
     /**
