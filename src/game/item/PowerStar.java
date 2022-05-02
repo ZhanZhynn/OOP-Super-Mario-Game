@@ -20,6 +20,7 @@ public class PowerStar extends Item implements Sellable, Consumable {
      * price sold by toad
      */
     public static final int PRICE = 600;
+    public static final String name = "PowerStar";
     /**
      * counter to keep track of 10 rounds fading time limit
      */

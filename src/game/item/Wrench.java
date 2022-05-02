@@ -7,6 +7,7 @@ import game.interfaces.Sellable;
 public class Wrench extends Item implements Sellable, Weapon {
 
     public static final int price = 200;
+    public static final String name = "Wrench";
 
     public Wrench(String name, char displayChar, boolean portable) {
         super(name, displayChar, portable);
