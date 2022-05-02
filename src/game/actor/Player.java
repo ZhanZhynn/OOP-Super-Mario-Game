@@ -112,6 +112,7 @@ public class Player extends Actor implements Resettable {
 		if (lastAction != resetAction) {
 			actions.add(resetAction);
 		}else{
+			this.resetMaxHp(this.getMaxHp());
 			actions.remove(resetAction);
 		}
 //		if (this.reset) {
