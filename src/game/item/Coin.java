@@ -30,11 +30,16 @@ public class Coin extends Item implements Resettable {
         this.registerInstance();
     }
 
+    /**
+     * to check whether player reset the game.
+     * @param currentLocation The location of the ground on which we lie.
+     */
     @Override
     public void tick(Location currentLocation) {
         super.tick(currentLocation);
         if (reset) {
             currentLocation.removeItem(this);
+            reset = false;
         }
     }
 

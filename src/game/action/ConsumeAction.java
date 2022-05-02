@@ -27,6 +27,12 @@ public class ConsumeAction extends Action {
         this.item = item;
     }
 
+    /**
+     * what happened after executing this action?
+     * @param actor The actor performing the action.
+     * @param map The map the actor is on.
+     * @return description of what happened as a String
+     */
     @Override
     public String execute(Actor actor, GameMap map) {
         Consumable consumable = (Consumable) item;
@@ -34,6 +40,11 @@ public class ConsumeAction extends Action {
         return item + " consumed";
     }
 
+    /**
+     * description of what this action does
+     * @param actor The actor performing the action.
+     * @return result as a String
+     */
     @Override
     public String menuDescription(Actor actor) {
         return actor + " consume " + item.toString();

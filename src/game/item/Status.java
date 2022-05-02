@@ -7,9 +7,9 @@ package game.item;
 public enum Status {
     HOSTILE_TO_ENEMY, // use this status to be considered hostile towards enemy (e.g., to be attacked by enemy)
     TALL, // use this status to tell that current instance has "grown".
-    INVINCIBLE,
-    INSTANT_KILL,
-    DESTROY_HIGH_GROUND,
-    PATH_OF_GOLD,
-    GUARANTEED_JUMP
+    INVINCIBLE, // wont take any damage
+    INSTANT_KILL, // kll enemies instantly
+    DESTROY_HIGH_GROUND, //can step into high ground and destroy it
+    PATH_OF_GOLD, //when high ground is destroyed turn into coin
+    GUARANTEED_JUMP // jump success rate turn 100%
 }

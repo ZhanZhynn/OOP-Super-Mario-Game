@@ -41,6 +41,9 @@ public class SuperMushroom extends Item implements Sellable, Consumable {
         this.addAction(consumeAction);
     }
 
+    /**
+     * constructor with no parameters, generate super mushroom with pre defined inputs.
+     */
     public SuperMushroom() {
         super("Super mushroom", '^', false);
         this.addAction(consumeAction);

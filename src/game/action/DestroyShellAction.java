@@ -19,11 +19,22 @@ public class DestroyShellAction extends Action {
      */
     protected String direction;
 
+    /**
+     * constructor of this action
+     * @param target the dormant koopa
+     * @param direction the direction of dormant koopa
+     */
     public DestroyShellAction(Actor target, String direction) {
         this.target = target;
         this.direction = direction;
     }
 
+    /**
+     * what happened after executing this action
+     * @param actor The actor performing the action.
+     * @param map The map the actor is on.
+     * @return
+     */
     @Override
     public String execute(Actor actor, GameMap map) {
         ActionList dropActions = new ActionList();
@@ -34,6 +45,11 @@ public class DestroyShellAction extends Action {
         return "shell is broken, super mushroom was found inside!";
     }
 
+    /**
+     * menu description of this action
+     * @param actor The actor performing the action.
+     * @return description as  a String
+     */
     @Override
     public String menuDescription(Actor actor) {
         return actor + " destroys " + target + "'s shell at " + direction;

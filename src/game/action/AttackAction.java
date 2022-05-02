@@ -73,8 +73,8 @@ public class AttackAction extends Action {
 			}
 			return result;
 		}
-		//NgZuShen\--------------------------------------------------------------
 
+		// if no power star then use weapon
 		Weapon weapon = actor.getWeapon();
 
 		if (!(rand.nextInt(100) <= weapon.chanceToHit())) {
@@ -88,6 +88,7 @@ public class AttackAction extends Action {
 		int damage = weapon.damage();
 		String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
 
+		//if koopa died turn into dormant koopa
 		target.hurt(damage);
 		if (!target.isConscious()) {
 			if (target instanceof Koopa){
@@ -107,6 +108,7 @@ public class AttackAction extends Action {
 			map.removeActor(target);
 			result += System.lineSeparator() + target + " is killed.";
 		}
+		//NgZuShen\--------------------------------------------------------------
 
 		return result;
 	}

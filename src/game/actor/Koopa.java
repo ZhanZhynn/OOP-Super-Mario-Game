@@ -20,8 +20,12 @@ import game.item.Status;
 import java.util.HashMap;
 import java.util.Map;
 
-//created by Ng Zu Shen on 22/4/2022, this is just a copy of goomba but change the name to Koopa
-//Koopa implementation has not been done.
+/**
+ * @author Ng Zu Shen
+ * @version 1.0
+ * Koopa behaves pretty similar to Goomba except for the stat different.
+ * When Koopa dies, they got turn into DormantKoopa but that is in attack action class.
+ */
 public class Koopa extends Actor implements Resettable {
     private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
     private boolean reset = false;
