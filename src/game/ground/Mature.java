@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Mature extends Tree implements Jumpable, Destroyable{
+
     private int counter;
 
     public Mature(){
@@ -22,10 +23,13 @@ public class Mature extends Tree implements Jumpable, Destroyable{
         counter = 0;
     }
     /**
+     * handle all the behaviour of trees as stated in assignment specification
+     *
      * Acts as a counter for tree to grow into Mature after 10 turns.
      * If location does not contains an actor, it has 15% chance of spawning a koopa at each turn.
      * Also implements a new Sprout every 5 turns.
-     * Param : Location
+     *
+     * @param location The location of the Ground
      */
     public void tick(Location location) {
 

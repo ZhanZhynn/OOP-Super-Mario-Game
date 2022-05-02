@@ -1,7 +1,9 @@
 package game.action;
-/*
-Author: Hee Zhan Zhynn
-Last modified: 28/04/2022
+/**
+ * A class that handles the actor jump action
+ *
+ * @author Hee Zhan Zhynn (31989403)
+ * @version 1
  */
 
 import edu.monash.fit2099.engine.actions.Action;
@@ -15,33 +17,43 @@ import game.item.Status;
 import java.util.Random;
 
 public class JumpAction extends Action{
+
+    /**
+     * A Jumpable object
+     */
     private Jumpable jumpable;
+
+    /**
+     * Location of jumpable objection
+     */
     private Location jumpableLocation;
+
+    /**
+     * Direction of jumpable objection from actor
+     */
     private String direction;
 
 
-    /**
-     * The Ground to jump over
-     */
-    protected Ground highGround;
 
     /**
-     * The Player
+     * constructor
+     * @param jumpable jumpable ground
+     * @param jumpableLocation location of jumpable ground
+     * @param direction direction of jumpable objection from actor
      */
-    protected Actor player;
-
-    /**
-     * Random number generator
-     */
-    protected Random rand = new Random();
-
     public JumpAction(Jumpable jumpable , Location jumpableLocation, String direction){
         this.jumpable = jumpable;
         this.jumpableLocation = jumpableLocation;
         this.direction = direction;
 
     }
-
+    /**
+     * actor moves to jumpable location after a successful jump
+     *
+     * @param actor The actor performing the action.
+     * @param map The map the actor is on.
+     * @return description of what happened as a String
+     */
     @Override
     public String execute(Actor actor, GameMap map) {
         //supermushroom jump
@@ -50,9 +62,13 @@ public class JumpAction extends Action{
             return actor + " jumped over " +  jumpable +"(" + jumpableLocation.x() + ","+ jumpableLocation.y() + ")"  + " successfully.";
         }
         return jumpable.jumped(actor, jumpableLocation);
-
     }
 
+    /**
+     * description of what this action does
+     * @param actor The actor performing the action.
+     * @return result as a String
+     */
     @Override
     public String menuDescription(Actor actor) {
         String res= actor + " jumps over "+ jumpable + " to the " + direction;

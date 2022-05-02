@@ -25,7 +25,8 @@ public class Dirt extends Ground implements Resettable {
 
 
 	/**
-	 * A function to remove items if game resets.
+	 * handle all the behaviour of trees as stated in assignment specification
+	 * @param location The location of the Ground
 	 */
 	public void tick(Location location) {
 		if (this.reset){

@@ -11,6 +11,9 @@ import java.util.List;
  * HINT: refer to Bootcamp Week 5 about static factory method.
  * A3: Think about how will you improve this implementation in the future assessment.
  * What could be the drawbacks of this implementation?
+ *
+ * @author Hee Zhan Zhynn (31989403) & FIT2099 Teaching Team
+ * @version 1
  */
 public class ResetManager {
     /**
