@@ -22,6 +22,10 @@ public class PowerStar extends Item implements Sellable, Consumable, Resettable 
      */
     public static final int PRICE = 600;
     public static final String name = "PowerStar";
+
+    /**
+     * Instance for reset action
+     */
     private boolean reset = false;
     /**
      * counter to keep track of 10 rounds fading time limit
@@ -36,6 +40,7 @@ public class PowerStar extends Item implements Sellable, Consumable, Resettable 
      */
     private Action consumeAction = new ConsumeAction(this);
 
+
     /**
      * Constructor of power star
      * @param name name of this power star(can be anything but preferably "Power Star")
@@ -45,6 +50,7 @@ public class PowerStar extends Item implements Sellable, Consumable, Resettable 
     public PowerStar(String name, char displayChar, boolean portable) {
         super(name, displayChar, portable);
         this.addAction(consumeAction);
+        this.registerInstance();
     }
 
     /**
@@ -67,20 +73,18 @@ public class PowerStar extends Item implements Sellable, Consumable, Resettable 
         counter -= 1;
 
         if (this.getCounter() == 0){
+            this.fade(actor);
             actor.removeItemFromInventory(this);
         }
 
         if (this.getIsConsumed() && this.reset){
+            this.fade(actor);
             actor.removeItemFromInventory(this);
-            reset = false;
         }
-
-        else if (this.isConsumed) {
+        else {
             System.out.println("Power star ability round remaining: " + (counter + 1));
             System.out.println("Mario is invincible!");
         }
-
-
     }
 
     /**
@@ -97,13 +101,21 @@ public class PowerStar extends Item implements Sellable, Consumable, Resettable 
     public void consume(Actor actor, GameMap map){
         isConsumed = true;
         counter = 10;
-        addCapability(Status.INSTANT_KILL);
-        addCapability(Status.PATH_OF_GOLD);
-        addCapability(Status.INVINCIBLE);
-        addCapability(Status.DESTROY_HIGH_GROUND);
+        actor.addCapability(Status.INSTANT_KILL);
+        actor.addCapability(Status.PATH_OF_GOLD);
+        actor.addCapability(Status.INVINCIBLE);
+        actor.addCapability(Status.DESTROY_HIGH_GROUND);
         actor.heal(200);
         this.removeAction(consumeAction);
     }
+
+    public void fade(Actor actor){
+        actor.removeCapability(Status.INSTANT_KILL);
+        actor.removeCapability(Status.PATH_OF_GOLD);
+        actor.removeCapability(Status.INVINCIBLE);
+        actor.removeCapability(Status.DESTROY_HIGH_GROUND);
+    }
+
 
     public Boolean getIsConsumed(){return isConsumed;}
 

@@ -103,9 +103,8 @@ public class Player extends Actor implements Resettable {
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
 		actions.add(new ResetAction());
-		//reset for player capabilities not working.
-		if (this.reset) {
-			this.resetMaxHp(this.getMaxHp());
+//		if (this.reset) {
+//			this.resetMaxHp(this.getMaxHp());
 //			this.removeCapability(Status.INSTANT_KILL);
 //			this.removeCapability(Status.PATH_OF_GOLD);
 //			this.removeCapability(Status.INVINCIBLE);
@@ -113,7 +112,22 @@ public class Player extends Actor implements Resettable {
 //			this.removeCapability(Status.TALL);
 //			this.removeCapability(Status.GUARANTEED_JUMP);
 //			this.addCapability(Status.HOSTILE_TO_ENEMY);
-		}
+//		}
+
+
+		//NgZuShen\-------------------------------------------------------------------
+
+		// Handle multi-turn Actions
+		if (lastAction.getNextAction() != null)
+			return lastAction.getNextAction();
+
+		//Added by NgZuShen on 21/4/2022------------------------------------------------
+		System.out.println(this+this.printHp() +" at ("+map.locationOf(this).x() + ", " + map.locationOf(this).y() + ")" );
+		System.out.println("Wallet: "+this.getWallet().getBalance());
+		//NgZuShen\--------------------------------------------------------------------
+
+//		this.reset = false;
+
 
 		//Added by Ng Zu Shen on 21/4/2022--------------------------------------------
 //		for (int i = 0; i<getInventory().size(); i++){ //please comment this block of code
@@ -143,27 +157,18 @@ public class Player extends Actor implements Resettable {
 //		}
 		lastRoundHp = getCurrentHp();
 
+//		this.removeCapability(Status.DESTROY_HIGH_GROUND);
 		if (map.locationOf(this).getGround() instanceof Destroyable){
-			if(hasCapability(Status.DESTROY_HIGH_GROUND)){
+			if(this.hasCapability(Status.DESTROY_HIGH_GROUND)){
 				map.locationOf(this).setGround(new Dirt());
 				map.locationOf(this).addItem(new Coin(5));}
 		}
 
-		//NgZuShen\-------------------------------------------------------------------
-
-		// Handle multi-turn Actions
-		if (lastAction.getNextAction() != null)
-			return lastAction.getNextAction();
-
-		//Added by NgZuShen on 21/4/2022------------------------------------------------
-		System.out.println(this+this.printHp() +" at ("+map.locationOf(this).x() + ", " + map.locationOf(this).y() + ")" );
-		System.out.println("Wallet: "+this.getWallet().getBalance());
-		//NgZuShen\--------------------------------------------------------------------
-
-//		this.reset = false;
-
 		// return/print the console menu
 		return menu.showMenu(this, actions, display);
+
+
+
 	}
 
 //	@Override
@@ -183,11 +188,11 @@ public class Player extends Actor implements Resettable {
 	public char getDisplayChar(){
 		char character = this.hasCapability(Status.TALL) ? Character.toUpperCase(super.getDisplayChar()): super.getDisplayChar();
 
-		if (this.reset){
-			character = super.getDisplayChar();
-			return character;
-		}
-		this.reset = false;
+//		if (this.reset){
+//			character = super.getDisplayChar();
+//			return character;
+//		}
+//		this.reset = false;
 
 		if (getCurrentHp() < lastRoundHp) {
 			character = super.getDisplayChar();

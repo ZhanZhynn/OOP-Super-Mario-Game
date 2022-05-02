@@ -88,17 +88,17 @@ public class Wall extends Ground implements Jumpable, Destroyable, Resettable {
 	 * @param location The location of the wall
 	 */
 	public void tick(Location location){
-		if (this.reset){
-			List<Item> items = location.getItems();
-			if (items.size() >0) {
-				for (int i = 0; i < items.size(); i++) {
-					if (items.get(i) instanceof Coin){
-						location.removeItem(items.get(i));
-					}
-				}
-			}
-		}
-		this.reset = false;
+//		if (this.reset){
+//			List<Item> items = location.getItems();
+//			if (items.size() >0) {
+//				for (int i = 0; i < items.size(); i++) {
+//					if (items.get(i) instanceof Coin){
+//						location.removeItem(items.get(i));
+//					}
+//				}
+//			}
+//		}
+//		this.reset = false;
 
 	}
 

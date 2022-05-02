@@ -44,6 +44,7 @@ public class SuperMushroom extends Item implements Sellable, Consumable, Resetta
     public SuperMushroom(String name, char displayChar, boolean portable) {
         super(name, displayChar, portable);
         this.addAction(consumeAction);
+        this.registerInstance();
     }
 
     /**
@@ -52,6 +53,7 @@ public class SuperMushroom extends Item implements Sellable, Consumable, Resetta
     public SuperMushroom() {
         super("Super mushroom", '^', false);
         this.addAction(consumeAction);
+        this.registerInstance();
     }
 
     public Boolean getIsConsumed(){return isConsumed;}
@@ -62,6 +64,7 @@ public class SuperMushroom extends Item implements Sellable, Consumable, Resetta
         super.tick(currentLocation, actor);
         if(getIsConsumed()) {
             if (((Player)actor).getCurrentHp() < ((Player)actor).getLastRoundHp() || this.reset) {
+                this.fade(actor);
                 actor.removeItemFromInventory(this);
                 reset = false;
             }
@@ -85,8 +88,8 @@ public class SuperMushroom extends Item implements Sellable, Consumable, Resetta
             map.locationOf(actor).removeItem(this);
         }
         isConsumed = true;
-        addCapability(Status.TALL);
-        addCapability(Status.GUARANTEED_JUMP);
+        actor.addCapability(Status.TALL);
+        actor.addCapability(Status.GUARANTEED_JUMP);
         actor.increaseMaxHp(50);
         this.removeAction(consumeAction);
 
@@ -97,8 +100,8 @@ public class SuperMushroom extends Item implements Sellable, Consumable, Resetta
         reset = true;
     }
 
-//    public void fade(){
-//        removeCapability(Status.TALL);
-//        removeCapability(Status.GUARANTEED_JUMP);
-//    }
+    public void fade(Actor actor){
+        actor.removeCapability(Status.TALL);
+        actor.removeCapability(Status.GUARANTEED_JUMP);
+    }
 }
