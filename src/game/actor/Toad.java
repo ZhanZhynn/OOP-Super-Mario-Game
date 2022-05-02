@@ -60,6 +60,4 @@ public class Toad extends Actor {
         return actions;
     }
 
-
-    //ActionList actions = new ActionList(new SpeakAction(this));
 }

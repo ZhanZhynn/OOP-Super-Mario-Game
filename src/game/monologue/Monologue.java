@@ -14,10 +14,10 @@ public class Monologue {
 
     public String allDialog() {
         dialog.clear();
-        dialog.add("You might need a wrench to smash Koopa's hard shells");
-        dialog.add("You better get back to finding the Power Stars");
-        dialog.add("The Princess is depending on you! You are our only hope");
-        dialog.add(" Being imprisoned in these walls can drive a fungus crazy");
+        dialog.add("You might need a wrench to smash Koopa's hard shells.");
+        dialog.add("You better get back to finding the Power Stars.");
+        dialog.add("The Princess is depending on you! You are our only hope.");
+        dialog.add(" Being imprisoned in these walls can drive a fungus crazy :(");
         int index = new Random().nextInt(dialog.size());
         String string = dialog.get(index);
         return string;
@@ -25,9 +25,9 @@ public class Monologue {
 
     public String playerAtePS() {
         dialog.clear();
-        dialog.add("You might need a wrench to smash Koopa's hard shells");
-        dialog.add("The Princess is depending on you! You are our only hope");
-        dialog.add(" Being imprisoned in these walls can drive a fungus crazy");
+        dialog.add("You might need a wrench to smash Koopa's hard shells.");
+        dialog.add("The Princess is depending on you! You are our only hope.");
+        dialog.add(" Being imprisoned in these walls can drive a fungus crazy :(");
         int index = new Random().nextInt(dialog.size());
         String string = dialog.get(index);
         return string;
@@ -37,9 +37,9 @@ public class Monologue {
 
     public String playerWithWrench() {
         dialog.clear();
-        dialog.add("You better get back to finding the Power Stars");
-        dialog.add("The Princess is depending on you! You are our only hope");
-        dialog.add(" Being imprisoned in these walls can drive a fungus crazy");
+        dialog.add("You better get back to finding the Power Stars.");
+        dialog.add("The Princess is depending on you! You are our only hope.");
+        dialog.add(" Being imprisoned in these walls can drive a fungus crazy :(");
         int index = new Random().nextInt(dialog.size());
         String string = dialog.get(index);
         return string;
