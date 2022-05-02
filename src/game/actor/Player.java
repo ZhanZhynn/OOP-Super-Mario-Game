@@ -88,7 +88,6 @@ public class Player extends Actor implements Resettable {
 			if (item instanceof PowerStar){
 				PowerStar ps = (PowerStar) item;
 				if (ps.getCounter() == 0){
-					//ps.fade();
 					removeItemFromInventory(item);
 				}
 				if (ps.getIsConsumed()){
@@ -100,7 +99,6 @@ public class Player extends Actor implements Resettable {
 				SuperMushroom sm = (SuperMushroom) item;
 				if(sm.getIsConsumed()) {
 					if (getCurrentHp() < lastRoundHp || this.reset) {
-						//sm.fade();
 						removeItemFromInventory(item);
 					}
 				}

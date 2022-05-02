@@ -91,13 +91,6 @@ public class PowerStar extends Item implements Sellable, Consumable {
         this.removeAction(consumeAction);
     }
 
-//    public void fade(){
-//        removeCapability(Status.INSTANT_KILL);
-//        removeCapability(Status.PATH_OF_GOLD);
-//        removeCapability(Status.INVINCIBLE);
-//        removeCapability(Status.DESTROY_HIGH_GROUND);
-//    }
-
     public Boolean getIsConsumed(){return isConsumed;}
 
     @Override
