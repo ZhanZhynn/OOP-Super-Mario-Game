@@ -109,6 +109,10 @@ public class PowerStar extends Item implements Sellable, Consumable, Resettable 
         this.removeAction(new ConsumeAction(this));
     }
 
+    /**
+     * a method to remove the capabilites in actor
+     * @param actor the actor having the capabilities
+     */
     public void fade(Actor actor){
         actor.removeCapability(Status.INSTANT_KILL);
         actor.removeCapability(Status.PATH_OF_GOLD);
@@ -116,7 +120,11 @@ public class PowerStar extends Item implements Sellable, Consumable, Resettable 
         actor.removeCapability(Status.DESTROY_HIGH_GROUND);
     }
 
-
+    /**
+     * has the item been consumed?
+     *
+     * @return whether the item has been consumed
+     */
     public Boolean getIsConsumed(){return isConsumed;}
 
     @Override
