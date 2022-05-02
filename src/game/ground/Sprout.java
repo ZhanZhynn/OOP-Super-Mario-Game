@@ -22,22 +22,9 @@ public class Sprout extends Tree implements Jumpable, Destroyable {
         this.registerInstance();
     }
 
-    public void resetInstance(){ //50% chance to turn into dirt
-        this.reset = true;
-    }
 
 
     public void tick(Location location){
-        if (this.reset){
-            List<Item> items = location.getItems();
-            for (Item item:items){
-                if (item instanceof Coin){
-                    location.removeItem(item);
-                }
-            }
-        }
-        this.reset = false;
-
         counter+=1;
         if (counter % 10 == 0){
             location.setGround(new Sapling());

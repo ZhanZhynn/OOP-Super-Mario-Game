@@ -7,20 +7,15 @@ import game.interfaces.Resettable;
 import game.item.Coin;
 import game.item.Status;
 
-public class Sapling extends Tree implements Jumpable, Destroyable, Resettable {
+public class Sapling extends Tree implements Jumpable, Destroyable{
     private int counter;
-    private boolean reset = false;
 
     public Sapling(){
         super('t');
         this.addCapability(Capabilities.SPAWN_COIN);
         counter = 0;
-        this.registerInstance();
     }
 
-    public void resetInstance(){//remove all coins
-        this.reset = true;
-    }
 
     public void tick(Location location) {
 

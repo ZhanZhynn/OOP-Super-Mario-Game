@@ -13,7 +13,6 @@ import java.util.Random;
 
 public class Mature extends Tree implements Jumpable, Destroyable{
     private int counter;
-    private boolean reset;
 
     public Mature(){
         super('T');
@@ -23,23 +22,7 @@ public class Mature extends Tree implements Jumpable, Destroyable{
         counter = 0;
     }
 
-    public void resetInstance(){ //50% chance to turn into dirt
-            this.reset = true;
-    }
-
     public void tick(Location location) {
-        if (this.reset){
-//            List<Item> items = location.getItems();
-//            for (Item item:items){
-//                if (item instanceof Coin){
-//                    location.removeItem(item);
-//                }
-//            }
-            if (Math.random() <= 0.5) {
-                location.setGround(new Dirt());
-            }
-        }
-        this.reset = false;
 
         //grow into mature after 10 turns
         counter += 1;
