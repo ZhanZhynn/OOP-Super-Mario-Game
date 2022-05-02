@@ -25,10 +25,16 @@ public class Player extends Actor implements Resettable {
 	 */
 	private Wallet wallet = new Wallet(1200);
 
+	/**
+	 * Player's HP on the last round
+	 */
 	public int getLastRoundHp() {
 		return lastRoundHp;
 	}
 
+	/**
+	 * Menu item
+	 */
 	public Menu getMenu() {
 		return menu;
 	}
@@ -38,6 +44,9 @@ public class Player extends Actor implements Resettable {
 	 */
 	private int lastRoundHp = getMaxHp();
 
+	/**
+	 * Reset instance to know whether reset action has been executed
+	 */
 	private boolean reset = false;
 
 	/**
@@ -53,11 +62,13 @@ public class Player extends Actor implements Resettable {
 		this.registerInstance();
 	}
 
-	public void resetInstance(){ //50% chance to turn into dirt
+	/**
+	 * Logic for resetting player
+	 */
+	public void resetInstance(){
 		this.reset = true;
 	}
 
-	//ZuShen
 	/**
 	 * this method is to get the current hp of player
 	 * @return current hp as integer
