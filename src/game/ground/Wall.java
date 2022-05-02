@@ -32,6 +32,7 @@ public class Wall extends Ground implements Jumpable, Destroyable, Resettable {
 
 	/**
 	 * Player can destroy highground if consumed Power Star
+	 * @param actor is the player.
 	 */
 	@Override
 	public boolean canActorEnter(Actor actor) {
@@ -47,6 +48,8 @@ public class Wall extends Ground implements Jumpable, Destroyable, Resettable {
 	 * Function for Mario to jump.
 	 * There is a 80% success rate, if fail, there will be a 20 damage incurred.
 	 * If jump is successful, a message will be printed to prompt the player, if fail, another message will be printed.
+	 * @param by is the actor
+	 * @param at is the location of where the player jumped over.
 	 */
 
 	//added by Hee Zhan Zhynn on 28/4/2022----------------
