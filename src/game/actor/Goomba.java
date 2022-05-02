@@ -103,7 +103,9 @@ public class Goomba extends Actor implements Resettable {
 	public void resetInstance(){
 		this.reset = true;
 	}
-
+	/**
+	 * This is Goomba's weapon, the kick.
+	 */
 	public Weapon getWeapon() {
 		return new IntrinsicWeapon(10, "kick");
 	}
@@ -129,10 +131,16 @@ public class Goomba extends Actor implements Resettable {
 
 	/**
 	 * Figure out what to do next.
+	 * If player hits reset, there is a 10% chance that Goomba will be removed from the map.
 	 * @see Actor#playTurn(ActionList, Action, GameMap, Display)
+	 *  @param actions    collection of possible Actions for this Actor
+	 *  @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
+	 *  @param map        the map containing the Actor
+	 *  @param display    the I/O object to which messages may be written
 	 */
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+
 		if (this.reset == true){
 //			map.removeActor(this);
 //			Location here = map.locationOf(this);
@@ -142,7 +150,7 @@ public class Goomba extends Actor implements Resettable {
 			map.removeActor(this);
 			return new DoNothingAction();
 		}
-
+		// if player rests, then GOOMBA has 10% chance to be removed.
 //		boolean suicide = Math.random() <0.1 == 0;
 		if (Math.random() <= 0.1 || !this.isConscious()){ //10% to suicide
 			map.removeActor(this);

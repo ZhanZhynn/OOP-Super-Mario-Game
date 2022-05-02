@@ -58,6 +58,9 @@ public class Player extends Actor implements Resettable {
 		s = s.substring(0, s.indexOf("/"));
 		return Integer.parseInt(s);
 	}
+	/**
+	 * this method is to add an item into player's inventory
+	 */
 
 	@Override
 	public void addItemToInventory(Item item) {
@@ -66,6 +69,15 @@ public class Player extends Actor implements Resettable {
 		}
 		super.addItemToInventory(item);
 	}
+
+	/**
+	 * Figure out what to do next.
+	 * @see Actor#playTurn(ActionList, Action, GameMap, Display)
+	 *  @param actions    collection of possible Actions for this Actor
+	 *  @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
+	 *  @param map        the map containing the Actor
+	 *  @param display    the I/O object to which messages may be written
+	 */
 
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
@@ -142,6 +154,9 @@ public class Player extends Actor implements Resettable {
 //		}
 //		return actions;
 //	}
+	/**
+	 * Function to display character status
+	 */
 
 	@Override
 	public char getDisplayChar(){

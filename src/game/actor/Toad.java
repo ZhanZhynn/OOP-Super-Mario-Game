@@ -46,6 +46,7 @@ public class Toad extends Actor {
      * @param direction  String representing the direction of the other Actor
      * @param map        current GameMap
      * @return a list of trade action
+     * Added monologueAction to the list for toad to speak.
      */
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
