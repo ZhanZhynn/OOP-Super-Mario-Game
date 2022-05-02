@@ -143,8 +143,8 @@ public class Goomba extends Actor implements Resettable {
 			return new DoNothingAction();
 		}
 
-		boolean suicide = new Random().nextInt(10) == 0;
-		if (suicide || !this.isConscious()){
+//		boolean suicide = Math.random() <0.1 == 0;
+		if (Math.random() <= 0.1 || !this.isConscious()){ //10% to suicide
 			map.removeActor(this);
 			return new DoNothingAction();
 		}
