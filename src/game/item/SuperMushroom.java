@@ -25,7 +25,7 @@ public class SuperMushroom extends Item implements Sellable, Consumable, Resetta
      */
     public final static int PRICE = 400;
 
-    private boolean reset = true;
+    private boolean reset = false;
     /**
      * is this superMushroom consumed?
      */
@@ -66,7 +66,7 @@ public class SuperMushroom extends Item implements Sellable, Consumable, Resetta
             if (((Player)actor).getCurrentHp() < ((Player)actor).getLastRoundHp() || this.reset) {
                 this.fade(actor);
                 actor.removeItemFromInventory(this);
-                reset = false;
+                this.reset = false;
             }
         }
     }
