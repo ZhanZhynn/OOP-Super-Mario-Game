@@ -193,15 +193,15 @@ public class Player extends Actor implements Resettable {
 //			return character;
 //		}
 //		this.reset = false;
-
-		if (getCurrentHp() < lastRoundHp) {
-			character = super.getDisplayChar();
-		}
-		//this else if statement is to deal with a specific situation when we consume supermushroom and got attack at the same round
-		//might not be the best way to do it but it works
-		else if (getCurrentHp() - lastRoundHp < 50 && getCurrentHp() > lastRoundHp){
-			character = super.getDisplayChar();
-		}
+//
+//		if (getCurrentHp() < lastRoundHp) {
+//			character = super.getDisplayChar();
+//		}
+//		//this else if statement is to deal with a specific situation when we consume supermushroom and got attack at the same round
+//		//might not be the best way to do it but it works
+//		else if (getCurrentHp() - lastRoundHp < 50 && getCurrentHp() > lastRoundHp){
+//			character = super.getDisplayChar();
+//		}
 
 		return character;
 		//return this.hasCapability(Status.TALL) ? Character.toUpperCase(super.getDisplayChar()): super.getDisplayChar();
