@@ -84,6 +84,7 @@ public class PowerStar extends Item implements Sellable, Consumable {
         addCapability(Status.PATH_OF_GOLD);
         addCapability(Status.INVINCIBLE);
         addCapability(Status.DESTROY_HIGH_GROUND);
+        actor.heal(200);
         this.removeAction(consumeAction);
     }
 
