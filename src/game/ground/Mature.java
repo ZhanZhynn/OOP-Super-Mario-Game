@@ -71,7 +71,8 @@ public class Mature extends Tree implements Jumpable, Destroyable{
      * Function for Mario to jump.
      * There is a 70% success rate, if fail, there will be a 30 damage incurred.
      * If jump is successful, a message will be printed to prompt the player, if fail, another message will be printed.
-     * *@param location of the tree, also used to get the map
+     * @param by is the actor.
+     * @param at is the location of the tree, also used to get the map
      */
 
     public String jumped(Actor by, Location at) {

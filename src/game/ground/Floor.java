@@ -15,6 +15,7 @@ public class Floor extends Ground {
 
 	/**
 	 * Enemies cannot enter floor
+	 * @param actor is the enemies
 	 */
 	public boolean canActorEnter(Actor actor){
 		//Added by Ng Zu Shen on 20/4/2022-----------------------------------

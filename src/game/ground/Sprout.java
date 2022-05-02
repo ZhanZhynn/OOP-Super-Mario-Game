@@ -28,7 +28,7 @@ public class Sprout extends Tree implements Jumpable, Destroyable {
     /**
      * Acts as a counter for tree to grow into Mature after 10 turns.
      * If location does not contains an actor, it has 10% chance of spawning a Goomba at each turn.
-     * Param : Location
+     * @param location is the location of Sapling
      */
 
     public void tick(Location location){
@@ -48,6 +48,8 @@ public class Sprout extends Tree implements Jumpable, Destroyable {
      * Function for Mario to jump.
      * There is a 90% success rate, if fail, there will be a 10 damage incurred.
      * If jump is successful, a message will be printed to prompt the player, if fail, another message will be printed.
+     * @param by is the actor
+     * @param at is the location of where the player jumped over.
      */
     public String jumped(Actor by, Location at) {
         Actor actor = by;
