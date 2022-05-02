@@ -52,7 +52,11 @@ public class ResetManager {
     public void run(){
 //        System.out.println(this.resettableList.size()); //why is it empty?
         for (Resettable item: resettableList) {
-            cleanUp(item);
+            item.resetInstance();
+
+        }
+        for (int i=0; i< resettableList.size(); i++) {
+            cleanUp(resettableList.get(i));
         }
     }
 
@@ -70,7 +74,7 @@ public class ResetManager {
      * FIXME: it does nothing, you need to implement it :)
      */
     public void cleanUp(Resettable resettable){
-        resettable.resetInstance();
+        resettableList.remove(resettable);
     }
 
 }
