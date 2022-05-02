@@ -21,7 +21,12 @@ public class Mature extends Tree implements Jumpable, Destroyable{
         this.registerInstance();
         counter = 0;
     }
-
+    /**
+     * Acts as a counter for tree to grow into Mature after 10 turns.
+     * If location does not contains an actor, it has 15% chance of spawning a koopa at each turn.
+     * Also implements a new Sprout every 5 turns.
+     * Param : Location
+     */
     public void tick(Location location) {
 
         //grow into mature after 10 turns
@@ -58,6 +63,12 @@ public class Mature extends Tree implements Jumpable, Destroyable{
             location.setGround(new Dirt());
         }
     }
+    /**
+     * Function for Mario to jump.
+     * There is a 70% success rate, if fail, there will be a 30 damage incurred.
+     * If jump is successful, a message will be printed to prompt the player, if fail, another message will be printed.
+     * *@param location of the tree, also used to get the map
+     */
 
     public String jumped(Actor by, Location at) {
         Actor actor = by;

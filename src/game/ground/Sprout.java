@@ -15,6 +15,9 @@ public class Sprout extends Tree implements Jumpable, Destroyable {
     private int counter;
     private boolean reset = false;
 
+    /**
+     * Constructor for class Sprout
+     */
     public Sprout(){
         super('+');
         this.addCapability(Capabilities.SPAWN_GOOMBA);
@@ -22,7 +25,11 @@ public class Sprout extends Tree implements Jumpable, Destroyable {
         this.registerInstance();
     }
 
-
+    /**
+     * Acts as a counter for tree to grow into Mature after 10 turns.
+     * If location does not contains an actor, it has 10% chance of spawning a Goomba at each turn.
+     * Param : Location
+     */
 
     public void tick(Location location){
         counter+=1;
@@ -37,6 +44,11 @@ public class Sprout extends Tree implements Jumpable, Destroyable {
         }
     }
 
+    /**
+     * Function for Mario to jump.
+     * There is a 90% success rate, if fail, there will be a 10 damage incurred.
+     * If jump is successful, a message will be printed to prompt the player, if fail, another message will be printed.
+     */
     public String jumped(Actor by, Location at) {
         Actor actor = by;
         Location location = at;

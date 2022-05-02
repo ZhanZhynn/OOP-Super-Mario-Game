@@ -23,6 +23,10 @@ public class Dirt extends Ground implements Resettable {
 		this.reset = true;
 	}
 
+
+	/**
+	 * A function to remove items if game resets.
+	 */
 	public void tick(Location location) {
 		if (this.reset){
 			List<Item> items = location.getItems();

@@ -18,6 +18,9 @@ import java.util.List;
 public class Wall extends Ground implements Jumpable, Destroyable, Resettable {
 	private boolean reset = false;
 
+	/**
+	 * Constructor for wall
+	 */
 	public Wall() {
 		super('#');
 		this.registerInstance();
@@ -27,7 +30,9 @@ public class Wall extends Ground implements Jumpable, Destroyable, Resettable {
 		this.reset = true;
 	}
 
-
+	/**
+	 * Player can destroy highground if consumed Power Star
+	 */
 	@Override
 	public boolean canActorEnter(Actor actor) {
 		//added by Ng Zu Shen on 20/4/2022----------------
@@ -37,6 +42,12 @@ public class Wall extends Ground implements Jumpable, Destroyable, Resettable {
 		//NgZuShen\----------------------------------------
 		return false;
 	}
+
+	/**
+	 * Function for Mario to jump.
+	 * There is a 80% success rate, if fail, there will be a 20 damage incurred.
+	 * If jump is successful, a message will be printed to prompt the player, if fail, another message will be printed.
+	 */
 
 	//added by Hee Zhan Zhynn on 28/4/2022----------------
 	public String jumped(Actor by, Location at) {
@@ -53,6 +64,15 @@ public class Wall extends Ground implements Jumpable, Destroyable, Resettable {
 		}
 	}
 
+	/**
+	 * At the moment, we only make it can be attacked by Player.
+	 * You can do something else with this method.
+	 * @param otherActor the Actor that might perform an action.
+	 * @param location location of wall
+	 * @param direction  String representing the direction of the other Actor
+	 * @return list of actions
+	 */
+
 	public ActionList allowableActions(Actor otherActor, Location location, String direction) {
 		ActionList actions = new ActionList();
 		if(otherActor instanceof Player && !location.containsAnActor()) {
@@ -63,6 +83,10 @@ public class Wall extends Ground implements Jumpable, Destroyable, Resettable {
 		return actions;
 	}
 
+	/**
+	 * handle all the behaviour of trees as stated in assignment specification
+	 * @param location The location of the wall
+	 */
 	public void tick(Location location){
 		if (this.reset){
 			List<Item> items = location.getItems();

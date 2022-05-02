@@ -33,20 +33,24 @@ public abstract class Tree extends Ground implements Jumpable, Resettable {
      */
     private ArrayList<Location> dirt = new ArrayList<>();
 
-    /**
-     * Constructor.
-     *
-     */
+
 //    public Tree() { //Zz: do I just use this as sprout class? or need a new class?
 //        super('+');
 //        this.addCapability(Capabilities.SPAWN_GOOMBA);
 //    }
-
+    /**
+     * Constructor.
+     *
+     */
     public Tree(char displayChar) {
         super(displayChar);
         this.registerInstance();
         this.registerInstance();
     }
+
+    /**
+     * Tree has 50% chance of turning into dirt if player resets.
+     */
 
     public void resetInstance(){ //50% chance to turn into dirt
         this.reset = true;
@@ -55,7 +59,9 @@ public abstract class Tree extends Ground implements Jumpable, Resettable {
         }
     }
 
-
+    /**
+     * Player can destroy highground if consumed Power Star
+     */
     public boolean canActorEnter(Actor actor) {
         if(actor.hasCapability(Status.DESTROY_HIGH_GROUND)){
             return true;
@@ -165,10 +171,19 @@ public abstract class Tree extends Ground implements Jumpable, Resettable {
 //            }
 //        }
 //    }
+    /**
+     * getter to get the dirt locations
+     */
     public ArrayList<Location> getDirt(){
-        //getter to get the dirt locations
+        //
         return this.dirt;
     }
+
+    /**
+     * Function for Mario to jump.
+     * There is a 90% success rate, if fail, there will be a 10 damage incurred.
+     * If jump is successful, a message will be printed to prompt the player, if fail, another message will be printed.
+     */
 
     public String jumped(Actor by, Location at) {
         Actor actor = by;
@@ -183,7 +198,14 @@ public abstract class Tree extends Ground implements Jumpable, Resettable {
             return actor + " fell from Sprout. Received " + damage + " damage.";
         }
     }
-
+    /**
+     * At the moment, we only make it can be attacked by Player.
+     * You can do something else with this method.
+     * @param otherActor the Actor that might perform an action.
+     * @param location location of tree
+     * @param direction  String representing the direction of the other Actor
+     * @return list of actions
+     */
     public ActionList allowableActions(Actor otherActor, Location location, String direction) {
         ActionList actions = new ActionList();
         if(otherActor instanceof Player && !location.containsAnActor()) {
