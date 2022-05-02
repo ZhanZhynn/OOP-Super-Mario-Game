@@ -50,6 +50,13 @@ public class Player extends Actor implements Resettable {
 	private boolean reset = false;
 
 	/**
+	 * Reset instance to know whether reset action has been executed before
+	 */
+	private int resetCount = 0;
+
+	private Action resetAction = new ResetAction();
+
+	/**
 	 * Constructor.
 	 *
 	 * @param name        Name to call the player in the UI
@@ -102,16 +109,21 @@ public class Player extends Actor implements Resettable {
 
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-		actions.add(new ResetAction());
+		if (lastAction != resetAction) {
+			actions.add(resetAction);
+		}else{
+			actions.remove(resetAction);
+		}
 //		if (this.reset) {
-//			this.resetMaxHp(this.getMaxHp());
-//			this.removeCapability(Status.INSTANT_KILL);
-//			this.removeCapability(Status.PATH_OF_GOLD);
-//			this.removeCapability(Status.INVINCIBLE);
-//			this.removeCapability(Status.DESTROY_HIGH_GROUND);
-//			this.removeCapability(Status.TALL);
-//			this.removeCapability(Status.GUARANTEED_JUMP);
-//			this.addCapability(Status.HOSTILE_TO_ENEMY);
+//			resetCount++;
+////			this.resetMaxHp(this.getMaxHp());
+////			this.removeCapability(Status.INSTANT_KILL);
+////			this.removeCapability(Status.PATH_OF_GOLD);
+////			this.removeCapability(Status.INVINCIBLE);
+////			this.removeCapability(Status.DESTROY_HIGH_GROUND);
+////			this.removeCapability(Status.TALL);
+////			this.removeCapability(Status.GUARANTEED_JUMP);
+////			this.addCapability(Status.HOSTILE_TO_ENEMY);
 //		}
 
 
