@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.action.MonologueAction;
 import game.action.TradeAction;
 import game.item.PowerStar;
 import game.item.SuperMushroom;
@@ -48,11 +49,17 @@ public class Toad extends Actor {
      */
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
+
+        actions.add(new ActionList(new MonologueAction(this)));
         if(otherActor instanceof Player) {
             actions.add(new TradeAction(new PowerStar("Power Star", '*', false)));
             actions.add(new TradeAction(new SuperMushroom("Super Mushroom", '^', false)));
             actions.add(new TradeAction(new Wrench("Wrench", '|', true)));
         }
+
         return actions;
     }
+
+
+    //ActionList actions = new ActionList(new SpeakAction(this));
 }
