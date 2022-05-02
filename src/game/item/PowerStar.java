@@ -65,19 +65,22 @@ public class PowerStar extends Item implements Sellable, Consumable, Resettable 
     public void tick(Location currentLocation, Actor actor) {
         super.tick(currentLocation);
         counter -= 1;
-        if (this.isConsumed) {
-            System.out.println("Power star ability round remaining: " + (counter + 1));
-            System.out.println("Mario is invincible!");
-        }
+
         if (this.getCounter() == 0){
             actor.removeItemFromInventory(this);
         }
-        if (this.getIsConsumed()){
-            if (this.reset) {
-                actor.removeItemFromInventory(this);
-                reset = false;
-            }
+
+        if (this.getIsConsumed() && this.reset){
+            actor.removeItemFromInventory(this);
+            reset = false;
         }
+
+        else if (this.isConsumed) {
+            System.out.println("Power star ability round remaining: " + (counter + 1));
+            System.out.println("Mario is invincible!");
+        }
+
+
     }
 
     /**
