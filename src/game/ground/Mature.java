@@ -11,7 +11,7 @@ import game.item.Status;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Mature extends Tree implements Jumpable, Destroyable, Resettable {
+public class Mature extends Tree implements Jumpable, Destroyable{
     private int counter;
     private boolean reset;
 

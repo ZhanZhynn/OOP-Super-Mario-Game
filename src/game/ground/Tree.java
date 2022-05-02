@@ -2,15 +2,18 @@ package game.ground;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.action.JumpAction;
 import game.interfaces.Jumpable;
 import game.actor.Player;
 import game.interfaces.Resettable;
+import game.item.Coin;
 import game.item.Status;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Ng Zu shen
@@ -19,6 +22,7 @@ import java.util.ArrayList;
 public abstract class Tree extends Ground implements Jumpable, Resettable {
 
     private boolean reset = false;
+    private boolean resetTree = false;
     /**
      * used to keep track of when the tree should evolve or grow new sprout.
      */
@@ -41,7 +45,16 @@ public abstract class Tree extends Ground implements Jumpable, Resettable {
     public Tree(char displayChar) {
         super(displayChar);
         this.registerInstance();
+        this.registerInstance();
     }
+
+    public void resetInstance(){ //50% chance to turn into dirt
+        this.reset = true;
+        if (Math.random() <0.5){
+            this.resetTree = true;
+        }
+    }
+
 
     public boolean canActorEnter(Actor actor) {
         if(actor.hasCapability(Status.DESTROY_HIGH_GROUND)){
@@ -88,15 +101,20 @@ public abstract class Tree extends Ground implements Jumpable, Resettable {
      * @param location The location of the Ground
      */
     public void tick(Location location){
-//        if (this.reset){
-//            List<Item> items = location.getItems();
-//            for (Item item:items){
-//                if (item instanceof Coin){
-//                    location.removeItem(item);
-//                }
-//            }
-//        }
-//        this.reset = false;
+        if (this.reset){
+            if (this.resetTree){
+                location.setGround((new Dirt()));
+            }
+            List<Item> items = location.getItems();
+            if (items.size() >0) {
+                for (int i = 0; i < items.size(); i++) {
+                    if (items.get(i) instanceof Coin){
+                        location.removeItem(items.get(i));
+                    }
+                }
+            }
+        }
+        this.reset = false;
 
 //        counter+=1;
 //        if (counter % 10 == 0){
@@ -181,10 +199,6 @@ public abstract class Tree extends Ground implements Jumpable, Resettable {
             }
         }
         return actions;
-    }
-
-    public void resetInstance(){ //50% chance to turn into dirt
-            this.reset = true;
     }
 
 

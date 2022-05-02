@@ -2,20 +2,32 @@ package game.ground;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.action.JumpAction;
 import game.actor.Player;
 import game.interfaces.Destroyable;
 import game.interfaces.Jumpable;
+import game.interfaces.Resettable;
+import game.item.Coin;
 import game.item.Status;
 
-public class Wall extends Ground implements Jumpable, Destroyable {
+import java.util.List;
+
+public class Wall extends Ground implements Jumpable, Destroyable, Resettable {
+	private boolean reset = false;
 
 	public Wall() {
 		super('#');
+		this.registerInstance();
 	}
-	
+
+	public void resetInstance(){
+		this.reset = true;
+	}
+
+
 	@Override
 	public boolean canActorEnter(Actor actor) {
 		//added by Ng Zu Shen on 20/4/2022----------------
@@ -49,6 +61,21 @@ public class Wall extends Ground implements Jumpable, Destroyable {
 			}
 		}
 		return actions;
+	}
+
+	public void tick(Location location){
+		if (this.reset){
+			List<Item> items = location.getItems();
+			if (items.size() >0) {
+				for (int i = 0; i < items.size(); i++) {
+					if (items.get(i) instanceof Coin){
+						location.removeItem(items.get(i));
+					}
+				}
+			}
+		}
+		this.reset = false;
+
 	}
 
 	public String toString() {
