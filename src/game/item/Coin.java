@@ -1,6 +1,8 @@
 package game.item;
 
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.Location;
+import game.interfaces.Resettable;
 //created by Ng Zu Shen on 22/4/2022
 
 /**
@@ -9,14 +11,14 @@ import edu.monash.fit2099.engine.items.Item;
  * @author Ng Zu Shen
  * @version 1.0
  */
-public class Coin extends Item{
+public class Coin extends Item implements Resettable {
 
     /**
      * value of the coin as an integer
      */
     private int value;
     private boolean isPickedUp;
-    private boolean reset;
+    private boolean reset = false;
 
     /**
      * Constructor that only take in one parameter, which is the value of coin
@@ -25,6 +27,15 @@ public class Coin extends Item{
     public Coin(int value){
         super("coin", '$', true);
         this.value = value;
+        this.registerInstance();
+    }
+
+    @Override
+    public void tick(Location currentLocation) {
+        super.tick(currentLocation);
+        if (reset) {
+            currentLocation.removeItem(this);
+        }
     }
 
     /**
@@ -34,5 +45,9 @@ public class Coin extends Item{
     public int getValue(){return value;}
 
 
+    @Override
+    public void resetInstance() {
+        reset = true;
+    }
 }
 

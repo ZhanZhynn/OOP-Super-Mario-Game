@@ -12,6 +12,7 @@ public class ResetAction extends Action {
     }
 
     public String execute(Actor actor, GameMap map) {
+
         ResetManager.getInstance().run();
         return menuDescription(actor);
     }
