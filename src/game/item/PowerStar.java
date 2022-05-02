@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.interfaces.Consumable;
+import game.interfaces.Resettable;
 import game.interfaces.Sellable;
 import game.action.ConsumeAction;
 
@@ -14,13 +15,14 @@ import game.action.ConsumeAction;
  * @author Ng Zu Shen
  * @version 1.0
  */
-public class PowerStar extends Item implements Sellable, Consumable {
+public class PowerStar extends Item implements Sellable, Consumable, Resettable {
 
     /**
      * price sold by toad
      */
     public static final int PRICE = 600;
     public static final String name = "PowerStar";
+    private boolean reset = false;
     /**
      * counter to keep track of 10 rounds fading time limit
      */
@@ -67,6 +69,15 @@ public class PowerStar extends Item implements Sellable, Consumable {
             System.out.println("Power star ability round remaining: " + (counter + 1));
             System.out.println("Mario is invincible!");
         }
+        if (this.getCounter() == 0){
+            actor.removeItemFromInventory(this);
+        }
+        if (this.getIsConsumed()){
+            if (this.reset) {
+                actor.removeItemFromInventory(this);
+                reset = false;
+            }
+        }
     }
 
     /**
@@ -96,5 +107,10 @@ public class PowerStar extends Item implements Sellable, Consumable {
     @Override
     public int getPrice() {
         return PRICE;
+    }
+
+    @Override
+    public void resetInstance() {
+        reset = true;
     }
 }

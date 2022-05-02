@@ -19,10 +19,20 @@ import game.item.*;
 public class Player extends Actor implements Resettable {
 
 	private final Menu menu = new Menu();
+
 	/**
 	 * Player's wallet
 	 */
 	private Wallet wallet = new Wallet(1200);
+
+	public int getLastRoundHp() {
+		return lastRoundHp;
+	}
+
+	public Menu getMenu() {
+		return menu;
+	}
+
 	/**
 	 * Helper instance variable to know when player got hurt in a round.
 	 */
@@ -95,31 +105,31 @@ public class Player extends Actor implements Resettable {
 		}
 
 		//Added by Ng Zu Shen on 21/4/2022--------------------------------------------
-		for (int i = 0; i<getInventory().size(); i++){ //please comment this block of code
-			Item item = getInventory().get(i);
-			if (item instanceof PowerStar){
-				PowerStar ps = (PowerStar) item;
-				if (ps.getCounter() == 0){
-					removeItemFromInventory(item);
-				}
-				if (ps.getIsConsumed()){
-					if (this.reset) {
-						removeItemFromInventory(item);
-					}
-				}
-			}else if (item instanceof SuperMushroom){
-				SuperMushroom sm = (SuperMushroom) item;
-				if(sm.getIsConsumed()) {
-					if (getCurrentHp() < lastRoundHp || this.reset) {
-						removeItemFromInventory(item);
-					}
-				}
-			}else if (item instanceof Coin){
-				Coin coin = (Coin) item;
-				wallet.increaseBalance(coin.getValue());
-				removeItemFromInventory(item);
-			}
-		}
+//		for (int i = 0; i<getInventory().size(); i++){ //please comment this block of code
+//			Item item = getInventory().get(i);
+//			if (item instanceof PowerStar){
+//				PowerStar ps = (PowerStar) item;
+//				if (ps.getCounter() == 0){
+//					removeItemFromInventory(item);
+//				}
+//				if (ps.getIsConsumed()){
+//					if (this.reset) {
+//						removeItemFromInventory(item);
+//					}
+//				}
+//			}else if (item instanceof SuperMushroom){
+//				SuperMushroom sm = (SuperMushroom) item;
+//				if(sm.getIsConsumed()) {
+//					if (getCurrentHp() < lastRoundHp || this.reset) {
+//						removeItemFromInventory(item);
+//					}
+//				}
+//			}else if (item instanceof Coin){
+//				Coin coin = (Coin) item;
+//				wallet.increaseBalance(coin.getValue());
+//				removeItemFromInventory(item);
+//			}
+//		}
 		lastRoundHp = getCurrentHp();
 
 		if (map.locationOf(this).getGround() instanceof Destroyable){

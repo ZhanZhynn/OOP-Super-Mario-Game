@@ -1,7 +1,9 @@
 package game.item;
 
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
+import game.actor.Player;
 import game.interfaces.Resettable;
 //created by Ng Zu Shen on 22/4/2022
 
@@ -41,6 +43,13 @@ public class Coin extends Item implements Resettable {
             currentLocation.removeItem(this);
             reset = false;
         }
+    }
+
+    @Override
+    public void tick(Location currentLocation, Actor actor) {
+        super.tick(currentLocation, actor);
+        ((Player)actor).getWallet().increaseBalance(this.getValue());
+        actor.removeItemFromInventory(this);
     }
 
     /**

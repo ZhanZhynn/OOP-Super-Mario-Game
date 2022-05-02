@@ -4,7 +4,10 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
+import game.actor.Player;
 import game.interfaces.Consumable;
+import game.interfaces.Resettable;
 import game.interfaces.Sellable;
 import game.action.ConsumeAction;
 
@@ -15,16 +18,18 @@ import game.action.ConsumeAction;
  * @author Ng Zu Shen
  * @version 1.0
  */
-public class SuperMushroom extends Item implements Sellable, Consumable {
+public class SuperMushroom extends Item implements Sellable, Consumable, Resettable {
 
     /**
      * price sold by toad
      */
     public final static int PRICE = 400;
+
+    private boolean reset = true;
     /**
      * is this superMushroom consumed?
      */
-    private Boolean isConsumed = false;
+    private boolean isConsumed = false;
     /**
      * consume action used to consume this super mushroom
      */
@@ -51,6 +56,18 @@ public class SuperMushroom extends Item implements Sellable, Consumable {
 
     public Boolean getIsConsumed(){return isConsumed;}
 
+
+    @Override
+    public void tick(Location currentLocation, Actor actor) {
+        super.tick(currentLocation, actor);
+        if(getIsConsumed()) {
+            if (((Player)actor).getCurrentHp() < ((Player)actor).getLastRoundHp() || this.reset) {
+                actor.removeItemFromInventory(this);
+                reset = false;
+            }
+        }
+    }
+
     @Override
     public int getPrice() {
         return PRICE;
@@ -73,6 +90,11 @@ public class SuperMushroom extends Item implements Sellable, Consumable {
         actor.increaseMaxHp(50);
         this.removeAction(consumeAction);
 
+    }
+
+    @Override
+    public void resetInstance() {
+        reset = true;
     }
 
 //    public void fade(){
