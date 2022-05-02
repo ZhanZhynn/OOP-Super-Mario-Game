@@ -36,6 +36,6 @@ public class DestroyShellAction extends Action {
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " whack " + target + " at " + direction;
+        return actor + " destroys " + target + "'s shell at " + direction;
     }
 }
