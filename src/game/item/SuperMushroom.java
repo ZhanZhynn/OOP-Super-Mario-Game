@@ -33,7 +33,7 @@ public class SuperMushroom extends Item implements Sellable, Consumable, Resetta
     /**
      * consume action used to consume this super mushroom
      */
-    private Action consumeAction = new ConsumeAction(this);
+    //private Action consumeAction = new ConsumeAction(this);
 
     /**
      * Constructor of super mushroom
@@ -43,7 +43,7 @@ public class SuperMushroom extends Item implements Sellable, Consumable, Resetta
      */
     public SuperMushroom(String name, char displayChar, boolean portable) {
         super(name, displayChar, portable);
-        this.addAction(consumeAction);
+        this.addAction(new ConsumeAction(this));
         this.registerInstance();
     }
 
@@ -52,7 +52,7 @@ public class SuperMushroom extends Item implements Sellable, Consumable, Resetta
      */
     public SuperMushroom() {
         super("Super mushroom", '^', false);
-        this.addAction(consumeAction);
+        this.addAction(new ConsumeAction(this));
         this.registerInstance();
     }
 
@@ -91,7 +91,7 @@ public class SuperMushroom extends Item implements Sellable, Consumable, Resetta
         actor.addCapability(Status.TALL);
         actor.addCapability(Status.GUARANTEED_JUMP);
         actor.increaseMaxHp(50);
-        this.removeAction(consumeAction);
+        this.removeAction(new ConsumeAction(this));
 
     }
 

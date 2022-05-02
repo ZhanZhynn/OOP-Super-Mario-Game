@@ -38,7 +38,7 @@ public class PowerStar extends Item implements Sellable, Consumable, Resettable 
     /**
      * consume action to consume this power star
      */
-    private Action consumeAction = new ConsumeAction(this);
+    //private Action consumeAction = new ConsumeAction(this);
 
 
     /**
@@ -49,7 +49,7 @@ public class PowerStar extends Item implements Sellable, Consumable, Resettable 
      */
     public PowerStar(String name, char displayChar, boolean portable) {
         super(name, displayChar, portable);
-        this.addAction(consumeAction);
+        this.addAction(new ConsumeAction(this));
         this.registerInstance();
     }
 
@@ -106,7 +106,7 @@ public class PowerStar extends Item implements Sellable, Consumable, Resettable 
         actor.addCapability(Status.INVINCIBLE);
         actor.addCapability(Status.DESTROY_HIGH_GROUND);
         actor.heal(200);
-        this.removeAction(consumeAction);
+        this.removeAction(new ConsumeAction(this));
     }
 
     public void fade(Actor actor){
