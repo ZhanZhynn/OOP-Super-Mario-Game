@@ -12,4 +12,5 @@ public enum Status {
     DESTROY_HIGH_GROUND, //can step into high ground and destroy it
     PATH_OF_GOLD, //when high ground is destroyed turn into coin
     GUARANTEED_JUMP // jump success rate turn 100%
+
 }
