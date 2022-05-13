@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.World;
 import game.actor.Player;
 import game.actor.Toad;
@@ -22,7 +23,7 @@ public class Application {
 
 			World world = new World(new Display());
 
-
+//			WarpPipe pipe = new WarpPipe();
 			FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(), new Sprout());
 
 			FancyGroundFactory groundLavaFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(), new Sprout(),new Lava());
@@ -50,7 +51,7 @@ public class Application {
 
 
 			List<String> lavaZone = Arrays.asList(
-					"C...........................##..........+.........................",
+					"............................##..........+.........................",
 					"...........+..................#...................................",
 					"...............................#..................................",
 					"......L...........L.................#...................L.........",
@@ -73,6 +74,16 @@ public class Application {
 
 			Actor mario = new Player("Player", 'm', 100);
 			world.addPlayer(mario, gameMap.at(42, 10));
+
+			WarpPipe pipe = new WarpPipe();
+//			pipe.allowableActions(mario, lavaMap.at(0,0), " to Lava Zone!!");
+			pipe.addTeleportActions(mario, lavaMap.at(0,0), " to Lava Zone!!");
+			gameMap.at(40,13).setGround(pipe);
+
+			WarpPipe pipe2 = new WarpPipe();
+//			pipe2.allowableActions(mario, gameMap.locationOf(mario)," back to normal world");
+			pipe2.addTeleportActions(mario, gameMap.locationOf(mario)," back to normal world");
+			lavaMap.at(0,0).setGround(pipe2);
 
 //			world.addPlayer(mario, lavaMap.at(15, 10));
 

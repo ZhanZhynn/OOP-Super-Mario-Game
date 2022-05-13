@@ -1,18 +1,26 @@
 package game.ground;
 
+import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
+import edu.monash.fit2099.engine.positions.World;
 import game.action.JumpAction;
+import game.action.TeleportAction;
 import game.actor.Player;
 import game.interfaces.Jumpable;
 import game.item.Status;
 
 public class WarpPipe extends Ground implements Jumpable {
 
+    private ActionList teleportActions = new ActionList();
+
+
     public WarpPipe() {
         super('C');
+
     }
 
     public boolean canActorEnter(Actor actor) {
@@ -28,6 +36,7 @@ public class WarpPipe extends Ground implements Jumpable {
         return actor + " jumped over " +  location +"(" + location.x() + ","+ location.y() + ")"  + " successfully.";
     }
 
+
     /**
      * At the moment, we only make it can be attacked by Player.
      * You can do something else with this method.
@@ -36,16 +45,26 @@ public class WarpPipe extends Ground implements Jumpable {
      * @param direction  String representing the direction of the other Actor
      * @return list of actions
      */
-
     public ActionList allowableActions(Actor otherActor, Location location, String direction) {
         ActionList actions = new ActionList();
         if(otherActor instanceof Player && !location.containsAnActor()) {
             actions.add(new JumpAction(this, location, direction));
-        } else if (otherActor instanceof Player && location.containsAnActor()){ //player on pipe, can teleport now
-            actions.add(new TeleportAction(this, location, direction));
+        }
+        else if (otherActor instanceof Player && location.containsAnActor()){ //player on pipe, can teleport now
+//            actions.add(new TeleportAction(location, direction));
+            for (Action i:teleportActions){
+                actions.add(i);
+            }
         }
         return actions;
     }
+
+    //	pipe.allowableActions(mario, lavaMap.at(0,0), " to Lava Zone!!");
+
+    public void addTeleportActions(Actor otherActor, Location location, String direction){
+        teleportActions.add(new TeleportAction(location, direction));
+    }
+
 
     /**
      * handle all the behaviour of trees as stated in assignment specification
