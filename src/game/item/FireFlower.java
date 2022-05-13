@@ -19,6 +19,8 @@ public class FireFlower extends Item implements Consumable {
         this.addAction(consumeAction);
     }
 
+
+
     /**
      * this tick is used when the powerstar is on the map
      * @param currentLocation The location of the ground on which we lie.
@@ -80,7 +82,7 @@ public class FireFlower extends Item implements Consumable {
      *
      * @return whether the item has been consumed
      */
-    public Boolean getIsConsumed(){return isConsumed;}
+    public boolean getIsConsumed(){return isConsumed;}
 
 
 }
