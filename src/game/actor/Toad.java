@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.action.MonologueAction;
 import game.action.TradeAction;
+import game.action.getBottleAction;
 import game.item.PowerStar;
 import game.item.SuperMushroom;
 import game.item.Wrench;
@@ -19,6 +20,12 @@ import game.item.Wrench;
  * @version 1.0
  */
 public class Toad extends Actor {
+
+    public boolean givenBottle = false;
+
+    public void giveBottle(){
+        givenBottle = true;
+    }
 
     /**
      * constructor
@@ -52,11 +59,13 @@ public class Toad extends Actor {
         ActionList actions = new ActionList();
 
         actions.add(new ActionList(new MonologueAction(this)));
-        if(otherActor instanceof Player) {
-            actions.add(new TradeAction(new PowerStar("Power Star", '*', false)));
-            actions.add(new TradeAction(new SuperMushroom()));
-            actions.add(new TradeAction(new Wrench("Wrench", '|', true)));
-        }
+
+        actions.add(new TradeAction(new PowerStar("Power Star", '*', false)));
+        actions.add(new TradeAction(new SuperMushroom()));
+        actions.add(new TradeAction(new Wrench("Wrench", '|', true)));
+        if(!givenBottle)
+            actions.add(new getBottleAction(this));
+
 
         return actions;
     }

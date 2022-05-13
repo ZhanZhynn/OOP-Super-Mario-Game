@@ -17,13 +17,13 @@ public class ConsumeAction extends Action {
     /**
      * an Item object to be consumed
      */
-    private Item item;
+    private Consumable item;
 
     /**
      * constructor
      * @param item the item to be consumed
      */
-    public ConsumeAction(Item item){
+    public ConsumeAction(Consumable item){
         this.item = item;
     }
 
@@ -35,8 +35,7 @@ public class ConsumeAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        Consumable consumable = (Consumable) item;
-        consumable.consume(actor, map);
+        item.consume(actor, map);
         return item + " consumed";
     }
 

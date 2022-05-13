@@ -11,10 +11,9 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.action.AttackAction;
-import game.behavior.AttackBehaviour;
-import game.behavior.Behaviour;
-import game.behavior.FollowBehaviour;
-import game.behavior.WanderBehaviour;
+import game.action.DrinkAction;
+import game.behavior.*;
+import game.interfaces.CanDrinkFountain;
 import game.interfaces.Resettable;
 import game.item.Status;
 
@@ -27,10 +26,12 @@ import java.util.Map;
  * Koopa behaves pretty similar to Goomba except for the stat different.
  * When Koopa dies, they got turn into DormantKoopa but that is in attack action class.
  */
-public class Koopa extends Actor implements Resettable {
+public class Koopa extends Actor implements Resettable, CanDrinkFountain {
     private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
     private boolean reset = false;
     private Player followTarget;
+    private int powerBuff = 0;
+    private int thirst=14;
 
     /**
      * Constructor.
@@ -39,6 +40,7 @@ public class Koopa extends Actor implements Resettable {
         super("Koopa", 'K', 100);
         this.behaviours.put(10, new WanderBehaviour());
         this.behaviours.put(13, new AttackBehaviour());
+        this.behaviours.put(thirst, new DrinkBehaviour());
         this.registerInstance();
     }
 
@@ -46,6 +48,7 @@ public class Koopa extends Actor implements Resettable {
         super(name, displaychar, hitpoints);
         this.behaviours.put(10, new WanderBehaviour());
         this.behaviours.put(13, new AttackBehaviour());
+        this.behaviours.put(14, new DrinkBehaviour());
         this.registerInstance();
     }
 
@@ -54,7 +57,7 @@ public class Koopa extends Actor implements Resettable {
     }
 
     public Weapon getWeapon() {
-        return new IntrinsicWeapon(30, "punches");
+        return new IntrinsicWeapon(30+powerBuff*15, "punches");
     }
 
     /**
@@ -110,6 +113,9 @@ public class Koopa extends Actor implements Resettable {
                 priority = set.getKey();
             }
         }
+        this.behaviours.remove(thirst);
+        thirst+=1;
+        this.behaviours.put(thirst, new DrinkBehaviour());
         if (followTarget != null) {
             Location here = map.locationOf(this);
             Location there = map.locationOf(followTarget);
@@ -119,8 +125,18 @@ public class Koopa extends Actor implements Resettable {
             }
         }
         if (action != null) {
+            if (action instanceof DrinkAction){
+                this.behaviours.remove(thirst);
+                thirst = 0;
+                this.behaviours.put(thirst, new DrinkBehaviour());
+            }
             return action;
         }
         return new DoNothingAction();
+    }
+
+    @Override
+    public void incrementPowerBuff() {
+        powerBuff+=1;
     }
 }

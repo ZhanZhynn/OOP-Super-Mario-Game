@@ -26,7 +26,8 @@ public class Application {
 			World world = new World(new Display());
 
 //			WarpPipe pipe = new WarpPipe();
-			FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(), new Sprout());
+			FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(), new Sprout(), new PowerFountainZS()
+			,new HealFountainZS());
 
 			FancyGroundFactory groundLavaFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(), new Sprout(),new Lava());
 
@@ -38,7 +39,7 @@ public class Application {
 					"...............................................#................................",
 					"................................................#...............................",
 					".................+................................#.............................",
-					".................................................##.............................",
+					"...........................................A.H...##.............................",
 					"................................................##..............................",
 					".........+..............................+#____####.................+............",
 					".......................................+#_____###++.............................",
@@ -74,7 +75,7 @@ public class Application {
 			world.addGameMap(gameMap);
 			world.addGameMap(lavaMap);
 
-			Actor mario = new Player("Player", 'm', 1000);
+			Actor mario = new Player("Player", 'm', 100);
 			world.addPlayer(mario, gameMap.at(42, 10));
 
 			WarpPipe pipe = new WarpPipe();

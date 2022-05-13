@@ -7,16 +7,19 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
+import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import edu.monash.fit2099.engine.weapons.Weapon;
 import game.action.ResetAction;
 import game.ground.Dirt;
 import game.interfaces.Destroyable;
 import game.interfaces.Resettable;
+import game.interfaces.CanDrinkFountain;
 import game.item.*;
 
 /**
  * Class representing the Player.
  */
-public class Player extends Actor implements Resettable {
+public class Player extends Actor implements Resettable, CanDrinkFountain {
 
 	private final Menu menu = new Menu();
 
@@ -59,6 +62,8 @@ public class Player extends Actor implements Resettable {
 	 */
 	private int resetCount = 0;
 
+	private int powerBuff = 0;
+
 	private Action resetAction = new ResetAction();
 
 	/**
@@ -72,7 +77,16 @@ public class Player extends Actor implements Resettable {
 		super(name, displayChar, hitPoints);
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
 		this.registerInstance();
-		this.addItemToInventory(bottle);
+		this.addItemToInventory(new BottleZS());
+	}
+
+	public BottleZS getBottleZS() {
+		for (Item item : getInventory()){
+			if(item instanceof BottleZS){
+				return (BottleZS) item;
+			}
+		}
+		return null;
 	}
 
 	/**
@@ -104,6 +118,21 @@ public class Player extends Actor implements Resettable {
 		super.addItemToInventory(item);
 	}
 
+	@Override
+	public Weapon getWeapon() {
+		for(Item item : getInventory()){
+			if(item.asWeapon() != null){
+				return item.asWeapon();
+			}
+		}
+		Weapon intWeap = new IntrinsicWeapon(getIntrinsicWeapon().damage() + powerBuff*15, "punch");
+		return intWeap;
+	}
+
+	public void incrementPowerBuff(){
+		powerBuff+=1;
+	}
+
 	/**
 	 * Figure out what to do next.
 	 * @see Actor#playTurn(ActionList, Action, GameMap, Display)
@@ -121,17 +150,6 @@ public class Player extends Actor implements Resettable {
 			this.resetMaxHp(this.getMaxHp());
 			actions.remove(resetAction);
 		}
-//		if (this.reset) {
-//			resetCount++;
-////			this.resetMaxHp(this.getMaxHp());
-////			this.removeCapability(Status.INSTANT_KILL);
-////			this.removeCapability(Status.PATH_OF_GOLD);
-////			this.removeCapability(Status.INVINCIBLE);
-////			this.removeCapability(Status.DESTROY_HIGH_GROUND);
-////			this.removeCapability(Status.TALL);
-////			this.removeCapability(Status.GUARANTEED_JUMP);
-////			this.addCapability(Status.HOSTILE_TO_ENEMY);
-//		}
 
 
 		//NgZuShen\-------------------------------------------------------------------
@@ -145,35 +163,6 @@ public class Player extends Actor implements Resettable {
 		System.out.println("Wallet: "+this.getWallet().getBalance());
 		//NgZuShen\--------------------------------------------------------------------
 
-//		this.reset = false;
-
-
-		//Added by Ng Zu Shen on 21/4/2022--------------------------------------------
-//		for (int i = 0; i<getInventory().size(); i++){ //please comment this block of code
-//			Item item = getInventory().get(i);
-//			if (item instanceof PowerStar){
-//				PowerStar ps = (PowerStar) item;
-//				if (ps.getCounter() == 0){
-//					removeItemFromInventory(item);
-//				}
-//				if (ps.getIsConsumed()){
-//					if (this.reset) {
-//						removeItemFromInventory(item);
-//					}
-//				}
-//			}else if (item instanceof SuperMushroom){
-//				SuperMushroom sm = (SuperMushroom) item;
-//				if(sm.getIsConsumed()) {
-//					if (getCurrentHp() < lastRoundHp || this.reset) {
-//						removeItemFromInventory(item);
-//					}
-//				}
-//			}else if (item instanceof Coin){
-//				Coin coin = (Coin) item;
-//				wallet.increaseBalance(coin.getValue());
-//				removeItemFromInventory(item);
-//			}
-//		}
 		lastRoundHp = getCurrentHp();
 
 //		this.removeCapability(Status.DESTROY_HIGH_GROUND);

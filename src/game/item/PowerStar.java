@@ -125,7 +125,7 @@ public class PowerStar extends Item implements Sellable, Consumable, Resettable 
      *
      * @return whether the item has been consumed
      */
-    public Boolean getIsConsumed(){return isConsumed;}
+    public boolean getIsConsumed(){return isConsumed;}
 
     @Override
     public int getPrice() {

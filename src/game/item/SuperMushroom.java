@@ -56,7 +56,7 @@ public class SuperMushroom extends Item implements Sellable, Consumable, Resetta
         this.registerInstance();
     }
 
-    public Boolean getIsConsumed(){return isConsumed;}
+    public boolean getIsConsumed(){return isConsumed;}
 
 
     @Override
