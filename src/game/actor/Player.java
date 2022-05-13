@@ -26,6 +26,11 @@ public class Player extends Actor implements Resettable {
 	private Wallet wallet = new Wallet(1200);
 
 	/**
+	 * Player's bottle
+	 */
+	private Bottle bottle;
+
+	/**
 	 * Player's HP on the last round
 	 */
 	public int getLastRoundHp() {
@@ -67,6 +72,7 @@ public class Player extends Actor implements Resettable {
 		super(name, displayChar, hitPoints);
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
 		this.registerInstance();
+		this.addItemToInventory(bottle);
 	}
 
 	/**

@@ -5,18 +5,15 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.action.ConsumeAction;
 import game.interfaces.Consumable;
+import game.interfaces.Water;
 
-import java.util.Stack;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
-public class Bottle extends Item implements Consumable {
+public class Bottle extends Item {
 
-
-    // Creating a Stack
-    Stack<Integer> waterStack = new Stack<>();
-
-
+    private Deque<Water> this_bottle;
     //NEED TO FIND A WAY TO ADD DAMAGE, WHAT IS THE BASE DAMAGE?
-
 
 
     /**
@@ -26,30 +23,40 @@ public class Bottle extends Item implements Consumable {
      * @param portable is this portable?
      */
     public Bottle(String name, char displayChar, boolean portable) {
-        super(name, displayChar, portable);
-        this.addAction(new ConsumeAction(this));
-        //this.registerInstance();
+        super("Bottle", 'b', false);
+        this_bottle = new ArrayDeque<>();
     }
 
-    /**
-     * whether is this power star is consumed
-     */
-    private boolean isConsumed = false;
+    public boolean newBottle(Actor actor){
+        Bottle b = new Bottle("Bottle", 'b', false);
+        if (!actor.getInventory().contains(b)){
+            actor.addItemToInventory(b);
+
+        }
+        return false;
+    }
 
     public void consume(Actor actor, GameMap map){
-        isConsumed = true;
-        //actor.addCapability(Status.POWER_UP);
-        actor.heal(200);
-        this.removeAction(new ConsumeAction(this));
+
+        if (!this_bottle.isEmpty()) {
+            Water fountainWater = this_bottle.removeLast();
+            fountainWater.drink(actor);
+        }
     }
 
 
 
     /**
-     * has the item been consumed?
-     *
-     * @return whether the item has been consumed
+     * append water into the stack
      */
-    public Boolean getIsConsumed(){return isConsumed;}
+    public void addFountainWater (Water fountainWater) {
+        this_bottle.addLast(fountainWater);
+    }
+
+
+    public String addFountainWater(Actor actor, Water fountainWater){
+        addFountainWater(fountainWater);
+        return actor + " refills " + fountainWater;
+    }
 
 }
