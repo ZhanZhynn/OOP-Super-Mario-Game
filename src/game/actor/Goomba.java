@@ -69,6 +69,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.action.AttackAction;
@@ -89,6 +90,7 @@ import java.util.Random;
 public class Goomba extends Actor implements Resettable {
 	private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
 	private boolean reset = false;
+	private Player followTarget;
 
 	/**
 	 * Constructor.
@@ -157,15 +159,13 @@ public class Goomba extends Actor implements Resettable {
 			return new DoNothingAction();
 		}
 		Action action = new DoNothingAction();
-		//can detect up to 2 step away. even the diagonal 2 steps.
-		for (Exit exit : map.locationOf(this).getExits()) {
-			for(Exit exitLayer2 : exit.getDestination().getExits()) {
-				if (exitLayer2.getDestination().containsAnActor()) {
-					if (exit.getDestination().getActor() instanceof Player) {
-						Player p = (Player) exit.getDestination().getActor();
-						this.behaviours.put(12, new FollowBehaviour(p));
-						break;
-					}
+		if (followTarget == null) {
+			for (Exit exit : map.locationOf(this).getExits()) {
+				if (exit.getDestination().getActor() instanceof Player) {
+					Player p = (Player) exit.getDestination().getActor();
+					followTarget = p;
+					this.behaviours.put(12, new FollowBehaviour(followTarget));
+					break;
 				}
 			}
 		}
@@ -176,7 +176,14 @@ public class Goomba extends Actor implements Resettable {
 				priority = set.getKey();
 			}
 		}
-		this.behaviours.remove(12);
+		if (followTarget != null) {
+			Location here = map.locationOf(this);
+			Location there = map.locationOf(followTarget);
+			if (Math.abs(here.x() - there.x()) + Math.abs(here.y() - there.y()) > 3) {
+				followTarget = null;
+				this.behaviours.remove(12);
+			}
+		}
 		if (action != null)
 			return action;
 		return new DoNothingAction();

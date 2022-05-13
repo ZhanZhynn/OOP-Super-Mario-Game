@@ -14,81 +14,48 @@ import game.action.AttackAction;
 import game.behavior.AttackBehaviour;
 import game.behavior.Behaviour;
 import game.behavior.FollowBehaviour;
-import game.behavior.WanderBehaviour;
 import game.interfaces.Resettable;
+import game.item.Key;
 import game.item.Status;
 
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author Ng Zu Shen
- * @version 1.0
- * Koopa behaves pretty similar to Goomba except for the stat different.
- * When Koopa dies, they got turn into DormantKoopa but that is in attack action class.
- */
-public class Koopa extends Actor implements Resettable {
+public class Bowser extends Actor implements Resettable {
+
     private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
     private boolean reset = false;
+    private final int startX, startY;
     private Player followTarget;
 
     /**
      * Constructor.
      */
-    public Koopa() {
-        super("Koopa", 'K', 100);
-        this.behaviours.put(10, new WanderBehaviour());
-        this.behaviours.put(13, new AttackBehaviour());
+    public Bowser(Location location) {
+        super("Bowser", 'B', 500);
+        this.behaviours.put(10, new AttackBehaviour());
+        this.addItemToInventory(new Key());
+        startX = location.x();
+        startY = location.y();
         this.registerInstance();
-    }
-
-    public Koopa(String name, char displaychar, int hitpoints) {
-        super(name, displaychar, hitpoints);
-        this.behaviours.put(10, new WanderBehaviour());
-        this.behaviours.put(13, new AttackBehaviour());
-        this.registerInstance();
-    }
-
-    public void resetInstance(){
-        this.reset = true;
     }
 
     public Weapon getWeapon() {
-        return new IntrinsicWeapon(30, "punches");
+        return new IntrinsicWeapon(80, "punch");
     }
 
-    /**
-     * At the moment, we only make it can be attacked by Player.
-     * You can do something else with this method.
-     * @param otherActor the Actor that might perform an action.
-     * @param direction  String representing the direction of the other Actor
-     * @param map        current GameMap
-     * @return list of actions
-     * @see Status#HOSTILE_TO_ENEMY
-     */
-    @Override
-    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
-        ActionList actions = new ActionList();
-        // it can be attacked only by the HOSTILE opponent, and this action will not attack the HOSTILE enemy back.
-        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
-            actions.add(new AttackAction(this,direction));
-        }
-        return actions;
+    public void resetInstance() {
+        this.reset = true;
     }
 
-    /**
-     * Figure out what to do next.
-     * @see Actor#playTurn(ActionList, Action, GameMap, Display)
-     *  @param actions    collection of possible Actions for this Actor
-     *  @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
-     *  @param map        the map containing the Actor
-     *  @param display    the I/O object to which messages may be written
-     */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         if (this.reset){
             this.reset = false;
-            map.removeActor(this);
+            if (!map.at(startX, startY).containsAnActor()) {
+                map.moveActor(this, map.at(startX, startY));
+            }
+            this.heal(500);
             return new DoNothingAction();
         }
 
@@ -98,11 +65,12 @@ public class Koopa extends Actor implements Resettable {
                 if (exit.getDestination().getActor() instanceof Player) {
                     Player p = (Player) exit.getDestination().getActor();
                     followTarget = p;
-                    this.behaviours.put(12, new FollowBehaviour(followTarget));
+                    this.behaviours.put(9, new FollowBehaviour(followTarget));
                     break;
                 }
             }
         }
+
         int priority = 0;
         for(Map.Entry<Integer, Behaviour> set : behaviours.entrySet()) {
             if (set.getKey() > priority && set.getValue().getAction(this, map)!=null) {
@@ -115,12 +83,22 @@ public class Koopa extends Actor implements Resettable {
             Location there = map.locationOf(followTarget);
             if (Math.abs(here.x() - there.x()) + Math.abs(here.y() - there.y()) > 3) {
                 followTarget = null;
-                this.behaviours.remove(12);
+                this.behaviours.remove(9);
             }
         }
         if (action != null) {
             return action;
         }
         return new DoNothingAction();
+    }
+
+    @Override
+    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
+        ActionList actions = new ActionList();
+        // it can be attacked only by the HOSTILE opponent, and this action will not attack the HOSTILE enemy back.
+        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
+            actions.add(new AttackAction(this,direction));
+        }
+        return actions;
     }
 }

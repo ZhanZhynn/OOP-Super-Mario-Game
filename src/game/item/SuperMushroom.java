@@ -33,7 +33,7 @@ public class SuperMushroom extends Item implements Sellable, Consumable, Resetta
     /**
      * consume action used to consume this super mushroom
      */
-    //private Action consumeAction = new ConsumeAction(this);
+    private Action consumeAction = new ConsumeAction(this);
 
     /**
      * Constructor of super mushroom
@@ -41,18 +41,18 @@ public class SuperMushroom extends Item implements Sellable, Consumable, Resetta
      * @param displayChar Character to be display on map
      * @param portable is this portable?
      */
-    public SuperMushroom(String name, char displayChar, boolean portable) {
-        super(name, displayChar, portable);
-        this.addAction(new ConsumeAction(this));
-        this.registerInstance();
-    }
+//    public SuperMushroom(String name, char displayChar, boolean portable) {
+//        super(name, displayChar, portable);
+//        this.addAction(new ConsumeAction(this));
+//        this.registerInstance();
+//    }
 
     /**
      * constructor with no parameters, generate super mushroom with pre defined inputs.
      */
     public SuperMushroom() {
         super("Super mushroom", '^', false);
-        this.addAction(new ConsumeAction(this));
+        this.addAction(consumeAction);
         this.registerInstance();
     }
 
@@ -88,11 +88,10 @@ public class SuperMushroom extends Item implements Sellable, Consumable, Resetta
             map.locationOf(actor).removeItem(this);
         }
         isConsumed = true;
-        actor.addCapability(Status.TALL);
-        actor.addCapability(Status.GUARANTEED_JUMP);
+        addCapability(Status.TALL);
+        addCapability(Status.GUARANTEED_JUMP);
         actor.increaseMaxHp(50);
-        this.removeAction(new ConsumeAction(this));
-
+        this.removeAction(consumeAction);
     }
 
     @Override
@@ -101,7 +100,7 @@ public class SuperMushroom extends Item implements Sellable, Consumable, Resetta
     }
 
     public void fade(Actor actor){
-        actor.removeCapability(Status.TALL);
-        actor.removeCapability(Status.GUARANTEED_JUMP);
+        removeCapability(Status.TALL);
+        removeCapability(Status.GUARANTEED_JUMP);
     }
 }

@@ -9,18 +9,21 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.positions.World;
 import game.action.JumpAction;
 import game.action.TeleportAction;
+import game.actor.PiranhaPlant;
 import game.actor.Player;
 import game.interfaces.Jumpable;
+import game.interfaces.Resettable;
 import game.item.Status;
 
-public class WarpPipe extends Ground implements Jumpable {
+public class WarpPipe extends Ground implements Jumpable, Resettable {
 
     private ActionList teleportActions = new ActionList();
-
+    private boolean reset = false;
+    private boolean start = true;
 
     public WarpPipe() {
         super('C');
-
+        this.registerInstance();
     }
 
     public boolean canActorEnter(Actor actor) {
@@ -71,7 +74,17 @@ public class WarpPipe extends Ground implements Jumpable {
      * @param location The location of the wall
      */
     public void tick(Location location){
-
+        //added by zushen on 13/5/2022
+        if (start) {
+            location.addActor(new PiranhaPlant());
+            start = false;
+        }
+        if (reset){
+            reset = false;
+            if (!location.containsAnActor()) {
+                location.addActor(new PiranhaPlant());
+            }
+        }
     }
 
     public String toString() {
@@ -79,4 +92,8 @@ public class WarpPipe extends Ground implements Jumpable {
     }
 
 
+    @Override
+    public void resetInstance() {
+        reset = true;
+    }
 }

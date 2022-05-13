@@ -54,7 +54,7 @@ public class Toad extends Actor {
         actions.add(new ActionList(new MonologueAction(this)));
         if(otherActor instanceof Player) {
             actions.add(new TradeAction(new PowerStar("Power Star", '*', false)));
-            actions.add(new TradeAction(new SuperMushroom("Super Mushroom", '^', false)));
+            actions.add(new TradeAction(new SuperMushroom()));
             actions.add(new TradeAction(new Wrench("Wrench", '|', true)));
         }
 

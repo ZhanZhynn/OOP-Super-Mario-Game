@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.action.JumpAction;
+import game.actor.FlyingKoopa;
 import game.actor.Player;
 import game.interfaces.Destroyable;
 import game.interfaces.Jumpable;
@@ -37,7 +38,7 @@ public class Wall extends Ground implements Jumpable, Destroyable, Resettable {
 	@Override
 	public boolean canActorEnter(Actor actor) {
 		//added by Ng Zu Shen on 20/4/2022----------------
-		if(actor.hasCapability(Status.DESTROY_HIGH_GROUND)){
+		if(actor.hasCapability(Status.DESTROY_HIGH_GROUND) || actor instanceof FlyingKoopa){
 			return true;
 		}
 		//NgZuShen\----------------------------------------

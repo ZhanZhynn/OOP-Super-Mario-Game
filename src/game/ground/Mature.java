@@ -2,6 +2,7 @@ package game.ground;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Location;
+import game.actor.FlyingKoopa;
 import game.actor.Koopa;
 import game.interfaces.Destroyable;
 import game.interfaces.Jumpable;
@@ -44,8 +45,10 @@ public class Mature extends Tree implements Jumpable, Destroyable{
         if (!location.containsAnActor()) {
             if (this.hasCapability(Capabilities.SPAWN_KOOPA)) {
                 //15% chance to spawn Koopa if actor is not standing on it
-                if (Math.random() <= 0.15)
+                if (Math.random() <= 0.075)
                     location.addActor(new Koopa());
+                else if (Math.random() > 0.075 && Math.random() <= 0.15)
+                    location.addActor(new FlyingKoopa());
             }
         }
 

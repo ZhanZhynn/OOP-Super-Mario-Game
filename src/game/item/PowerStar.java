@@ -38,7 +38,7 @@ public class PowerStar extends Item implements Sellable, Consumable, Resettable 
     /**
      * consume action to consume this power star
      */
-    //private Action consumeAction = new ConsumeAction(this);
+    private Action consumeAction = new ConsumeAction(this);
 
 
     /**
@@ -49,7 +49,7 @@ public class PowerStar extends Item implements Sellable, Consumable, Resettable 
      */
     public PowerStar(String name, char displayChar, boolean portable) {
         super(name, displayChar, portable);
-        this.addAction(new ConsumeAction(this));
+        this.addAction(consumeAction);
         this.registerInstance();
     }
 
@@ -101,12 +101,12 @@ public class PowerStar extends Item implements Sellable, Consumable, Resettable 
     public void consume(Actor actor, GameMap map){
         isConsumed = true;
         counter = 10;
-        actor.addCapability(Status.INSTANT_KILL);
-        actor.addCapability(Status.PATH_OF_GOLD);
-        actor.addCapability(Status.INVINCIBLE);
-        actor.addCapability(Status.DESTROY_HIGH_GROUND);
+        addCapability(Status.INSTANT_KILL);
+        addCapability(Status.PATH_OF_GOLD);
+        addCapability(Status.INVINCIBLE);
+        addCapability(Status.DESTROY_HIGH_GROUND);
         actor.heal(200);
-        this.removeAction(new ConsumeAction(this));
+        this.removeAction(consumeAction);
     }
 
     /**
@@ -114,10 +114,10 @@ public class PowerStar extends Item implements Sellable, Consumable, Resettable 
      * @param actor the actor having the capabilities
      */
     public void fade(Actor actor){
-        actor.removeCapability(Status.INSTANT_KILL);
-        actor.removeCapability(Status.PATH_OF_GOLD);
-        actor.removeCapability(Status.INVINCIBLE);
-        actor.removeCapability(Status.DESTROY_HIGH_GROUND);
+        removeCapability(Status.INSTANT_KILL);
+        removeCapability(Status.PATH_OF_GOLD);
+        removeCapability(Status.INVINCIBLE);
+        removeCapability(Status.DESTROY_HIGH_GROUND);
     }
 
     /**

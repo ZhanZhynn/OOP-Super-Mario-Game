@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.action.JumpAction;
+import game.actor.FlyingKoopa;
 import game.interfaces.Jumpable;
 import game.actor.Player;
 import game.interfaces.Resettable;
@@ -63,7 +64,7 @@ public abstract class Tree extends Ground implements Jumpable, Resettable {
      * Player can destroy highground if consumed Power Star
      */
     public boolean canActorEnter(Actor actor) {
-        if(actor.hasCapability(Status.DESTROY_HIGH_GROUND)){
+        if(actor.hasCapability(Status.DESTROY_HIGH_GROUND) || actor instanceof FlyingKoopa){
             return true;
         }
         return false;

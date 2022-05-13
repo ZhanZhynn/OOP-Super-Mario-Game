@@ -11,6 +11,7 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.actor.DormantKoopa;
 import game.actor.Koopa;
+import game.item.Fire;
 import game.item.Status;
 
 // last modified by NgZuShen on 22/4/2022 (add documentation and implement instant kill)
@@ -90,6 +91,9 @@ public class AttackAction extends Action {
 
 		//if koopa died turn into dormant koopa
 		target.hurt(damage);
+		if (actor.hasCapability(Status.FIRE_ATTACK)){
+			map.locationOf(target).addItem(new Fire());
+		}
 		if (!target.isConscious()) {
 			if (target instanceof Koopa){
 				Location here = map.locationOf(target);
