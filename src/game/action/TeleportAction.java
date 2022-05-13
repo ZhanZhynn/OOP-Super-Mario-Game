@@ -30,6 +30,7 @@ public class TeleportAction extends MoveActorAction {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
+        //kill any actor who is on the other side of teleport
         if (moveToLocation.containsAnActor()) {
             moveToLocation.map().removeActor(moveToLocation.getActor());
             map.moveActor(actor, moveToLocation);
