@@ -9,5 +9,6 @@ public enum Capabilities {
     SPAWN_GOOMBA,
     SPAWN_COIN,
     SPAWN_KOOPA,
-    GROW_SPROUT
+    GROW_SPROUT,
+    SPAWN_FIREFLOWER,
 }

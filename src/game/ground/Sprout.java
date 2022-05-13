@@ -7,6 +7,7 @@ import game.actor.Goomba;
 import game.interfaces.Destroyable;
 import game.interfaces.Jumpable;
 import game.item.Coin;
+import game.item.FireFlower;
 import game.item.Status;
 
 import java.util.List;
@@ -21,6 +22,7 @@ public class Sprout extends Tree implements Jumpable, Destroyable {
     public Sprout(){
         super('+');
         this.addCapability(Capabilities.SPAWN_GOOMBA);
+        this.addCapability(Capabilities.SPAWN_FIREFLOWER);
         counter = 0;
         this.registerInstance();
     }
@@ -36,6 +38,11 @@ public class Sprout extends Tree implements Jumpable, Destroyable {
         if (counter % 10 == 0){
             location.setGround(new Sapling());
         }
+
+        if (!(location.getItems().size()> 0) && this.hasCapability(Capabilities.SPAWN_FIREFLOWER) && Math.random()<=0.5){ //if got item then cannot spawn new flower
+            location.addItem(new FireFlower());
+        }
+
         if (!location.containsAnActor()) {
             if (this.hasCapability(Capabilities.SPAWN_GOOMBA)) {
                 if (Math.random() <= 0.1)

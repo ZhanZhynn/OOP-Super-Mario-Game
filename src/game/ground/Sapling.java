@@ -5,6 +5,7 @@ import game.interfaces.Destroyable;
 import game.interfaces.Jumpable;
 import game.interfaces.Resettable;
 import game.item.Coin;
+import game.item.FireFlower;
 import game.item.Status;
 
 public class Sapling extends Tree implements Jumpable, Destroyable{
@@ -16,6 +17,7 @@ public class Sapling extends Tree implements Jumpable, Destroyable{
     public Sapling(){
         super('t');
         this.addCapability(Capabilities.SPAWN_COIN);
+        this.addCapability(Capabilities.SPAWN_FIREFLOWER);
         counter = 0;
     }
     /**
@@ -32,6 +34,10 @@ public class Sapling extends Tree implements Jumpable, Destroyable{
         if (counter  == 10) {
 //            location.addActor(new Bug());
             location.setGround(new Mature());
+        }
+
+        if (!(location.getItems().size()> 0) && this.hasCapability(Capabilities.SPAWN_FIREFLOWER) && Math.random()<=0.5){ //if got item then cannot spawn new flower
+            location.addItem(new FireFlower());
         }
 
         if (this.hasCapability(Capabilities.SPAWN_COIN)) {
