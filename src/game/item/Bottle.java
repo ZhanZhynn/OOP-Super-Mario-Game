@@ -16,19 +16,19 @@ public class Bottle extends Item {
     //NEED TO FIND A WAY TO ADD DAMAGE, WHAT IS THE BASE DAMAGE?
 
 
-    /**
-     * Constructor of Bottle
-     * @param name name of this power star(can be anything but preferably "Power Star")
-     * @param displayChar Character to be display on map
-     * @param portable is this portable?
-     */
-    public Bottle(String name, char displayChar, boolean portable) {
+//    /**
+//     * Constructor of Bottle
+//     * @param name name of this power star(can be anything but preferably "Power Star")
+//     * @param displayChar Character to be display on map
+//     * @param portable is this portable?
+//     */
+    public Bottle() {
         super("Bottle", 'b', false);
         this_bottle = new ArrayDeque<>();
     }
 
     public boolean newBottle(Actor actor){
-        Bottle b = new Bottle("Bottle", 'b', false);
+        Bottle b = new Bottle();
         if (!actor.getInventory().contains(b)){
             actor.addItemToInventory(b);
 

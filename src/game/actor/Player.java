@@ -28,7 +28,7 @@ public class Player extends Actor implements Resettable {
 	/**
 	 * Player's bottle
 	 */
-	private Bottle bottle;
+	private Bottle bottle = new Bottle();
 
 	/**
 	 * Player's HP on the last round
