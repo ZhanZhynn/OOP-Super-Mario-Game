@@ -11,7 +11,7 @@ public class Fire extends Item {
      * Constructor.
      */
     public Fire() {
-        super("Fire", '@', false);
+        super("Fire", 'v', false);
     }
 
     @Override
