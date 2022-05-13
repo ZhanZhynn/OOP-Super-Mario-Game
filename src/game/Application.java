@@ -10,10 +10,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
 import game.actor.Player;
 import game.actor.Toad;
-import game.ground.Dirt;
-import game.ground.Floor;
-import game.ground.Sprout;
-import game.ground.Wall;
+import game.ground.*;
 
 /**
  * The main class for the Mario World game.
@@ -26,7 +23,7 @@ public class Application {
 			World world = new World(new Display());
 
 
-			FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(), new Sprout());
+			FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(), new Sprout(), new Lava());
 
 			List<String> map = Arrays.asList(
 					"..........................................##..........+.........................",
@@ -49,14 +46,36 @@ public class Application {
 					"......................................................#.........................",
 					".......................................................##.......................");
 
+
+		List<String> lavaZone = Arrays.asList(
+				"............................##..........+.........................",
+				"...........+..................#...................................",
+				"...............................#..................................",
+				"......L...........L.................#...................L.........",
+				"............................##....................................",
+				"................................................##................",
+				".........+..............................+#____####................",
+				".......................................+#_____###++...............",
+				"...............L.......................+#______###................",
+				"........................................+#_____###................",
+				"........................+........................##.............+.",
+				"...................................................#...............",
+				"....................................................#.............."
+);
+
 			GameMap gameMap = new GameMap(groundFactory, map);
-			world.addGameMap(gameMap);
+			GameMap lavaMap = new GameMap(groundFactory, lavaZone);
+
+//			world.addGameMap(gameMap);
+			world.addGameMap(lavaMap);
 
 			Actor mario = new Player("Player", 'm', 100);
-			world.addPlayer(mario, gameMap.at(42, 10));
+//			world.addPlayer(mario, gameMap.at(42, 10));
+
+			world.addPlayer(mario, lavaMap.at(15, 10));
 
 			Actor toad = new Toad();
-			gameMap.addActor(toad, gameMap.at(42, 11));
+//			gameMap.addActor(toad, gameMap.at(42, 11));
 
 			world.run();
 
