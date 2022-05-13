@@ -77,8 +77,9 @@ public class Application {
 
 			WarpPipe pipe = new WarpPipe();
 //			pipe.allowableActions(mario, lavaMap.at(0,0), " to Lava Zone!!");
-			pipe.addTeleportActions(mario, lavaMap.at(0,0), " to Lava Zone!!");
+			pipe.addTeleportActions(mario, lavaMap.at(0,0), " to Lava Zone!!!");
 			gameMap.at(40,13).setGround(pipe);
+			gameMap.at(38,10).setGround(pipe);
 
 			WarpPipe pipe2 = new WarpPipe();
 //			pipe2.allowableActions(mario, gameMap.locationOf(mario)," back to normal world");

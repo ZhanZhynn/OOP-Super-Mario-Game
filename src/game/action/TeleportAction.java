@@ -39,7 +39,7 @@ public class TeleportAction extends MoveActorAction {
      */
     @Override
     public String menuDescription(Actor actor) {
-        String res= actor + " jumps to" + direction;
+        String res= actor + " travel " + direction;
         return res;
     }
 
