@@ -9,7 +9,9 @@ import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.World;
+import game.actor.Bowser;
 import game.actor.Player;
+import game.actor.PrincessPeach;
 import game.actor.Toad;
 import game.ground.*;
 
@@ -72,14 +74,16 @@ public class Application {
 			world.addGameMap(gameMap);
 			world.addGameMap(lavaMap);
 
-			Actor mario = new Player("Player", 'm', 100);
+			Actor mario = new Player("Player", 'm', 1000);
 			world.addPlayer(mario, gameMap.at(42, 10));
 
 			WarpPipe pipe = new WarpPipe();
 //			pipe.allowableActions(mario, lavaMap.at(0,0), " to Lava Zone!!");
 			pipe.addTeleportActions(mario, lavaMap.at(0,0), " to Lava Zone!!!");
 			gameMap.at(40,13).setGround(pipe);
-			gameMap.at(38,10).setGround(pipe);
+			WarpPipe pipe3 = new WarpPipe();
+			pipe3.addTeleportActions(mario, lavaMap.at(0,0), " to Lava Zone!!!");
+			gameMap.at(38,10).setGround(pipe3);
 
 			WarpPipe pipe2 = new WarpPipe();
 //			pipe2.allowableActions(mario, gameMap.locationOf(mario)," back to normal world");
@@ -90,6 +94,9 @@ public class Application {
 
 			Actor toad = new Toad();
 			gameMap.addActor(toad, gameMap.at(42, 11));
+
+			lavaMap.addActor(new Bowser(gameMap.at(6, 11)), lavaMap.at(6, 11));
+			lavaMap.addActor(new PrincessPeach(), lavaMap.at(3, 11));
 
 			world.run();
 

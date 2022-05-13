@@ -14,10 +14,12 @@ public class TeleportAction extends MoveActorAction {
      */
     private Location oldLocation;
     private GameMap map;
+    private Location newLocation;
 
 
     public TeleportAction(Location moveToLocation, String direction){
         super(moveToLocation, direction);
+        newLocation = moveToLocation;
     }
     /**
      * actor moves to jumpable location after a successful jump
@@ -28,7 +30,10 @@ public class TeleportAction extends MoveActorAction {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        map.moveActor(actor, moveToLocation);
+        if (moveToLocation.containsAnActor()) {
+            moveToLocation.map().removeActor(moveToLocation.getActor());
+            map.moveActor(actor, moveToLocation);
+        }
         return actor + " teleported " + " successfully.";
     }
 
