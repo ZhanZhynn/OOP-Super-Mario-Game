@@ -99,8 +99,12 @@ public class PowerStar extends Item implements Sellable, Consumable, Resettable 
      * @param actor the actor that consume this
      */
     public void consume(Actor actor, GameMap map){
-        isConsumed = true;
-        counter = 10;
+        if (!actor.getInventory().contains(this)){
+            actor.addItemToInventory(this);
+            map.locationOf(actor).removeItem(this);
+        }
+        this.isConsumed = true;
+        this.counter = 10;
         addCapability(Status.INSTANT_KILL);
         addCapability(Status.PATH_OF_GOLD);
         addCapability(Status.INVINCIBLE);
