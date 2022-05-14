@@ -6,17 +6,15 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.action.MonologueAction;
 import game.action.RescueAction;
-import game.interfaces.Speakable;
 import game.item.Status;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class PrincessPeach extends Actor implements Speakable {
+public class PrincessPeach extends Actor {
 
-    ArrayList<String> dialog = new ArrayList<>();
+
     /**
      * Constructor.
      */
@@ -38,14 +36,4 @@ public class PrincessPeach extends Actor implements Speakable {
         return actions;
     }
 
-    @Override
-    public String allDialog() {
-        dialog.clear();
-        dialog.add("Dear Mario, I'll be waiting for you...");
-        dialog.add("Never gonna give you up!");
-        dialog.add("Release me, or I will kick you!");
-        int index = new Random().nextInt(dialog.size());
-        String string = dialog.get(index);
-        return string;
-    }
 }

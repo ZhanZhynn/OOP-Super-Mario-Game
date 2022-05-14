@@ -15,7 +15,6 @@ import game.behavior.AttackBehaviour;
 import game.behavior.Behaviour;
 import game.behavior.FollowBehaviour;
 import game.interfaces.Resettable;
-import game.interfaces.Speakable;
 import game.item.Key;
 import game.item.Status;
 
@@ -24,13 +23,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class Bowser extends Actor implements Resettable, Speakable {
+public class Bowser extends Actor implements Resettable {
 
     private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
     private boolean reset = false;
     private final int startX, startY;
     private Player followTarget;
-    ArrayList<String> dialog = new ArrayList<>();
+    ArrayList<String> dialogB = new ArrayList<>();
+
 
 
     /**
@@ -53,8 +53,31 @@ public class Bowser extends Actor implements Resettable, Speakable {
         this.reset = true;
     }
 
+    public String dialogBowser() {
+        dialogB.clear();
+        dialogB.add("What was that sound? Oh, just a fire.");
+        dialogB.add("Princess Peach! You are formally invited... to the creation of my new kingdom!");
+        dialogB.add("Never gonna let you down!");
+        dialogB.add("Wrrrrrrrrrrrrrrrryyyyyyyyyyyyyy!!!!");
+        int index = new Random().nextInt(dialogB.size());
+        String string = dialogB.get(index);
+        return string;
+    }
+
+    //int count = 0;
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+
+//       TO BE CONTINUED
+//        if (this.isConscious()){
+//
+//            if (count % 2 == 0){
+//                dialogBowser();
+//                count ++;
+//            }
+//        }
+
+
         if (this.reset){
             this.reset = false;
             if (!map.at(startX, startY).containsAnActor()) {
@@ -94,28 +117,24 @@ public class Bowser extends Actor implements Resettable, Speakable {
         if (action != null) {
             return action;
         }
+
+
+
         return new DoNothingAction();
     }
 
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
+
         // it can be attacked only by the HOSTILE opponent, and this action will not attack the HOSTILE enemy back.
         if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
             actions.add(new AttackAction(this,direction));
         }
+
+
         return actions;
     }
 
-    @Override
-    public String allDialog() {
-        dialog.clear();
-        dialog.add("What was that sound? Oh, just a fire.");
-        dialog.add("Princess Peach! You are formally invited... to the creation of my new kingdom!");
-        dialog.add("Never gonna let you down!");
-        dialog.add("Wrrrrrrrrrrrrrrrryyyyyyyyyyyyyy!!!!");
-        int index = new Random().nextInt(dialog.size());
-        String string = dialog.get(index);
-        return string;
-    }
+
 }

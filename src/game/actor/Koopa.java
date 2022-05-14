@@ -15,7 +15,6 @@ import game.action.DrinkAction;
 import game.behavior.*;
 import game.interfaces.CanDrinkFountain;
 import game.interfaces.Resettable;
-import game.interfaces.Speakable;
 import game.item.Status;
 
 import java.util.ArrayList;
@@ -29,13 +28,13 @@ import java.util.Random;
  * Koopa behaves pretty similar to Goomba except for the stat different.
  * When Koopa dies, they got turn into DormantKoopa but that is in attack action class.
  */
-public class Koopa extends Actor implements Resettable, CanDrinkFountain, Speakable {
+public class Koopa extends Actor implements Resettable, CanDrinkFountain{
     private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
     private boolean reset = false;
     private Player followTarget;
     private int powerBuff = 0;
     private int thirst=14;
-    ArrayList<String> dialog = new ArrayList<>();
+
 
     /**
      * Constructor.
@@ -144,13 +143,6 @@ public class Koopa extends Actor implements Resettable, CanDrinkFountain, Speaka
         powerBuff+=1;
     }
 
-    @Override
-    public String allDialog() {
-        dialog.clear();
-        dialog.add("Never gonna make you cry!");
-        dialog.add("Koopi koopi koopii~!");
-        int index = new Random().nextInt(dialog.size());
-        String string = dialog.get(index);
-        return string;
-    }
+
+
 }
