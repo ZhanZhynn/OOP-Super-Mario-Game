@@ -15,18 +15,23 @@ import game.behavior.AttackBehaviour;
 import game.behavior.Behaviour;
 import game.behavior.FollowBehaviour;
 import game.interfaces.Resettable;
+import game.interfaces.Speakable;
 import game.item.Key;
 import game.item.Status;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
-public class Bowser extends Actor implements Resettable {
+public class Bowser extends Actor implements Resettable, Speakable {
 
     private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
     private boolean reset = false;
     private final int startX, startY;
     private Player followTarget;
+    ArrayList<String> dialog = new ArrayList<>();
+
 
     /**
      * Constructor.
@@ -100,5 +105,17 @@ public class Bowser extends Actor implements Resettable {
             actions.add(new AttackAction(this,direction));
         }
         return actions;
+    }
+
+    @Override
+    public String allDialog() {
+        dialog.clear();
+        dialog.add("What was that sound? Oh, just a fire.");
+        dialog.add("Princess Peach! You are formally invited... to the creation of my new kingdom!");
+        dialog.add("Never gonna let you down!");
+        dialog.add("Wrrrrrrrrrrrrrrrryyyyyyyyyyyyyy!!!!");
+        int index = new Random().nextInt(dialog.size());
+        String string = dialog.get(index);
+        return string;
     }
 }

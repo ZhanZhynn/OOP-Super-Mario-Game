@@ -77,8 +77,10 @@ import game.action.DrinkAction;
 import game.behavior.*;
 import game.interfaces.CanDrinkFountain;
 import game.interfaces.Resettable;
+import game.interfaces.Speakable;
 import game.item.Status;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -86,12 +88,13 @@ import java.util.Random;
 /**
  * A little fungus guy.
  */
-public class Goomba extends Actor implements Resettable, CanDrinkFountain {
+public class Goomba extends Actor implements Resettable, CanDrinkFountain, Speakable {
 	private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
 	private boolean reset = false;
 	private Player followTarget;
 	private int powerBuff=0;
 	private int thirst = 14;
+	ArrayList<String> dialog = new ArrayList<>();
 
 	/**
 	 * Constructor.
@@ -198,5 +201,16 @@ public class Goomba extends Actor implements Resettable, CanDrinkFountain {
 	@Override
 	public void incrementPowerBuff() {
 		powerBuff += 1;
+	}
+
+	@Override
+	public String allDialog() {
+		dialog.clear();
+		dialog.add("Mugga mugga!");
+		dialog.add("Ugha ugha... (Never gonna run around and desert you...)");
+		dialog.add("Ooga-Chaka Ooga-Ooga!");
+		int index = new Random().nextInt(dialog.size());
+		String string = dialog.get(index);
+		return string;
 	}
 }

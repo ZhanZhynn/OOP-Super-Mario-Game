@@ -11,15 +11,18 @@ import edu.monash.fit2099.engine.weapons.Weapon;
 import game.action.AttackAction;
 import game.behavior.AttackBehaviour;
 import game.behavior.Behaviour;
+import game.interfaces.Speakable;
 import game.item.Status;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
-public class PiranhaPlant extends Actor {
+public class PiranhaPlant extends Actor implements Speakable {
     private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
     private boolean reset = false;
-
+    ArrayList<String> dialog = new ArrayList<>();
     /**
      * Constructor.
      */
@@ -55,5 +58,15 @@ public class PiranhaPlant extends Actor {
             actions.add(new AttackAction(this,direction));
         }
         return actions;
+    }
+
+    @Override
+    public String allDialog() {
+        dialog.clear();
+        dialog.add("Slsstssthshs~! (Never gonna say goodbye~)");
+        dialog.add("Ohmnom nom nom nom.");
+        int index = new Random().nextInt(dialog.size());
+        String string = dialog.get(index);
+        return string;
     }
 }
