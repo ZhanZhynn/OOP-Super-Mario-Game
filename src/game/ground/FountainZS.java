@@ -1,13 +1,16 @@
 package game.ground;
 
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
+import game.interfaces.Refillable;
+import game.interfaces.Drinkable;
 
 /**
  * @author Ng Zu Shen
  * this class can be abstarct as well. A base class of fountain
  */
-public class FountainZS extends Ground {
+public class FountainZS extends Ground implements Drinkable, Refillable {
 
     /**
      * capacity of a fountain
@@ -89,5 +92,14 @@ public class FountainZS extends Ground {
      */
     public Boolean enoughWater(){
         return amountLeft >= 5;
+    }
+
+    @Override
+    public void drank(Actor actor) {
+    }
+
+    @Override
+    public String RefillBy(Actor actor) {
+        return "";
     }
 }

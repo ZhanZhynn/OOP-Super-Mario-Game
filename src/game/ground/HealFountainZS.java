@@ -6,8 +6,11 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
 import game.action.DrinkAction;
 import game.action.RefillActionZS;
+import game.actor.Player;
+import game.interfaces.CanDrinkFountain;
 import game.item.BottleZS;
 import game.item.HealWaterZS;
+import game.item.PowerWaterZS;
 
 /**
  * @author Ng zu shen
@@ -32,12 +35,25 @@ public class HealFountainZS extends FountainZS{
         ActionList actions = new ActionList();
         for (Item item : actor.getInventory()){
             if(item instanceof BottleZS){
-                actions.add(new RefillActionZS(new HealWaterZS(), this));
+                actions.add(new RefillActionZS(this));
                 break;
             }
         }
         actions.add(new DrinkAction(this));
         return actions;
+    }
+
+    public void drank(Actor actor) {
+        super.used();
+        actor.heal(50);
+    }
+
+    @Override
+    public String RefillBy(Actor actor) {
+        super.used();
+        Player player = (Player) actor;
+        player.getBottleZS().addWater(new PowerWaterZS());
+        return "bottle is filled with Heal Water";
     }
 
     /**

@@ -5,6 +5,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.ground.FountainZS;
 import game.interfaces.CanDrinkFountain;
+import game.interfaces.Drinkable;
 
 public class DrinkAction extends Action {
 
@@ -16,14 +17,17 @@ public class DrinkAction extends Action {
 
     @Override
     public String execute(Actor actor, GameMap map) {
-        fountain.used();
-        CanDrinkFountain temp = (CanDrinkFountain) actor;
-        temp.incrementPowerBuff();
-        return actor + " drank water from "+ fountain;
+        if (fountain.enoughWater()) {
+            fountain.drank(actor);
+            CanDrinkFountain temp = (CanDrinkFountain) actor;
+            temp.incrementPowerBuff();
+            return actor + " drank water from " + fountain;
+        }
+        return fountain + " has dried out. Come back in " + (fountain.getCooldown()+1) + " turns";
     }
 
     @Override
     public String menuDescription(Actor actor) {
-        return "drink water from " + fountain;
+        return fountain.getAmountLeft() +  "/10. Drink water from " + fountain;
     }
 }

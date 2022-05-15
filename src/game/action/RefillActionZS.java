@@ -14,21 +14,15 @@ import game.interfaces.Consumable;
 public class RefillActionZS extends Action {
 
     /**
-     * water to be put inside a bottle
-     */
-    private Consumable water;
-    /**
      * from from which fountain
      */
     private FountainZS fountain;
 
     /**
      * constructor
-     * @param water the water to get
      * @param fountain from which fountain
      */
-    public RefillActionZS(Consumable water, FountainZS fountain){
-        this.water = water;
+    public RefillActionZS(FountainZS fountain){
         this.fountain = fountain;
     }
 
@@ -41,10 +35,7 @@ public class RefillActionZS extends Action {
     @Override
     public String execute(Actor actor, GameMap map) {
         if (actor instanceof Player && fountain.enoughWater()){
-            Player player = (Player) actor;
-            player.getBottleZS().addWater(water);
-            fountain.used();
-            return "bottle is filled with " + water;
+            return fountain.RefillBy(actor);
         }
         return fountain + " has dried out. Come back in " + (fountain.getCooldown()+1) + " turns";
     }
@@ -56,6 +47,6 @@ public class RefillActionZS extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return fountain.getAmountLeft() + "/10, Fill bottle with " + water;
+        return fountain.getAmountLeft() + "/10, Fill bottle with water";
     }
 }

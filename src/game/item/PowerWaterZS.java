@@ -4,13 +4,12 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.interfaces.CanDrinkFountain;
 import game.interfaces.Consumable;
-import game.interfaces.Drinkable;
 
 /**
  * @author Ng Zu Shen
  * power water from power fountain
  */
-public class PowerWaterZS implements Consumable, Drinkable {
+public class PowerWaterZS implements Consumable{
 
     /**
      * is the water consumed?
