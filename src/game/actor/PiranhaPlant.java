@@ -39,6 +39,7 @@ public class PiranhaPlant extends Actor{
         int priority = 0;
         for(Map.Entry<Integer, Behaviour> set : behaviours.entrySet()) {
             if (set.getKey() > priority && set.getValue().getAction(this, map)!=null) {
+                System.out.println("test");
                 action = set.getValue().getAction(this, map);
                 priority = set.getKey();
             }

@@ -77,7 +77,6 @@ public class Player extends Actor implements Resettable, CanDrinkFountain {
 		super(name, displayChar, hitPoints);
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
 		this.registerInstance();
-		this.addItemToInventory(new BottleZS());
 	}
 
 	public BottleZS getBottleZS() {

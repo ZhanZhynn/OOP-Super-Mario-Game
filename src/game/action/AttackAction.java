@@ -14,7 +14,6 @@ import game.actor.Koopa;
 import game.item.Fire;
 import game.item.Status;
 
-// last modified by NgZuShen on 22/4/2022 (add documentation and implement instant kill)
 /**
  * Special Action for attacking other Actors.
  */
@@ -88,12 +87,20 @@ public class AttackAction extends Action {
 
 		int damage = weapon.damage();
 		String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
+		// fire attack, 1 ground can only have 1 fire. Will not damage invincible actor.
+		if (actor.hasCapability(Status.FIRE_ATTACK)){
+			boolean containFire = false;
+			for (Item item : map.locationOf(target).getItems()){
+				if (item instanceof Fire)
+					containFire = true;
+			}
+			if (!containFire) {
+				map.locationOf(target).addItem(new Fire());
+			}
+		}
 
 		//if koopa died turn into dormant koopa
 		target.hurt(damage);
-		if (actor.hasCapability(Status.FIRE_ATTACK)){
-			map.locationOf(target).addItem(new Fire());
-		}
 		if (!target.isConscious()) {
 			if (target instanceof Koopa){
 				Location here = map.locationOf(target);

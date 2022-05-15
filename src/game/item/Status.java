@@ -13,8 +13,8 @@ public enum Status {
     PATH_OF_GOLD, //when high ground is destroyed turn into coin
     GUARANTEED_JUMP, // jump success rate turn 100%
     DMG_UP, // increase base damage by 15
-    RESCUE_PRINCESS,
-    FIRE_ATTACK
+    RESCUE_PRINCESS, // ability to rescue princess
+    FIRE_ATTACK // ability to drop fire when attacks
 
 
 }

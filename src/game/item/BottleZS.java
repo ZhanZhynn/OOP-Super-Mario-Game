@@ -10,10 +10,22 @@ import game.interfaces.Water;
 import java.util.Deque;
 import java.util.Stack;
 
+/**
+ * @author Ng Zu Shen
+ */
 public class BottleZS extends Item{
 
+    /**
+     * where the water is stored
+     */
     private Stack<Consumable> storage = new Stack<>();
+    /**
+     * pointer for a given consume action
+     */
     private ConsumeAction consumeAction = null;
+    /**
+     * pointer for latest water.
+     */
     private Consumable lastWater;
 
     /***
@@ -23,6 +35,11 @@ public class BottleZS extends Item{
         super("Bottle", 'b', false);
     }
 
+    /**
+     * add consume action for last water if there is any.
+     * @param currentLocation The location of the actor carrying this Item.
+     * @param actor The actor carrying this Item.
+     */
     @Override
     public void tick(Location currentLocation, Actor actor) {
         super.tick(currentLocation, actor);
@@ -45,6 +62,10 @@ public class BottleZS extends Item{
         }
     }
 
+    /**
+     * add water in bottle
+     * @param water
+     */
     public void addWater(Consumable water){
         storage.push(water);
     }

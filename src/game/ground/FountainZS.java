@@ -1,16 +1,25 @@
 package game.ground;
 
-import edu.monash.fit2099.engine.actions.ActionList;
-import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
-import game.action.RefillActionZS;
-import game.item.PowerWaterZS;
 
+/**
+ * @author Ng Zu Shen
+ * this class can be abstarct as well. A base class of fountain
+ */
 public class FountainZS extends Ground {
 
+    /**
+     * capacity of a fountain
+     */
     public static final int CAPACITY = 10;
+    /**
+     * how much water left in this fountain
+     */
     private int amountLeft = 10;
+    /**
+     * 5 round counter when the water runs out
+     */
     private int cooldown = 5;
 
     /**
@@ -20,6 +29,10 @@ public class FountainZS extends Ground {
         super(displaychar);
     }
 
+    /**
+     * start cooldown when fountain is empty
+     * @param location The location of the Ground
+     */
     @Override
     public void tick(Location location) {
         super.tick(location);
@@ -32,26 +45,48 @@ public class FountainZS extends Ground {
         }
     }
 
+    /**
+     * cooldown time
+     * @return
+     */
     public int getCooldown() {
         return cooldown;
     }
 
+    /**
+     * amount of water left
+     * @return
+     */
     public int getAmountLeft() {
         return amountLeft;
     }
 
+    /**
+     * 1 drink or refill will cost 5 amount
+     */
     public void used(){
         amountLeft -= 5;
     }
 
+    /**
+     * is the fountain empty
+     * @return
+     */
     public boolean isEmpty(){
         return amountLeft == 0;
     }
 
+    /**
+     * refill the fountain
+     */
     public void replenish(){
         amountLeft = CAPACITY;
     }
 
+    /**
+     * does the fountain has more than 5 water
+     * @return
+     */
     public Boolean enoughWater(){
         return amountLeft >= 5;
     }

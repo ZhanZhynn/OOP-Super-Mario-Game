@@ -75,7 +75,7 @@ public class Application {
 			world.addGameMap(gameMap);
 			world.addGameMap(lavaMap);
 
-			Actor mario = new Player("Player", 'm', 100);
+			Actor mario = new Player("Player", 'm', 1000);
 			world.addPlayer(mario, gameMap.at(42, 10));
 
 			WarpPipe pipe = new WarpPipe();

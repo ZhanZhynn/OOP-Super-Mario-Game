@@ -40,15 +40,23 @@ public class Bowser extends Actor implements Resettable {
         super("Bowser", 'B', 500);
         this.behaviours.put(10, new AttackBehaviour());
         this.addItemToInventory(new Key());
+        this.addCapability(Status.FIRE_ATTACK);
         startX = location.x();
         startY = location.y();
         this.registerInstance();
     }
 
+    /**
+     * set koopa base attack to 80
+     * @return
+     */
     public Weapon getWeapon() {
         return new IntrinsicWeapon(80, "punch");
     }
 
+    /**
+     * just to set reset to true when player reset the game.
+     */
     public void resetInstance() {
         this.reset = true;
     }

@@ -59,6 +59,11 @@ public class SuperMushroom extends Item implements Sellable, Consumable, Resetta
     public boolean getIsConsumed(){return isConsumed;}
 
 
+    /**
+     * check whether has the player for attacked or has the game for reset.
+     * @param currentLocation The location of the actor carrying this Item.
+     * @param actor The actor carrying this Item.
+     */
     @Override
     public void tick(Location currentLocation, Actor actor) {
         super.tick(currentLocation, actor);
@@ -94,11 +99,18 @@ public class SuperMushroom extends Item implements Sellable, Consumable, Resetta
         this.removeAction(consumeAction);
     }
 
+    /**
+     * reset game
+     */
     @Override
     public void resetInstance() {
         reset = true;
     }
 
+    /**
+     * remove ability of this super mushroom
+     * @param actor
+     */
     public void fade(Actor actor){
         removeCapability(Status.TALL);
         removeCapability(Status.GUARANTEED_JUMP);

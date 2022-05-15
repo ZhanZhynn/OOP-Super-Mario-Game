@@ -22,11 +22,26 @@ public class PrincessPeach extends Actor {
         super("Princess Peach", 'P', 0);
     }
 
+    /**
+     * princess peach will do nothing
+     * @param actions    collection of possible Actions for this Actor
+     * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
+     * @param map        the map containing the Actor
+     * @param display    the I/O object to which messages may be written
+     * @return
+     */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         return new DoNothingAction();
     }
 
+    /**
+     * can be rescued if other actor has the key
+     * @param otherActor the Actor that might be performing attack
+     * @param direction  String representing the direction of the other Actor
+     * @param map        current GameMap
+     * @return
+     */
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
