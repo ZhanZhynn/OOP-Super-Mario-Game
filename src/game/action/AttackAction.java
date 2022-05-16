@@ -89,13 +89,13 @@ public class AttackAction extends Action {
 		String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
 		// fire attack, 1 ground can only have 1 fire. Will not damage invincible actor.
 		if (actor.hasCapability(Status.FIRE_ATTACK)){
-			result += "\n" + actor + " attack " + target + " with fire. ";
 			boolean containFire = false;
 			for (Item item : map.locationOf(target).getItems()){
 				if (item instanceof Fire)
 					containFire = true;
 			}
 			if (!containFire) {
+				result += "\n" + actor + " attack " + target + " with fire. ";
 				map.locationOf(target).addItem(new Fire());
 			}
 		}
