@@ -2,45 +2,61 @@ package game.ground;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.positions.Ground;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
+import game.action.DrinkAction;
 import game.action.RefillAction;
-import game.interfaces.Water;
+import game.actor.Player;
+import game.interfaces.CanDrinkFountain;
 import game.item.Bottle;
+import game.item.PowerWater;
 
-public class PowerFountain extends Ground {
-
-    private Bottle bottle;
-
+/**
+ * @author Ng Zu Shen
+ * power fountain
+ */
+public class PowerFountain extends Fountain {
     /**
      * Constructor.
-     *
-     * @param displayChar character to display for this type of terrain
      */
-    public PowerFountain(char displayChar, Bottle bottle) {
+    public PowerFountain() {
         super('A');
-        this.bottle = bottle;
-    }
-
-    public Water getWater(){
-        return new PowerWater();
     }
 
     /**
-     * At the moment, we only make it can be attacked by Player.
-     * You can do something else with this method.
-     * @param otherActor the Actor that might perform an action.
-     * @param location location of tree
-     * @param direction  String representing the direction of the other Actor
-     * @return list of actions
+     * only allow people with bottle to refill. allow drink action
+     * @param actor the Actor acting
+     * @param location the current Location
+     * @param direction the direction of the Ground from the Actor
+     * @return
      */
-    public ActionList allowableActions(Actor otherActor, Location location, String direction) {
+    public ActionList allowableActions(Actor actor, Location location, String direction) {
         ActionList actions = new ActionList();
-        if(otherActor == location.getActor()) {
-            actions.add(new RefillAction(getWater(), bottle));
+        for (Item item : actor.getInventory()){
+            if(item instanceof Bottle){
+                actions.add(new RefillAction(this));
+                break;
+            }
         }
+        actions.add(new DrinkAction(this));
         return actions;
     }
 
-}
+    public void drank(Actor actor) {
+        super.used();
+        ((CanDrinkFountain)actor).incrementPowerBuff();
+    }
 
+    @Override
+    public String RefillBy(Actor actor) {
+        super.used();
+        Player player = (Player) actor;
+        player.getBottleZS().addWater(new PowerWater());
+        return "bottle is filled with Power Water";
+    }
+
+    @Override
+    public String toString() {
+        return "Power Fountain";
+    }
+}

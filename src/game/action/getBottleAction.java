@@ -4,7 +4,7 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actor.Toad;
-import game.item.BottleZS;
+import game.item.Bottle;
 
 public class getBottleAction extends Action {
 
@@ -16,7 +16,7 @@ public class getBottleAction extends Action {
 
     @Override
     public String execute(Actor actor, GameMap map) {
-        actor.addItemToInventory(new BottleZS());
+        actor.addItemToInventory(new Bottle());
         toad.giveBottle();
         return actor + " acquired Bottle!";
     }

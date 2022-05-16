@@ -29,10 +29,6 @@ public class Player extends Actor implements Resettable, CanDrinkFountain {
 	 */
 	private Wallet wallet = new Wallet(1200);
 
-	/**
-	 * Player's bottle
-	 */
-	private Bottle bottle = new Bottle();
 
 	/**
 	 * Player's HP on the last round
@@ -82,10 +78,10 @@ public class Player extends Actor implements Resettable, CanDrinkFountain {
 		this.registerInstance();
 	}
 
-	public BottleZS getBottleZS() {
+	public Bottle getBottleZS() {
 		for (Item item : getInventory()){
-			if(item instanceof BottleZS){
-				return (BottleZS) item;
+			if(item instanceof Bottle){
+				return (Bottle) item;
 			}
 		}
 		return null;

@@ -4,7 +4,7 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.action.DrinkAction;
-import game.ground.FountainZS;
+import game.ground.Fountain;
 
 /**
  * @author Ng Zu Shen
@@ -20,8 +20,8 @@ public class DrinkBehaviour implements Behaviour{
      */
     @Override
     public Action getAction(Actor actor, GameMap map) {
-        if (map.locationOf(actor).getGround() instanceof FountainZS){
-            FountainZS temp = (FountainZS) map.locationOf(actor).getGround();
+        if (map.locationOf(actor).getGround() instanceof Fountain){
+            Fountain temp = (Fountain) map.locationOf(actor).getGround();
             return new DrinkAction(temp);
         }
         return null;

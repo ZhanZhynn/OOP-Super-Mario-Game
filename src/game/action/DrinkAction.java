@@ -3,16 +3,15 @@ package game.action;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.ground.FountainZS;
+import game.ground.Fountain;
 import game.interfaces.CanDrinkFountain;
-import game.interfaces.Drinkable;
 
 public class DrinkAction extends Action {
 
-    private FountainZS fountain;
+    private Fountain fountain;
 
-    public DrinkAction(FountainZS fountainZS){
-        fountain = fountainZS;
+    public DrinkAction(Fountain fountain){
+        this.fountain = fountain;
     }
 
     @Override
