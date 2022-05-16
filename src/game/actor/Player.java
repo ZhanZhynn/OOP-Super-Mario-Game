@@ -225,7 +225,7 @@ public class Player extends Actor implements Resettable, CanDrinkFountain {
 	}
 
 	public void setLastLocation(Location _oriLocation){
-		this.lastTeleport = new Location(_oriLocation.map(), _oriLocation.x(), _oriLocation.y());
+		this.lastTeleport = _oriLocation;
 	}
 
 	public Location getLastLocation(){

@@ -57,6 +57,11 @@ public class WarpPipe extends Ground implements Jumpable, Resettable {
     public ActionList allowableActions(Actor otherActor, Location location, String direction) {
         ActionList actions = new ActionList();
 
+        if (otherActor instanceof Player && ((Player) otherActor).getAtLavaZone()){
+            this.moveToLocation = ((Player) otherActor).getLastLocation();
+//            System.out.println(((Player) otherActor).getLastLocation());
+        }
+
         if(otherActor instanceof Player && !location.containsAnActor()) {
             actions.add(new JumpAction(this, location, direction));
         }
@@ -67,9 +72,7 @@ public class WarpPipe extends Ground implements Jumpable, Resettable {
 //            }
             actions.add(new TeleportAction(this.moveToLocation, this.moveDirection));
         }
-//        if (otherActor instanceof Player && ((Player) otherActor).getAtLavaZone()){
-//            this.moveToLocation = ((Player) otherActor).getLastLocation();
-//        }
+
 
 
         return actions;

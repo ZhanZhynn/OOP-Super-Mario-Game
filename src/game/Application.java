@@ -76,7 +76,7 @@ public class Application {
 
 			Player mario = new Player("Player", 'm', 1000);
 			world.addPlayer(mario, gameMap.at(42, 10));
-			mario.setLastLocation(gameMap.at(42, 10));
+//			mario.setLastLocation(gameMap.at(42, 10));
 
 			WarpPipe pipe = new WarpPipe(lavaMap.at(0,0),"to Lava Zone!!!");
 //			pipe.allowableActions(mario, lavaMap.at(0,0), " to Lava Zone!!");
@@ -87,7 +87,7 @@ public class Application {
 //			pipe3.addTeleportActions(mario, lavaMap.at(0,0), " to Lava Zone!!!");
 			gameMap.at(38,10).setGround(pipe3);
 
-			WarpPipe pipeReturn = new WarpPipe(gameMap.at(mario.getLastLocation().x(), mario.getLastLocation().y()), "to Normal World");
+			WarpPipe pipeReturn = new WarpPipe(gameMap.locationOf(mario), "to Normal World");
 //			pipe2.allowableActions(mario, gameMap.locationOf(mario)," back to normal world");
 //			pipeReturn.addTeleportActions(mario, gameMap.at(mario.getOriLocation().x(), mario.getOriLocation().y())," back to normal world");
 
