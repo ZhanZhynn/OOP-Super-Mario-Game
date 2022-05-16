@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.action.RescueAction;
+import game.action.SpeakAction;
 import game.item.Status;
 
 import java.util.ArrayList;
@@ -14,6 +15,8 @@ import java.util.Random;
 
 public class PrincessPeach extends Actor {
 
+    boolean speak = true;
+    private SpeakAction speakAction = new SpeakAction();
 
     /**
      * Constructor.
@@ -32,6 +35,11 @@ public class PrincessPeach extends Actor {
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+        if (speak){
+            System.out.println(this + ": " + speakAction.dialogPrincess());
+        }
+        speak = !speak;
+
         return new DoNothingAction();
     }
 
@@ -50,5 +58,7 @@ public class PrincessPeach extends Actor {
         }
         return actions;
     }
+
+
 
 }
