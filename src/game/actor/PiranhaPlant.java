@@ -9,6 +9,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.action.AttackAction;
+import game.action.SpeakAction;
 import game.behavior.AttackBehaviour;
 import game.behavior.Behaviour;
 import game.item.Status;
@@ -21,6 +22,10 @@ import java.util.Random;
 public class PiranhaPlant extends Actor{
     private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
     private boolean reset = false;
+    boolean speak = true;
+    private SpeakAction speakAction = new SpeakAction();
+
+
     /**
      * Constructor.
      */
@@ -35,6 +40,12 @@ public class PiranhaPlant extends Actor{
 
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+
+        if (speak){
+            System.out.println(this + ": " + speakAction.dialogPiranha());
+        }
+        speak = !speak;
+
         Action action = null;
         int priority = 0;
         for(Map.Entry<Integer, Behaviour> set : behaviours.entrySet()) {
@@ -44,6 +55,8 @@ public class PiranhaPlant extends Actor{
                 priority = set.getKey();
             }
         }
+
+
         if (action != null) {
             return action;
         }

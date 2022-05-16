@@ -70,11 +70,15 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import edu.monash.fit2099.engine.weapons.Weapon;
+import game.action.SpeakAction;
 
 /**
  * A little fungus guy.
  */
 public class Goomba extends WanderingEnemy {
+
+	boolean speak = true;
+	SpeakAction speakAction = new SpeakAction();
 
 	/**
 	 * Constructor.
@@ -101,6 +105,11 @@ public class Goomba extends WanderingEnemy {
 	 */
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+
+		if (speak){
+			System.out.println(this + ": " + speakAction.dialogGoomba());
+		}
+		speak = !speak;
 		// if player rests, then GOOMBA has 10% chance to be removed.
 		if (Math.random() <= 0.1 || !this.isConscious()){ //10% to suicide
 			map.removeActor(this);

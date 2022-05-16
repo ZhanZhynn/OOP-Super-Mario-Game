@@ -11,6 +11,7 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.action.AttackAction;
+import game.action.SpeakAction;
 import game.behavior.AttackBehaviour;
 import game.behavior.Behaviour;
 import game.behavior.FollowBehaviour;
@@ -29,7 +30,8 @@ public class Bowser extends Actor implements Resettable {
     private boolean reset = false;
     private final int startX, startY;
     private Player followTarget;
-    ArrayList<String> dialogB = new ArrayList<>();
+    boolean speak = true;
+    private SpeakAction speakAction = new SpeakAction();
 
 
 
@@ -61,30 +63,14 @@ public class Bowser extends Actor implements Resettable {
         this.reset = true;
     }
 
-    public String dialogBowser() {
-        dialogB.clear();
-        dialogB.add("What was that sound? Oh, just a fire.");
-        dialogB.add("Princess Peach! You are formally invited... to the creation of my new kingdom!");
-        dialogB.add("Never gonna let you down!");
-        dialogB.add("Wrrrrrrrrrrrrrrrryyyyyyyyyyyyyy!!!!");
-        int index = new Random().nextInt(dialogB.size());
-        String string = dialogB.get(index);
-        return string;
-    }
 
-    //int count = 0;
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
 
-//       TO BE CONTINUED
-//        if (this.isConscious()){
-//
-//            if (count % 2 == 0){
-//                dialogBowser();
-//                count ++;
-//            }
-//        }
-
+        if (speak){
+            System.out.println(this + ": " + speakAction.dialogBowser());
+        }
+        speak = !speak;
 
         if (this.reset){
             this.reset = false;
