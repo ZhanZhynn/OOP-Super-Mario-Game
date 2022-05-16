@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.action.ResetAction;
@@ -65,6 +66,8 @@ public class Player extends Actor implements Resettable, CanDrinkFountain {
 	private int powerBuff = 0;
 
 	private Action resetAction = new ResetAction();
+
+	private Location oriLocation;
 
 	/**
 	 * Constructor.
@@ -221,5 +224,13 @@ public class Player extends Actor implements Resettable, CanDrinkFountain {
 	 */
 	public Wallet getWallet() {
 		return wallet;
+	}
+
+	public void setOriLocation(Location _oriLocation){
+		this.oriLocation = new Location(_oriLocation.map(), _oriLocation.x(), _oriLocation.y());
+	}
+
+	public Location getOriLocation(){
+		return this.oriLocation;
 	}
 }

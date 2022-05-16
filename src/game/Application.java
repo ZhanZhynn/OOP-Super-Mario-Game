@@ -75,21 +75,25 @@ public class Application {
 			world.addGameMap(gameMap);
 			world.addGameMap(lavaMap);
 
-			Actor mario = new Player("Player", 'm', 1000);
+			Player mario = new Player("Player", 'm', 1000);
 			world.addPlayer(mario, gameMap.at(42, 10));
+			mario.setOriLocation(gameMap.at(42, 10));
 
 			WarpPipe pipe = new WarpPipe();
 //			pipe.allowableActions(mario, lavaMap.at(0,0), " to Lava Zone!!");
 			pipe.addTeleportActions(mario, lavaMap.at(0,0), " to Lava Zone!!!");
 			gameMap.at(40,13).setGround(pipe);
+
 			WarpPipe pipe3 = new WarpPipe();
 			pipe3.addTeleportActions(mario, lavaMap.at(0,0), " to Lava Zone!!!");
 			gameMap.at(38,10).setGround(pipe3);
 
-			WarpPipe pipe2 = new WarpPipe();
+			WarpPipe pipeReturn = new WarpPipe();
 //			pipe2.allowableActions(mario, gameMap.locationOf(mario)," back to normal world");
-			pipe2.addTeleportActions(mario, gameMap.locationOf(mario)," back to normal world");
-			lavaMap.at(0,0).setGround(pipe2);
+			pipeReturn.addTeleportActions(mario, gameMap.at(mario.getOriLocation().x(), mario.getOriLocation().y())," back to normal world");
+
+//			pipeReturn.addTeleportActionsReturn(mario, gameMap.at(0,0)," back to normal world");
+			lavaMap.at(0,0).setGround(pipeReturn);
 
 //			world.addPlayer(mario, lavaMap.at(15, 10));
 

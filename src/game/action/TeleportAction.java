@@ -5,6 +5,7 @@ import edu.monash.fit2099.engine.actions.MoveActorAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
+import game.actor.Player;
 import game.interfaces.Jumpable;
 import game.item.Status;
 
@@ -33,8 +34,11 @@ public class TeleportAction extends MoveActorAction {
         //kill any actor who is on the other side of teleport
         if (moveToLocation.containsAnActor()) {
             moveToLocation.map().removeActor(moveToLocation.getActor());
-            map.moveActor(actor, moveToLocation);
         }
+        if (actor instanceof Player) {
+            ((Player) actor).setOriLocation(map.locationOf(actor));
+        }
+        map.moveActor(actor, moveToLocation);
         return actor + " teleported " + " successfully.";
     }
 

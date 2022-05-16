@@ -64,9 +64,10 @@ public class WarpPipe extends Ground implements Jumpable, Resettable {
 
     //	pipe.allowableActions(mario, lavaMap.at(0,0), " to Lava Zone!!");
 
-    public void addTeleportActions(Actor otherActor, Location location, String direction){
+    public void addTeleportActions(Player otherActor, Location location, String direction){
         teleportActions.add(new TeleportAction(location, direction));
     }
+
 
 
     /**
@@ -85,6 +86,7 @@ public class WarpPipe extends Ground implements Jumpable, Resettable {
                 location.addActor(new PiranhaPlant());
             }
         }
+        System.out.println(location + "," + location.getActor());
     }
 
     public String toString() {
