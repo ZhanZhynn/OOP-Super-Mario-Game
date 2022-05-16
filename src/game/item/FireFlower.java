@@ -15,7 +15,7 @@ public class FireFlower extends Item implements Consumable {
 
 
     public FireFlower() {
-        super("Fire Flower", 'f', true);
+        super("Fire Flower", 'f', false);
         this.addAction(consumeAction);
     }
 

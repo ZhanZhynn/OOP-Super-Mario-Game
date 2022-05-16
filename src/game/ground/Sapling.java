@@ -34,10 +34,9 @@ public class Sapling extends Tree implements Jumpable, Destroyable{
         if (counter  == 10) {
 //            location.addActor(new Bug());
             location.setGround(new Mature());
-        }
-
-        if (!(location.getItems().size()> 0) && this.hasCapability(Capabilities.SPAWN_FIREFLOWER) && Math.random()<=0.5){ //if got item then cannot spawn new flower
-            location.addItem(new FireFlower());
+            if (!(location.getItems().size()> 0) && this.hasCapability(Capabilities.SPAWN_FIREFLOWER) && Math.random()<=0.5){ //if got item then cannot spawn new flower
+                location.addItem(new FireFlower());
+            }
         }
 
         if (this.hasCapability(Capabilities.SPAWN_COIN)) {

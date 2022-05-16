@@ -36,10 +36,9 @@ public class Sprout extends Tree implements Jumpable, Destroyable {
         counter+=1;
         if (counter % 10 == 0){
             location.setGround(new Sapling());
-        }
-
-        if (!(location.getItems().size()> 0) && this.hasCapability(Capabilities.SPAWN_FIREFLOWER) && Math.random()<=0.5){ //if got item then cannot spawn new flower
-            location.addItem(new FireFlower());
+            if (!(location.getItems().size()> 0) && this.hasCapability(Capabilities.SPAWN_FIREFLOWER) && Math.random()<=0.5){ //if got item then cannot spawn new flower
+                location.addItem(new FireFlower());
+            }
         }
 
         if (!location.containsAnActor()) {
