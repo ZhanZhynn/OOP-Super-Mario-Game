@@ -26,7 +26,6 @@ public class SpeakAction extends Action{
         return actor + " TRIES TO SPEAK";
     }
 
-
     public String dialogBowser() {
         dialogB.clear();
         dialogB.add("What was that sound? Oh, just a fire.");
