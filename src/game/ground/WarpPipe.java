@@ -74,7 +74,6 @@ public class WarpPipe extends Ground implements Jumpable, Resettable {
         }
 
 
-
         return actions;
     }
 
