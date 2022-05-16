@@ -95,7 +95,6 @@ public class AttackAction extends Action {
 					containFire = true;
 			}
 			if (!containFire) {
-				result += "\n" + actor + " attack " + target + " with fire. ";
 				map.locationOf(target).addItem(new Fire());
 			}
 		}
