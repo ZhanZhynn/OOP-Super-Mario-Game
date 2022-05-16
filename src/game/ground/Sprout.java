@@ -32,7 +32,6 @@ public class Sprout extends Tree implements Jumpable, Destroyable {
      * If location does not contains an actor, it has 10% chance of spawning a Goomba at each turn.
      * @param location is the location of Sapling
      */
-
     public void tick(Location location){
         counter+=1;
         if (counter % 10 == 0){
