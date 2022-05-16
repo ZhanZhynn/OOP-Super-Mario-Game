@@ -2,28 +2,29 @@ package game.item;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.actor.Player;
+import game.interfaces.CanDrinkFountain;
 import game.interfaces.Consumable;
 
 /**
  * @author Ng Zu Shen
- * healing water from healing fountain
+ * power water from power fountain
  */
-public class HealWaterZS implements Consumable {
+public class PowerWater implements Consumable{
 
     /**
-     * is the water consumed
+     * is the water consumed?
      */
     public Boolean isConsumed = false;
 
     /**
-     * what happen after consume
+     * buff the actor that drink this.
      * @param actor
      * @param map
      */
     @Override
     public void consume(Actor actor, GameMap map) {
-        actor.heal(50);
+        CanDrinkFountain actorr = (CanDrinkFountain) actor;
+        actorr.incrementPowerBuff();
         isConsumed = true;
     }
 
@@ -42,6 +43,6 @@ public class HealWaterZS implements Consumable {
      */
     @Override
     public String toString() {
-        return "Heal Water";
+        return "Power Water";
     }
 }

@@ -2,61 +2,69 @@ package game.item;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
-import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 import game.action.ConsumeAction;
 import game.interfaces.Consumable;
-import game.interfaces.Water;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
+import java.util.Stack;
 
-public class Bottle extends Item {
-
-    private Deque<Water> this_bottle;
-    //NEED TO FIND A WAY TO ADD DAMAGE, WHAT IS THE BASE DAMAGE?
-
-
-//    /**
-//     * Constructor of Bottle
-//     * @param name name of this power star(can be anything but preferably "Power Star")
-//     * @param displayChar Character to be display on map
-//     * @param portable is this portable?
-//     */
-    public Bottle() {
-        super("Bottle", 'b', false);
-        this_bottle = new ArrayDeque<>();
-    }
-
-    public boolean newBottle(Actor actor){
-        Bottle b = new Bottle();
-        if (!actor.getInventory().contains(b)){
-            actor.addItemToInventory(b);
-
-        }
-        return false;
-    }
-
-    public void consume(Actor actor, GameMap map){
-
-        if (!this_bottle.isEmpty()) {
-            Water fountainWater = this_bottle.removeLast();
-            fountainWater.drink(actor);
-        }
-    }
-
-
+/**
+ * @author Ng Zu Shen
+ */
+public class Bottle extends Item{
 
     /**
-     * append water into the stack
+     * where the water is stored
      */
-    public void addFountainWater (Water fountainWater) {
-        this_bottle.addLast(fountainWater);
+    private Stack<Consumable> storage = new Stack<>();
+    /**
+     * pointer for a given consume action
+     */
+    private ConsumeAction consumeAction = null;
+    /**
+     * pointer for latest water.
+     */
+    private Consumable lastWater;
+
+    /***
+     * Constructor.
+     */
+    public Bottle() {
+        super("Bottle", 'b', false);
     }
 
-
-    public String addFountainWater(Actor actor, Water fountainWater){
-        addFountainWater(fountainWater);
-        return actor + " refills " + fountainWater;
+    /**
+     * add consume action for last water if there is any.
+     * @param currentLocation The location of the actor carrying this Item.
+     * @param actor The actor carrying this Item.
+     */
+    @Override
+    public void tick(Location currentLocation, Actor actor) {
+        super.tick(currentLocation, actor);
+        if (consumeAction!=null){
+            this.removeAction(consumeAction);
+        }
+        if(!storage.empty()){
+            lastWater = storage.peek();
+            if (lastWater.getIsConsumed()){
+                storage.pop();
+                if(!storage.empty())
+                    lastWater = storage.peek();
+                else
+                    lastWater = null;
+            }
+            if (lastWater != null) {
+                consumeAction = new ConsumeAction(lastWater);
+                this.addAction(consumeAction);
+            }
+        }
     }
 
+    /**
+     * add water in bottle
+     * @param water
+     */
+    public void addWater(Consumable water){
+        storage.push(water);
+    }
 }

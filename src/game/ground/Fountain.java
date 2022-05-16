@@ -10,7 +10,7 @@ import game.interfaces.Drinkable;
  * @author Ng Zu Shen
  * this class can be abstarct as well. A base class of fountain
  */
-public class FountainZS extends Ground implements Drinkable, Refillable {
+public class Fountain extends Ground implements Drinkable, Refillable {
 
     /**
      * capacity of a fountain
@@ -28,7 +28,7 @@ public class FountainZS extends Ground implements Drinkable, Refillable {
     /**
      * Constructor.
      */
-    public FountainZS(char displaychar) {
+    public Fountain(char displaychar) {
         super(displaychar);
     }
 
