@@ -31,6 +31,7 @@ public class Bowser extends Actor implements Resettable {
     private final int startX, startY;
     private Player followTarget;
     boolean speak = true;
+    //instantiating an instance of SpeakAction here.
     private SpeakAction speakAction = new SpeakAction();
 
 
@@ -63,10 +64,18 @@ public class Bowser extends Actor implements Resettable {
         this.reset = true;
     }
 
-
+    /**
+     * Figure out what to do next.
+     * @see Actor#playTurn(ActionList, Action, GameMap, Display)
+     *  @param actions    collection of possible Actions for this Actor
+     *  @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
+     *  @param map        the map containing the Actor
+     *  @param display    the I/O object to which messages may be written
+     */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
 
+        //for Bowser to speak every two turns.
         if (speak){
             System.out.println(this + ": " + speakAction.dialogBowser());
         }

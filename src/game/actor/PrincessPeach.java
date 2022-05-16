@@ -16,6 +16,7 @@ import java.util.Random;
 public class PrincessPeach extends Actor {
 
     boolean speak = true;
+    //instantiating an instance of SpeakAction here.
     private SpeakAction speakAction = new SpeakAction();
 
     /**
@@ -35,6 +36,8 @@ public class PrincessPeach extends Actor {
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+
+        //for PrincessPeach to speak at every two turns.
         if (speak){
             System.out.println(this + ": " + speakAction.dialogPrincess());
         }

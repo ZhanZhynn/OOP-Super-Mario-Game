@@ -78,6 +78,7 @@ import game.action.SpeakAction;
 public class Goomba extends WanderingEnemy {
 
 	boolean speak = true;
+	//instantiating an instance of SpeakAction here.
 	SpeakAction speakAction = new SpeakAction();
 
 	/**
@@ -106,6 +107,7 @@ public class Goomba extends WanderingEnemy {
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
 
+		//for Goomba to speak every two turns.
 		if (speak){
 			System.out.println(this + ": " + speakAction.dialogGoomba());
 		}

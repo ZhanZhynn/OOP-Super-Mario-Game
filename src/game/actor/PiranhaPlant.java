@@ -23,6 +23,7 @@ public class PiranhaPlant extends Actor{
     private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
     private boolean reset = false;
     boolean speak = true;
+    //instantiating an instance of SpeakAction here.
     private SpeakAction speakAction = new SpeakAction();
 
 
@@ -38,9 +39,18 @@ public class PiranhaPlant extends Actor{
         return new IntrinsicWeapon(90, "chomps");
     }
 
+    /**
+     * Figure out what to do next.
+     * @see Actor#playTurn(ActionList, Action, GameMap, Display)
+     *  @param actions    collection of possible Actions for this Actor
+     *  @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
+     *  @param map        the map containing the Actor
+     *  @param display    the I/O object to which messages may be written
+     */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
 
+        //for piranhaPlant to speak at every two turns.
         if (speak){
             System.out.println(this + ": " + speakAction.dialogPiranha());
         }
