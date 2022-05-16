@@ -63,7 +63,9 @@ public class Player extends Actor implements Resettable, CanDrinkFountain {
 
 	private Action resetAction = new ResetAction();
 
-	private Location oriLocation;
+	private Location lastTeleport;
+
+	private Boolean atLavaZone = false;
 
 	/**
 	 * Constructor.
@@ -222,11 +224,19 @@ public class Player extends Actor implements Resettable, CanDrinkFountain {
 		return wallet;
 	}
 
-	public void setOriLocation(Location _oriLocation){
-		this.oriLocation = new Location(_oriLocation.map(), _oriLocation.x(), _oriLocation.y());
+	public void setLastLocation(Location _oriLocation){
+		this.lastTeleport = new Location(_oriLocation.map(), _oriLocation.x(), _oriLocation.y());
 	}
 
-	public Location getOriLocation(){
-		return this.oriLocation;
+	public Location getLastLocation(){
+		return this.lastTeleport;
+	}
+
+	public void setAtLavaZone(Boolean value){
+		this.atLavaZone = value;
+	}
+
+	public Boolean getAtLavaZone(){
+		return this.atLavaZone;
 	}
 }

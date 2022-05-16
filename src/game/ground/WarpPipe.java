@@ -20,10 +20,16 @@ public class WarpPipe extends Ground implements Jumpable, Resettable {
     private ActionList teleportActions = new ActionList();
     private boolean reset = false;
     private boolean start = true;
+    private Location moveToLocation;
+    private String moveDirection;
+//    private Location pipeLocation;
 
-    public WarpPipe() {
+    public WarpPipe(Location moveToLocation, String direction) {
         super('C');
         this.registerInstance();
+        this.moveToLocation = moveToLocation;
+        this.moveDirection = direction;
+//        this.pipeLocation = pipeLocation;
     }
 
     public boolean canActorEnter(Actor actor) {
@@ -50,24 +56,30 @@ public class WarpPipe extends Ground implements Jumpable, Resettable {
      */
     public ActionList allowableActions(Actor otherActor, Location location, String direction) {
         ActionList actions = new ActionList();
+
         if(otherActor instanceof Player && !location.containsAnActor()) {
             actions.add(new JumpAction(this, location, direction));
         }
         else if (otherActor instanceof Player && location.containsAnActor()){ //player on pipe, can teleport now
 //            actions.add(new TeleportAction(location, direction));
-            for (Action i:teleportActions){
-                actions.add(i);
-            }
+//            for (Action i:teleportActions){
+//                actions.add(i);
+//            }
+            actions.add(new TeleportAction(this.moveToLocation, this.moveDirection));
         }
+//        if (otherActor instanceof Player && ((Player) otherActor).getAtLavaZone()){
+//            this.moveToLocation = ((Player) otherActor).getLastLocation();
+//        }
+
+
         return actions;
     }
 
     //	pipe.allowableActions(mario, lavaMap.at(0,0), " to Lava Zone!!");
 
-    public void addTeleportActions(Player otherActor, Location location, String direction){
-        teleportActions.add(new TeleportAction(location, direction));
-    }
-
+//    public void addTeleportActions(Player otherActor, Location location, String direction){
+//        teleportActions.add(new TeleportAction(location, direction));
+//    }
 
 
     /**
@@ -80,19 +92,20 @@ public class WarpPipe extends Ground implements Jumpable, Resettable {
             location.addActor(new PiranhaPlant());
             start = false;
         }
+
         if (reset){
             reset = false;
             if (!location.containsAnActor()) {
                 location.addActor(new PiranhaPlant());
             }
         }
+
         System.out.println(location + "," + location.getActor());
     }
 
     public String toString() {
         return "Warp Pipe";
     }
-
 
     @Override
     public void resetInstance() {

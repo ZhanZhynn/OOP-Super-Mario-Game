@@ -16,6 +16,7 @@ public class TeleportAction extends MoveActorAction {
     private Location oldLocation;
     private GameMap map;
     private Location newLocation;
+    private Boolean lavaZone = false;
 
 
     public TeleportAction(Location moveToLocation, String direction){
@@ -35,10 +36,14 @@ public class TeleportAction extends MoveActorAction {
         if (moveToLocation.containsAnActor()) {
             moveToLocation.map().removeActor(moveToLocation.getActor());
         }
-        if (actor instanceof Player) {
-            ((Player) actor).setOriLocation(map.locationOf(actor));
+
+        if (!this.lavaZone){
+            ((Player)actor).setLastLocation(map.locationOf(actor)); //save previous location before teleporting
         }
+
         map.moveActor(actor, moveToLocation);
+        this.lavaZone = !(this.lavaZone);
+        ((Player)actor).setAtLavaZone(this.lavaZone);
         return actor + " teleported " + " successfully.";
     }
 
