@@ -35,10 +35,16 @@ public class TeleportAction extends MoveActorAction {
         if (moveToLocation.containsAnActor()) {
             moveToLocation.map().removeActor(moveToLocation.getActor());
         }
-        if (actor instanceof Player) {
-            ((Player) actor).setOriLocation(map.locationOf(actor));
-        }
-        map.moveActor(actor, moveToLocation);
+//        if (actor instanceof Player) {
+//            ((Player) actor).setOriLocation(map.locationOf(actor));
+//        }
+        Location currentLocation = map.locationOf(actor);
+
+        Location lastLocation = ((Player) actor).getLastTeleportLocation();
+//        map.moveActor(actor, moveToLocation);
+        map.moveActor(actor, lastLocation);
+
+        ((Player) actor).setLastTeleportLocation(currentLocation);
         return actor + " teleported " + " successfully.";
     }
 

@@ -68,8 +68,6 @@ public class WarpPipe extends Ground implements Jumpable, Resettable {
         teleportActions.add(new TeleportAction(location, direction));
     }
 
-
-
     /**
      * handle all the behaviour of trees as stated in assignment specification
      * @param location The location of the wall
@@ -86,6 +84,8 @@ public class WarpPipe extends Ground implements Jumpable, Resettable {
                 location.addActor(new PiranhaPlant());
             }
         }
+
+
         System.out.println(location + "," + location.getActor());
     }
 

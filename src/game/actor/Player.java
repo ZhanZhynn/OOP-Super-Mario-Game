@@ -65,6 +65,8 @@ public class Player extends Actor implements Resettable, CanDrinkFountain {
 
 	private Location oriLocation;
 
+	private Location lastLocation;
+
 	/**
 	 * Constructor.
 	 *
@@ -222,11 +224,21 @@ public class Player extends Actor implements Resettable, CanDrinkFountain {
 		return wallet;
 	}
 
-	public void setOriLocation(Location _oriLocation){
-		this.oriLocation = new Location(_oriLocation.map(), _oriLocation.x(), _oriLocation.y());
+//	public void setOriLocation(Location _oriLocation){
+//		this.oriLocation = new Location(_oriLocation.map(), _oriLocation.x(), _oriLocation.y());
+//	}
+//
+//	public Location getOriLocation(){
+//		return this.oriLocation;
+//	}
+
+	public void setLastTeleportLocation(Location _normalLocation){
+		this.lastLocation = new Location(_normalLocation.map(), _normalLocation.x(), _normalLocation.y());
 	}
 
-	public Location getOriLocation(){
-		return this.oriLocation;
+	public Location getLastTeleportLocation(){
+		return this.lastLocation ;
 	}
+
+
 }
