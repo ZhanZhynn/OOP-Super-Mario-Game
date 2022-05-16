@@ -101,8 +101,6 @@ public class WarpPipe extends Ground implements Jumpable, Resettable {
                 location.addActor(new PiranhaPlant());
             }
         }
-
-        System.out.println(location + "," + location.getActor());
     }
 
     public String toString() {
