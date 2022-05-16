@@ -41,5 +41,8 @@ public class Dirt extends Ground implements Resettable {
 		}
 		this.reset = false;
 	}
+	public String toString() {
+		return "Dirt";
+	}
 
 }

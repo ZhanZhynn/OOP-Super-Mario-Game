@@ -29,4 +29,8 @@ public class Lava extends Ground {
             location.getActor().hurt(damage);
         }
     }
+
+    public String toString() {
+        return "Lava";
+    }
 }

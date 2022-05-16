@@ -68,6 +68,12 @@ public class Sprout extends Tree implements Jumpable, Destroyable {
             actor.hurt(damage);
             return actor + " fell from Sprout. Received " + damage + " damage.";
         }
+
+
+
+    }
+    public String toString() {
+        return "Sprout";
     }
 
     //    public ActionList allowableActions(Actor otherActor, Location location, String direction) {

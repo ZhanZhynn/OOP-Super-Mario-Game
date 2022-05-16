@@ -25,4 +25,8 @@ public class Floor extends Ground {
 		//-------------------------------------------------------------------
 		return true;
 	}
+
+	public String toString() {
+		return "Floor";
+	}
 }
