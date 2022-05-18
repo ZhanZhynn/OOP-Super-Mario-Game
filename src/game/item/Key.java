@@ -13,7 +13,7 @@ public class Key extends Item {
      * Constructor.
      */
     public Key() {
-        super("key", '&', true);
+        super("key", 'k', true);
         this.addCapability(Status.RESCUE_PRINCESS);
     }
 }
