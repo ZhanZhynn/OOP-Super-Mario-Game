@@ -1,5 +1,13 @@
 package game.ground;
 
+/**
+ * A class about the Warp Pipe
+ *
+ * @author Hee Zhan Zhynn (31989403)
+ * @version 1
+ */
+
+
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
@@ -17,13 +25,37 @@ import game.item.Status;
 
 public class WarpPipe extends Ground implements Jumpable, Resettable {
 
+    /**
+     * A list of teleportActions that can be executed
+     */
     private ActionList teleportActions = new ActionList();
+
+    /**
+     * Has the reset action been called?
+     */
     private boolean reset = false;
+
+    /**
+     * Is this the start of the game?
+     */
     private boolean start = true;
+
+    /**
+     * Location where the player will be teleported to
+     */
     private Location moveToLocation;
+
+    /**
+     * Name of the location to teleport to
+     */
     private String moveDirection;
 //    private Location pipeLocation;
 
+    /**
+     * Constructor for warp pipe
+     * @param moveToLocation Location to teleport to
+     * @param direction Name of location
+     */
     public WarpPipe(Location moveToLocation, String direction) {
         super('C');
         this.registerInstance();
@@ -32,11 +64,23 @@ public class WarpPipe extends Ground implements Jumpable, Resettable {
 //        this.pipeLocation = pipeLocation;
     }
 
+    /**
+     * Can the actor enter this location?
+     * @param actor Actor
+     * @return actor can never enter
+     */
     public boolean canActorEnter(Actor actor) {
         return false;
     }
 
-    //added by Hee Zhan Zhynn on 28/4/2022----------------
+    /**
+     * Function for Player to jump.
+     *
+     * Jump is always succesful, no restriction
+     * @param by is the actor
+     * @param at is the location of where the player jumped over.
+     * @return description when a actor jumped over the warp pipe
+     */
     public String jumped(Actor by, Location at) {
         Actor actor = by;
         Location location = at;
@@ -47,8 +91,8 @@ public class WarpPipe extends Ground implements Jumpable, Resettable {
 
 
     /**
-     * At the moment, we only make it can be attacked by Player.
-     * You can do something else with this method.
+     * We allow players to teleport when player is standing on top of warp pipe.
+     *
      * @param otherActor the Actor that might perform an action.
      * @param location location of wall
      * @param direction  String representing the direction of the other Actor
@@ -66,27 +110,17 @@ public class WarpPipe extends Ground implements Jumpable, Resettable {
             actions.add(new JumpAction(this, location, direction));
         }
         else if (otherActor instanceof Player && location.containsAnActor()){ //player on pipe, can teleport now
-//            actions.add(new TeleportAction(location, direction));
-//            for (Action i:teleportActions){
-//                actions.add(i);
-//            }
             actions.add(new TeleportAction(this.moveToLocation, this.moveDirection));
         }
-
 
         return actions;
     }
 
-    //	pipe.allowableActions(mario, lavaMap.at(0,0), " to Lava Zone!!");
-
-//    public void addTeleportActions(Player otherActor, Location location, String direction){
-//        teleportActions.add(new TeleportAction(location, direction));
-//    }
 
 
     /**
-     * handle all the behaviour of trees as stated in assignment specification
-     * @param location The location of the wall
+     * handle all the behaviour of Warp Pipe as stated in assignment specification
+     * @param location The location of the warp pipe
      */
     public void tick(Location location){
         //added by zushen on 13/5/2022
@@ -102,12 +136,18 @@ public class WarpPipe extends Ground implements Jumpable, Resettable {
             }
         }
     }
-
+    /**
+     * name of class
+     * @return name of the class
+     */
     public String toString() {
         return "Warp Pipe";
     }
 
     @Override
+    /**
+     * Execute reset action
+     */
     public void resetInstance() {
         reset = true;
     }

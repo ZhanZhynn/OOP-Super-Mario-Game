@@ -1,5 +1,11 @@
 package game.action;
 
+/**
+ * A class the teleport action
+ *
+ * @author Hee Zhan Zhynn (31989403)
+ * @version 1
+ */
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.MoveActorAction;
 import edu.monash.fit2099.engine.actors.Actor;
@@ -11,20 +17,37 @@ import game.item.Status;
 
 public class TeleportAction extends MoveActorAction {
     /**
-     * A Jumpable object
+     * The last location before player teleports
      */
     private Location oldLocation;
+
+    /**
+     * GameMap
+     */
     private GameMap map;
+
+    /**
+     * Location the player teleported to
+     */
     private Location newLocation;
+
+    /**
+     * Is the player at lava zone?
+     */
     private Boolean lavaZone = false;
 
-
+    /**
+     * Constructor for teleport action
+     * @param moveToLocation Location to teleport to
+     * @param direction Name of the location
+     */
     public TeleportAction(Location moveToLocation, String direction){
         super(moveToLocation, direction);
         newLocation = moveToLocation;
     }
+
     /**
-     * actor moves to jumpable location after a successful jump
+     * actor executing the teleport action
      *
      * @param actor The actor performing the action.
      * @param map The map the actor is on.
