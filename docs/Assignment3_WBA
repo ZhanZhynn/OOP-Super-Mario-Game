@@ -4,9 +4,9 @@ REQ |   Part        |     PERSON IN-CHARGE      | DUE DATE
 -------------------------------------------------------------
 1   |  ALL          |      HEE ZHAN ZHYNN       | 21/05/2022
 2   |  ALL          |      NG ZU SHEN           | 21/05/2022
-3   |  ALL          |      Davis Hwa Ye Xuan    | 21/05/2022
-4   |  Fire Flower  |      HEE ZHAN ZHYNN       | 21/05/2022
-4   |  Fire Attack  |      NG ZU SHEN           | 21/05/2022
+3   |  HALF         |      Davis Hwa Ye Xuan    | 21/05/2022
+3   |  HALF         |      NG ZU SHEN           | 21/05/2022
+4   |  FIRE FLOWERS |      HEE ZHAN ZHYNN       | 21/05/2022
 5   |  ALL          |      Davis Hwa Ye Xuan    | 21/05/2022
 
 Note:
@@ -15,3 +15,4 @@ Team members to assist one another despite not being assigned to the task.
 *Commit and push with the message "I accept this WBA".
 
 Hee Zhan Zhynn 31989403. I accept this WBA.
+Ng Zu Shen 32272952. I accept this WBA.
