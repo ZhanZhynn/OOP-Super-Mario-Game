@@ -10,10 +10,20 @@ public class getBottleAction extends Action {
 
     Toad toad;
 
+    /**
+     * constructor for getBottleAction.
+     */
     public getBottleAction(Toad toad){
         this.toad = toad;
     }
 
+    /**
+     * actor adds bottle into inventory after receiving from toad.
+     *
+     * @param actor The actor performing the action.
+     * @param map The map the actor is on.
+     * @return description of what happened as a String
+     */
     @Override
     public String execute(Actor actor, GameMap map) {
         actor.addItemToInventory(new Bottle());
@@ -21,6 +31,11 @@ public class getBottleAction extends Action {
         return actor + " acquired Bottle!";
     }
 
+    /**
+     * description of what this action does
+     * @param actor The actor performing the action.
+     * @return result as a String
+     */
     @Override
     public String menuDescription(Actor actor) {
         return "Get bottle from Toad";

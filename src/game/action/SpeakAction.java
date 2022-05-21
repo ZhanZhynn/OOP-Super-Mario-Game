@@ -20,12 +20,19 @@ public class SpeakAction extends Action{
     ArrayList<String> dialogG = new ArrayList<>();
 
 
-
+    /**
+     * description of what this action does
+     * @param actor The actor performing the action.
+     * @return result as a String
+     */
     @Override
     public String menuDescription(Actor actor) {
         return actor + " TRIES TO SPEAK";
     }
 
+    /**
+     * store speech sentences into the arraylist.
+     */
     public String dialogBowser() {
         dialogB.clear();
         dialogB.add("What was that sound? Oh, just a fire.");
@@ -37,6 +44,9 @@ public class SpeakAction extends Action{
         return string;
     }
 
+    /**
+     * store speech sentences into the arraylist.
+     */
     public String dialogPiranha() {
         dialogP.clear();
         dialogP.add("Slsstssthshs~! (Never gonna say goodbye~)");
@@ -46,6 +56,9 @@ public class SpeakAction extends Action{
         return string;
     }
 
+    /**
+     * store speech sentences into the arraylist.
+     */
     public String dialogFlyingKoopa() {
         dialogF.clear();
         dialogF.add("Pam pam pam!");
@@ -54,6 +67,9 @@ public class SpeakAction extends Action{
         return string;
     }
 
+    /**
+     * store speech sentences into the arraylist.
+     */
     public String dialogKoopa() {
         dialogK.clear();
         dialogK.add("Never gonna make you cry!");
@@ -63,6 +79,9 @@ public class SpeakAction extends Action{
         return string;
     }
 
+    /**
+     * store speech sentences into the arraylist.
+     */
     public String dialogPrincess() {
         dialogPR.clear();
         dialogPR.add("Dear Mario, I'll be waiting for you...");
@@ -73,6 +92,9 @@ public class SpeakAction extends Action{
         return string;
     }
 
+    /**
+     * store speech sentences into the arraylist.
+     */
     public String dialogGoomba() {
         dialogG.clear();
         dialogG.add("Mugga mugga!");
@@ -83,6 +105,13 @@ public class SpeakAction extends Action{
         return string;
     }
 
+    /**
+     * actor speaks depending on which actor is on the map.
+     *
+     * @param actor The actor performing the action.
+     * @param map The map the actor is on.
+     * @return description of what happened as a String
+     */
     @Override
     public String execute(Actor actor, GameMap map) {
         String talkBack = "";
